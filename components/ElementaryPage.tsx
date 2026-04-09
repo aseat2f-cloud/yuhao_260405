@@ -87,25 +87,33 @@ const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate })
       <ElementaryBanner />
 
       {/* 1. 亮眼成績 (ID: outstanding-results) */}
-      <OutstandingResults theme="green" />
+      <div id="outstanding-results" className="scroll-mt-32 min-h-[800px]">
+        <OutstandingResults theme="green" />
+      </div>
 
       {/* 3. 課程規劃 (ID: course-roadmap) - Has internal green theme */}
-      <CourseRoadmap />
+      <div id="course-roadmap" className="scroll-mt-32 min-h-[1500px]">
+        <CourseRoadmap />
+      </div>
 
       {/* 4. 榮耀金榜 (Elementary Specific) */}
-      <HonorRoll variant="elementary" theme="green" />
+      <div id="honor-roll" className="scroll-mt-32 min-h-[1000px]">
+        <HonorRoll variant="elementary" theme="green" />
+      </div>
 
       {/* 5. 環境介紹 (ID: environment) */}
-      <EnvironmentIntro 
-        theme="green" 
-        images={[
-          "https://www.dropbox.com/scl/fi/j45gub1h2qkkn4aj59hya/70.jpg?rlkey=54pjut604aaqnfwsile0bxvm7&raw=1",
-          "https://www.dropbox.com/scl/fi/k2nq2hkjqx9hjfgxd7hhd/71.jpg?rlkey=hdwxq06xkgeise7ssvcbg4f5o&raw=1",
-          "https://www.dropbox.com/scl/fi/637sfvc6sb90n1w55clp9/72.jpg?rlkey=xh8fsrjehlxuuheknauzlku62&raw=1",
-          "https://www.dropbox.com/scl/fi/m105s5r7mae72g37s04t3/06.jpg?rlkey=ixphixrunndduwk248052w2f1&raw=1",
-          "https://www.dropbox.com/scl/fi/cupp9e6blxrl0eucclriy/04.jpg?rlkey=q8jt2hyizn99n8ps5g1crzmzt&raw=1"
-        ]}
-      />
+      <div id="environment" className="scroll-mt-32 min-h-[800px] pb-64">
+        <EnvironmentIntro 
+          theme="green" 
+          images={[
+            "https://www.dropbox.com/scl/fi/j45gub1h2qkkn4aj59hya/70.jpg?rlkey=54pjut604aaqnfwsile0bxvm7&raw=1",
+            "https://www.dropbox.com/scl/fi/k2nq2hkjqx9hjfgxd7hhd/71.jpg?rlkey=hdwxq06xkgeise7ssvcbg4f5o&raw=1",
+            "https://www.dropbox.com/scl/fi/637sfvc6sb90n1w55clp9/72.jpg?rlkey=xh8fsrjehlxuuheknauzlku62&raw=1",
+            "https://www.dropbox.com/scl/fi/m105s5r7mae72g37s04t3/06.jpg?rlkey=ixphixrunndduwk248052w2f1&raw=1",
+            "https://www.dropbox.com/scl/fi/cupp9e6blxrl0eucclriy/04.jpg?rlkey=q8jt2hyizn99n8ps5g1crzmzt&raw=1"
+          ]}
+        />
+      </div>
 
     </div>
   );

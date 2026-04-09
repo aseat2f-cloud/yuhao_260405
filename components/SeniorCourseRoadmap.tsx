@@ -216,7 +216,7 @@ const SeniorCourseRoadmap: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="course-roadmap" className="py-20 bg-slate-950 scroll-mt-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-20 bg-slate-950 relative overflow-hidden">
       {/* Texture Background */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 

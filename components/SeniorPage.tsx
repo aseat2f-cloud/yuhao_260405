@@ -88,13 +88,19 @@ const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
       <GSATCountdown />
 
       {/* 3. Course Roadmap (課程規劃) */}
-      <SeniorCourseRoadmap />
+      <div id="course-roadmap" className="scroll-mt-32">
+        <SeniorCourseRoadmap />
+      </div>
 
       {/* 4. Honor Roll (榮耀金榜) */}
-      <HonorRoll variant="senior" theme="purple" />
+      <div id="honor-roll" className="scroll-mt-32">
+        <HonorRoll variant="senior" theme="purple" />
+      </div>
 
       {/* 5. Environment Introduction (環境介紹) */}
-      <EnvironmentIntro theme="purple" />
+      <div id="environment" className="scroll-mt-32">
+        <EnvironmentIntro theme="purple" />
+      </div>
 
     </div>
   );

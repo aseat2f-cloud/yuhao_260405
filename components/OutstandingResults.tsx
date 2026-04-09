@@ -219,7 +219,7 @@ const OutstandingResults: React.FC<OutstandingResultsProps> = ({ theme = 'primar
   };
   
   return (
-    <section id="outstanding-results" className="py-24 bg-slate-50 relative overflow-hidden scroll-mt-24">
+    <section className="py-24 bg-slate-50 relative overflow-hidden">
       {/* Background Decor */}
       <div className={`absolute top-0 left-0 w-[600px] h-[600px] bg-${t}-100/50 rounded-full blur-3xl opacity-40 -translate-x-1/2 -translate-y-1/2`}></div>
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-3xl opacity-40 translate-x-1/2 translate-y-1/2"></div>

@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: '課程班別', id: 'course-roadmap' },
       { label: '教學成果', id: 'outstanding-results' },
       { label: '學員金榜', id: 'honor-roll' },
-      { label: '家長見證', id: 'testimonials' },
+      { label: '學員心得', id: 'student-testimonials' },
     ]
   },
   { 
@@ -57,51 +57,56 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
     setIsMenuOpen(false);
     
     if (sectionId) {
-      // If changing pages, wait longer for the new page to mount and App's scrollTo(0,0) to finish.
-      // 500ms allows for Suspense fallback and initial render.
-      const startDelay = isPageChange ? 500 : 100;
+      // If changing pages, reset scroll to top instantly first to avoid "jumping" from previous page position
+      if (isPageChange) {
+        window.scrollTo(0, 0);
+      }
+
+      // If changing pages, wait longer for the new page to mount and layout to stabilize.
+      // 800ms allows for initial render and some image loading.
+      const startDelay = isPageChange ? 800 : 0;
       
       let attempts = 0;
-      const maxAttempts = 60; // 6 seconds max polling
+      const maxAttempts = 50; // 5 seconds max polling
 
       const pollElement = () => {
         const element = document.getElementById(sectionId);
         if (element) {
-          // Calculate precise scroll position
-          // Target position: Element top should be 100px from viewport top (80px header + 20px padding)
-          const headerOffset = 100;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-
-          // Second correction scroll after a short delay
-          // This handles layout shifts caused by images loading or dynamic content resizing after the first scroll
-          setTimeout(() => {
-             const newElement = document.getElementById(sectionId);
-             if (newElement) {
-                const currentRect = newElement.getBoundingClientRect();
-                // If element is not approximately where we want it (allow 10px error margin)
-                if (Math.abs(currentRect.top - headerOffset) > 10) {
-                     const newOffset = currentRect.top + window.scrollY - headerOffset;
-                     window.scrollTo({
-                        top: newOffset,
-                        behavior: 'smooth'
-                     });
-                }
-             }
-          }, 400);
-
+          const headerOffset = 80; // Adjusted for sticky header height
+          let lastTargetTop = -1;
+          let scrollStartTime = Date.now();
+          const duration = 2000; // Follow the target for 2 seconds to fight layout shifts
+          
+          const followTarget = () => {
+            const rect = element.getBoundingClientRect();
+            const currentTargetTop = rect.top + window.pageYOffset - headerOffset;
+            
+            // If the target position has shifted significantly, or it's the first run
+            if (Math.abs(currentTargetTop - lastTargetTop) > 1) {
+              window.scrollTo({
+                top: currentTargetTop,
+                behavior: 'smooth'
+              });
+              lastTargetTop = currentTargetTop;
+            }
+            
+            if (Date.now() - scrollStartTime < duration) {
+              requestAnimationFrame(followTarget);
+            }
+          };
+          
+          followTarget();
         } else if (attempts < maxAttempts) {
           attempts++;
           setTimeout(pollElement, 100);
         }
       };
 
-      setTimeout(pollElement, startDelay);
+      if (startDelay === 0) {
+        pollElement();
+      } else {
+        setTimeout(pollElement, startDelay);
+      }
     } else {
        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -114,10 +119,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
     const scrollToContact = () => {
       const element = document.getElementById('contact');
       if (element) {
-        const headerOffset = 100;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     };
 

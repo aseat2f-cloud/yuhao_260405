@@ -481,7 +481,7 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
   const currentProgram = PROGRAMS_DATA[activeTab];
 
   return (
-    <section id="program-planning" className={`py-24 transition-colors duration-500 ${currentProgram.sectionBg} scroll-mt-24 relative overflow-hidden`}>
+    <section className={`py-24 transition-colors duration-500 ${currentProgram.sectionBg} relative overflow-hidden`}>
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
 

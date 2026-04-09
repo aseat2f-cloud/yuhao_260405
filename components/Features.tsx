@@ -82,47 +82,44 @@ const Features: React.FC = () => {
     if (isExpanded) {
       // Closing
       setIsExpanded(false);
-      // Scroll back to the top of the features section to show the title "為什麼選擇我們"
+      
+      // Use a more robust scroll back to the top of the section
+      // We use a small delay to allow the state change to trigger re-render
       setTimeout(() => {
         const section = document.getElementById('features');
         if (section) {
-           const headerOffset = 100; // Header + padding
-           const elementPosition = section.getBoundingClientRect().top;
-           const offsetPosition = elementPosition + window.scrollY - headerOffset;
-           
-           window.scrollTo({
-             top: offsetPosition,
-             behavior: 'smooth'
-           });
-        }
-      }, 100);
-    } else {
-      // Opening
-      setIsExpanded(true);
-      
-      // Calculate scroll position manually to ensure:
-      // 1. The new content is visible
-      // 2. The top context (button & cards) isn't cropped (leave ~220px from top)
-      setTimeout(() => {
-        if (expandedRef.current) {
-          const headerHeight = 80; // Approx sticky header
-          const buffer = 140; // Space for button and context above the expanded section
-          const targetOffset = headerHeight + buffer; 
+          const headerOffset = 100;
+          const elementPosition = section.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
           
-          const elementPosition = expandedRef.current.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - targetOffset;
-
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
           });
         }
-      }, 300); // Delay to allow render and layout
+      }, 10);
+    } else {
+      // Opening
+      setIsExpanded(true);
+      
+      // Use scrollIntoView with a delay to allow content to render
+      setTimeout(() => {
+        if (expandedRef.current) {
+          const headerOffset = 120;
+          const elementPosition = expandedRef.current.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
     }
   };
 
   return (
-    <section id="features" className="py-24 bg-white relative overflow-hidden transition-all duration-500">
+    <section className="py-24 bg-white relative overflow-hidden">
       {/* Background Decor - Subtler */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary-50 rounded-full blur-3xl opacity-60 -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-50 translate-x-1/3 translate-y-1/3"></div>
@@ -161,19 +158,17 @@ const Features: React.FC = () => {
         </div>
 
         {/* Toggle Button */}
-        <div className="flex justify-center relative">
-          {!isExpanded && (
-            <div className="absolute inset-0 -m-3 rounded-full border-2 border-dashed border-yellow-400/40 animate-spin-slow pointer-events-none" />
-          )}
-          <button
-            ref={buttonRef}
-            onClick={toggleExpand}
-            className={`group relative px-12 py-5 rounded-full font-bold text-xl transition-all duration-500 flex items-center justify-center shadow-lg overflow-hidden ${
-              isExpanded 
-                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' 
-                : 'bg-yellow-400 text-slate-900 hover:bg-yellow-300 hover:shadow-2xl hover:scale-105 active:scale-95'
-            }`}
-          >
+        <div className="flex justify-center">
+          <div className="relative inline-flex group">
+            <button
+              ref={buttonRef}
+              onClick={toggleExpand}
+              className={`relative px-12 py-5 rounded-full font-bold text-xl transition-all duration-500 flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 active:scale-95 ${
+                isExpanded 
+                  ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' 
+                  : 'bg-yellow-400 text-slate-900 hover:bg-yellow-300 animate-subtle-glow'
+              }`}
+            >
             {!isExpanded && (
               <>
                 {/* Shimmer Effect (Hover Only) */}
@@ -189,6 +184,7 @@ const Features: React.FC = () => {
             </span>
           </button>
         </div>
+      </div>
 
         {/* Expandable Section */}
         {isExpanded && (

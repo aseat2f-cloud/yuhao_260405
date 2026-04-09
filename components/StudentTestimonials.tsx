@@ -55,7 +55,7 @@ const StudentTestimonials: React.FC<StudentTestimonialsProps> = ({ theme = 'gree
   };
 
   return (
-    <section id="testimonials" className="py-20 bg-white scroll-mt-24">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Centered */}
         <div className="flex flex-col items-center mb-12 text-center">

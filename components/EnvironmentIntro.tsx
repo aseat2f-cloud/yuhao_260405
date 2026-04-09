@@ -1,6 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Camera } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface EnvironmentIntroProps {
   images?: string[];
@@ -29,7 +30,6 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
   subtitle = "舒適、明亮、專業的教學空間，讓孩子在最優質的環境中專注學習，發揮最大潛能。"
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const themeColors = {
     purple: {
@@ -68,104 +68,137 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
     });
   }, [images]);
 
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  }, [images.length]);
 
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
+  }, [images.length]);
 
   // Auto-play
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
-  }, [currentIndex, isAnimating, images.length]);
+  }, [nextSlide]);
 
-  const getVisibleImages = () => {
-    const visible = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % images.length;
-      visible.push({
-        src: images[index],
-        originalIndex: index
-      });
-    }
-    return visible;
+  const getVisibleIndices = () => {
+    const prev = (currentIndex - 1 + images.length) % images.length;
+    const next = (currentIndex + 1) % images.length;
+    return [prev, currentIndex, next];
   };
 
   return (
-    <section id="environment" className="py-24 bg-slate-50 overflow-hidden">
+    <section className="py-6 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className={`inline-flex items-center gap-2 px-4 py-2 ${activeTheme.bg} rounded-full ${activeTheme.text} font-bold mb-4 border ${activeTheme.border} shadow-sm`}>
-            <Camera size={18} />
+        <div className="text-center mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className={`inline-flex items-center gap-2 px-4 py-1.5 ${activeTheme.bg} rounded-full ${activeTheme.text} font-bold mb-2 border ${activeTheme.border} shadow-sm text-sm`}
+          >
+            <Camera size={16} />
             <span>五星級學習環境</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">{title}</h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl md:text-3xl font-black text-slate-900 mb-2 tracking-tight"
+          >
+            {title}
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium"
+          >
             {subtitle}
-          </p>
+          </motion.p>
         </div>
 
-        <div className="relative">
-          <div className="flex justify-center items-center gap-6 md:gap-12">
-            {getVisibleImages().map((item, idx) => (
-              <div 
-                key={idx}
-                onClick={() => {
-                  if (idx === 0) prevSlide();
-                  if (idx === 2) nextSlide();
-                }}
-                className={`relative group transition-all duration-700 ease-in-out transform cursor-pointer ${
-                  idx === 1 ? 'scale-110 z-10' : 'scale-90 opacity-60'
-                }`}
-              >
-                <div className={`w-48 h-48 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-white shadow-2xl shadow-slate-200 ${idx === 1 ? 'border-[6.76px]' : 'border-4'}`}>
-                  <img 
-                    src={item.src} 
-                    alt={`環境照片 ${item.originalIndex + 1}`} 
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                {/* Decorative Ring */}
-                <div className={`absolute inset-0 rounded-full border-2 border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none ${idx === 1 ? 'block' : 'hidden'}`} />
-              </div>
-            ))}
+        <div className="relative h-[220px] sm:h-[320px] md:h-[420px] flex items-center justify-center">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-12 w-full">
+            {getVisibleIndices().map((imgIndex, displayIdx) => {
+              const isCenter = displayIdx === 1;
+              return (
+                <motion.div
+                  key={imgIndex}
+                  layout
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ 
+                    opacity: isCenter ? 1 : 0.8, 
+                    scale: isCenter ? 1.4 : 0.75,
+                    zIndex: isCenter ? 20 : 10
+                  }}
+                  transition={{
+                    layout: { duration: 0.35, ease: "easeOut" },
+                    opacity: { duration: 0.25 },
+                    scale: { duration: 0.35 }
+                  }}
+                  onClick={() => {
+                    if (displayIdx === 0) prevSlide();
+                    if (displayIdx === 2) nextSlide();
+                  }}
+                  className={`relative cursor-pointer`}
+                >
+                  <div className={`
+                    relative overflow-hidden rounded-full border-white shadow-2xl bg-slate-200
+                    w-20 h-20 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64
+                    ${isCenter ? 'border-2 md:border-[3px]' : 'border-2'}
+                  `}>
+                    <img 
+                      src={images[imgIndex]} 
+                      alt={`環境照片 ${imgIndex + 1}`} 
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                      loading="eager"
+                    />
+                  </div>
+                  
+                  {isCenter && (
+                    <motion.div 
+                      layoutId="active-ring"
+                      className={`absolute -inset-0.5 md:-inset-1 rounded-full border-2 border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none`}
+                      style={{ animationDuration: '30s' }}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Navigation Buttons */}
           <button 
             onClick={prevSlide}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-8 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 transition-all z-20`}
+            className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all z-30`}
             aria-label="Previous slide"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={24} />
           </button>
           <button 
             onClick={nextSlide}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-8 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 transition-all z-20`}
+            className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all z-30`}
             aria-label="Next slide"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={24} />
           </button>
         </div>
 
         {/* Indicators */}
-        <div className="flex justify-center gap-2 mt-16">
+        <div className="flex justify-center gap-2 mt-6">
           {images.map((_, idx) => (
             <button
               key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                currentIndex === idx ? `w-8 ${activeTheme.indicator}` : 'w-2 bg-slate-300'
+              onClick={() => {
+                setCurrentIndex(idx);
+              }}
+              className={`h-2 rounded-full transition-all duration-500 ${
+                currentIndex === idx ? `w-8 ${activeTheme.indicator}` : 'w-2 bg-slate-300 hover:bg-slate-400'
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
@@ -179,7 +212,7 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
           to { transform: rotate(360deg); }
         }
         .animate-spin-slow {
-          animation: spin-slow 48s linear infinite;
+          animation: spin-slow 30s linear infinite;
         }
       `}</style>
     </section>
@@ -187,3 +220,4 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
 };
 
 export default EnvironmentIntro;
+

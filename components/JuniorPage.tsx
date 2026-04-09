@@ -5,7 +5,6 @@ import OutstandingResults from './OutstandingResults';
 import StudentTestimonials from './StudentTestimonials';
 import JuniorCourseRoadmap from './JuniorCourseRoadmap';
 import HonorRoll from './HonorRoll';
-import ParentTestimonials from './ParentTestimonials';
 import JuniorBanner from './JuniorBanner';
 import { NewsItem, PageType } from '../types';
 import { FileCheck } from 'lucide-react';
@@ -21,7 +20,7 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
     { label: '課程班別', href: '#course-roadmap' },
     { label: '教學成果', href: '#outstanding-results' },
     { label: '學員金榜', href: '#honor-roll' },
-    { label: '家長見證', href: '#testimonials' },
+    { label: '學員心得', href: '#student-testimonials' },
   ];
 
   return (
@@ -87,21 +86,24 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
       <JuniorBanner />
 
       {/* 2. Outstanding Results (亮眼成績 - 版面同首頁) */}
-      <OutstandingResults theme="blue" />
-
-      {/* 3. Student Testimonials (學員心得 - 版面同國小) */}
-      <StudentTestimonials theme="blue" />
-
-      {/* 4. Course Roadmap (課程規劃 - 版面同國小, 國中專屬內容) */}
-      <JuniorCourseRoadmap />
-
-      {/* 5. Honor Roll (榮耀金榜 - 校排前十/會考滿分/建北錄取) */}
-      <div id="honor-roll">
-        <HonorRoll variant="junior" theme="blue" />
+      <div id="outstanding-results" className="scroll-mt-32">
+        <OutstandingResults theme="blue" />
       </div>
 
-      {/* 6. Parent Testimonials (口碑推薦 - 版面同國小) */}
-      <ParentTestimonials theme="blue" />
+      {/* 3. Student Testimonials (學員心得 - 版面同國小) */}
+      <div id="student-testimonials" className="scroll-mt-32">
+        <StudentTestimonials theme="blue" />
+      </div>
+
+      {/* 4. Course Roadmap (課程規劃 - 版面同國小, 國中專屬內容) */}
+      <div id="course-roadmap" className="scroll-mt-32">
+        <JuniorCourseRoadmap />
+      </div>
+
+      {/* 5. Honor Roll (榮耀金榜 - 校排前十/會考滿分/建北錄取) */}
+      <div id="honor-roll" className="scroll-mt-32">
+        <HonorRoll variant="junior" theme="blue" />
+      </div>
 
     </div>
   );

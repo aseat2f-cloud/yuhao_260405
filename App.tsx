@@ -126,15 +126,19 @@ function App() {
   const [isLineModalOpen, setIsLineModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
+  // Scroll to top removed here as it is handled by Header.tsx to avoid two-stage jumps
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // Disable browser scroll restoration to prevent jumping on page change
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -236,11 +240,21 @@ function App() {
               secondaryBtnLink="#features"
             />
             <HomeBanner />
-            <Features />
-            <ProgramPlanning onNavigate={setCurrentPage} />
-            <OutstandingResults />
-            <HonorRoll />
-            <ParentTestimonials />
+            <div id="features" className="scroll-mt-32">
+              <Features />
+            </div>
+            <div id="program-planning" className="scroll-mt-32">
+              <ProgramPlanning onNavigate={setCurrentPage} />
+            </div>
+            <div id="outstanding-results" className="scroll-mt-32">
+              <OutstandingResults />
+            </div>
+            <div id="honor-roll" className="scroll-mt-32">
+              <HonorRoll />
+            </div>
+            <div id="testimonials" className="scroll-mt-32">
+              <ParentTestimonials />
+            </div>
           </>
         )}
       </Suspense>
