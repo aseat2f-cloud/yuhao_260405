@@ -24,45 +24,43 @@ const BulletinPage = lazy(() => import('./components/BulletinPage'));
 
 // --- MOCK DATA HELPERS ---
 
-const raw = (url: string) => url.replace('dl=0', 'raw=1');
-
 // 榮耀成績 (Honors) - highlight
 const BULLETIN_HONORS_IMAGES = [
-  "https://www.dropbox.com/scl/fi/kje8gvmr642sfejxslovh/pic-1.jpg?rlkey=3wt3kclyge1fmjy5bt2lggat2&dl=0",
-  "https://www.dropbox.com/scl/fi/mau4zf24fpof2q48kilcf/pic-2.jpg?rlkey=75tycw8sxbaql9uhti1e2kpnd&dl=0",
-  "https://www.dropbox.com/scl/fi/mc139monzq1ngj8rj5kwi/pic-3.jpg?rlkey=yhyklzgzo1gdsi4os955daquv&dl=0",
-  "https://www.dropbox.com/scl/fi/phtn7hq6cxd7x92e0mh5q/pic-12.jpg?rlkey=yi3ty0hwmbb6ysnu8uo362ww2&dl=0",
-  "https://www.dropbox.com/scl/fi/nip7i3xceui1mndxsfri6/pic-5.jpg?rlkey=e57w7gbfqfguxilrw0t3k3tc7&dl=0",
-  "https://www.dropbox.com/scl/fi/zw32ughf91fbojjl5segu/pic-11.jpg?rlkey=fd5nq5iehkuq95iq1huksfrjq&dl=0",
-  "https://www.dropbox.com/scl/fi/nbwfsiv3oczx8pqve2tim/pic-9.jpg?rlkey=q2lss7ajn2wz8s77kw0fu8zzl&dl=0",
-  "https://www.dropbox.com/scl/fi/ufoxfgm6xe38y84zhfqt2/pic-14.jpg?rlkey=dmiyhj1bacmttqfiocp395qam&dl=0",
-  "https://www.dropbox.com/scl/fi/5q1mv00gh1bbh4bafwnjq/pic-15.jpg?rlkey=i18oonvk881urja14d9nd18w9&dl=0"
-].map(raw);
+  "https://www.dropbox.com/scl/fi/kje8gvmr642sfejxslovh/pic-1.jpg?rlkey=3wt3kclyge1fmjy5bt2lggat2&raw=1",
+  "https://www.dropbox.com/scl/fi/mau4zf24fpof2q48kilcf/pic-2.jpg?rlkey=75tycw8sxbaql9uhti1e2kpnd&raw=1",
+  "https://www.dropbox.com/scl/fi/mc139monzq1ngj8rj5kwi/pic-3.jpg?rlkey=yhyklzgzo1gdsi4os955daquv&raw=1",
+  "https://www.dropbox.com/scl/fi/phtn7hq6cxd7x92e0mh5q/pic-12.jpg?rlkey=yi3ty0hwmbb6ysnu8uo362ww2&raw=1",
+  "https://www.dropbox.com/scl/fi/nip7i3xceui1mndxsfri6/pic-5.jpg?rlkey=e57w7gbfqfguxilrw0t3k3tc7&raw=1",
+  "https://www.dropbox.com/scl/fi/zw32ughf91fbojjl5segu/pic-11.jpg?rlkey=fd5nq5iehkuq95iq1huksfrjq&raw=1",
+  "https://www.dropbox.com/scl/fi/nbwfsiv3oczx8pqve2tim/pic-9.jpg?rlkey=q2lss7ajn2wz8s77kw0fu8zzl&raw=1",
+  "https://www.dropbox.com/scl/fi/ufoxfgm6xe38y84zhfqt2/pic-14.jpg?rlkey=dmiyhj1bacmttqfiocp395qam&raw=1",
+  "https://www.dropbox.com/scl/fi/5q1mv00gh1bbh4bafwnjq/pic-15.jpg?rlkey=i18oonvk881urja14d9nd18w9&raw=1"
+];
 
 // 活動資訊 (Events) - event
 const BULLETIN_EVENTS_IMAGES = [
-  "https://www.dropbox.com/scl/fi/wsncc82t5ftwxunrct10z/_-PO.jpg?rlkey=k2ah8u4xfxnyh86pxsfh28kfj&dl=0",
-  "https://www.dropbox.com/scl/fi/0a95j5wkwbsihp75zl3t1/_-_01.jpg?rlkey=dbijit3l3rbuh52ygxcghro4w&dl=0",
-  "https://www.dropbox.com/scl/fi/iru67bwdzuqs789iwezjs/_-PO-2.jpg?rlkey=eop6b2tug45p6kh9qcs9ckcxj&dl=0",
-  "https://www.dropbox.com/scl/fi/66jsydgxwxs59agw2uwv5/pic-21.jpg?rlkey=zalfs9l4rwsdq1m02uimebrt5&dl=0",
-  "https://www.dropbox.com/scl/fi/bbzjuqls82ti9apn70ejm/pic-22.jpg?rlkey=wh08bk7s53oq85f0z0diupwfg&dl=0",
-  "https://www.dropbox.com/scl/fi/gcnvcfz85ursljtartje4/pic-6.jpg?rlkey=fwleioau7oexj3gfjas7p6rx5&dl=0",
-  "https://www.dropbox.com/scl/fi/qkrpxzx5lbu1ep6vtshwv/pic-10.jpg?rlkey=3wwxzcbmc2pobzsppo9lzxana&dl=0",
-  "https://www.dropbox.com/scl/fi/7xpir6068ax2ciby0hyy3/pic-7.jpg?rlkey=qusvdgacxmjsc36ufmdov230p&dl=0",
-  "https://www.dropbox.com/scl/fi/6f64noimi8ssut55ldoxp/1.png?rlkey=g9q1n8v901jazo6brpsnbmxz6&dl=0"
-].map(raw);
+  "https://www.dropbox.com/scl/fi/wsncc82t5ftwxunrct10z/_-PO.jpg?rlkey=k2ah8u4xfxnyh86pxsfh28kfj&raw=1",
+  "https://www.dropbox.com/scl/fi/0a95j5wkwbsihp75zl3t1/_-_01.jpg?rlkey=dbijit3l3rbuh52ygxcghro4w&raw=1",
+  "https://www.dropbox.com/scl/fi/iru67bwdzuqs789iwezjs/_-PO-2.jpg?rlkey=eop6b2tug45p6kh9qcs9ckcxj&raw=1",
+  "https://www.dropbox.com/scl/fi/66jsydgxwxs59agw2uwv5/pic-21.jpg?rlkey=zalfs9l4rwsdq1m02uimebrt5&raw=1",
+  "https://www.dropbox.com/scl/fi/bbzjuqls82ti9apn70ejm/pic-22.jpg?rlkey=wh08bk7s53oq85f0z0diupwfg&raw=1",
+  "https://www.dropbox.com/scl/fi/gcnvcfz85ursljtartje4/pic-6.jpg?rlkey=fwleioau7oexj3gfjas7p6rx5&raw=1",
+  "https://www.dropbox.com/scl/fi/qkrpxzx5lbu1ep6vtshwv/pic-10.jpg?rlkey=3wwxzcbmc2pobzsppo9lzxana&raw=1",
+  "https://www.dropbox.com/scl/fi/7xpir6068ax2ciby0hyy3/pic-7.jpg?rlkey=qusvdgacxmjsc36ufmdov230p&raw=1",
+  "https://www.dropbox.com/scl/fi/6f64noimi8ssut55ldoxp/1.png?rlkey=g9q1n8v901jazo6brpsnbmxz6&raw=1"
+];
 
 // 更多消息 (News) - normal
 const BULLETIN_NORMAL_IMAGES = [
-  "https://www.dropbox.com/scl/fi/zf1dccc6y6k4ebdmpwc59/pic-4.jpg?rlkey=rgqsyiwuwoxz0lu2lk3mtdfpp&dl=0",
-  "https://www.dropbox.com/scl/fi/azaky2ebmuypp1phmrb74/pic-17.jpg?rlkey=l4nio8m2se2oygtfmgmwewtea&dl=0",
-  "https://www.dropbox.com/scl/fi/yacybf07znbif857xk29o/pic-16.jpg?rlkey=su4eyhtgdtm5vfa94wm01ioda&dl=0",
-  "https://www.dropbox.com/scl/fi/2gyl620emdw7ihecwgz6n/pic-13.jpg?rlkey=oabpnaej0x9rbxypc5ui4dmm1&dl=0",
-  "https://www.dropbox.com/scl/fi/01n0d94pei1taghllxih6/pic-8.jpg?rlkey=0tqlkcxlw2yqr46elr2aidif5&dl=0",
-  "https://www.dropbox.com/scl/fi/p95ekvg6xcvk4ao48ul52/pic-18.jpg?rlkey=hnyzw6tki59326n3i8ytevcdr&dl=0",
-  "https://www.dropbox.com/scl/fi/37ni6uiuda2e5hztudoox/pic-20.jpg?rlkey=ij206dn25tx2texel3aa1v4cr&dl=0",
-  "https://www.dropbox.com/scl/fi/tmeihc1i24pd596i672ot/pic-19.jpg?rlkey=1sm9qd7srr5lg3tlfzows5pqj&dl=0"
-].map(raw);
+  "https://www.dropbox.com/scl/fi/zf1dccc6y6k4ebdmpwc59/pic-4.jpg?rlkey=rgqsyiwuwoxz0lu2lk3mtdfpp&raw=1",
+  "https://www.dropbox.com/scl/fi/azaky2ebmuypp1phmrb74/pic-17.jpg?rlkey=l4nio8m2se2oygtfmgmwewtea&raw=1",
+  "https://www.dropbox.com/scl/fi/yacybf07znbif857xk29o/pic-16.jpg?rlkey=su4eyhtgdtm5vfa94wm01ioda&raw=1",
+  "https://www.dropbox.com/scl/fi/2gyl620emdw7ihecwgz6n/pic-13.jpg?rlkey=oabpnaej0x9rbxypc5ui4dmm1&raw=1",
+  "https://www.dropbox.com/scl/fi/01n0d94pei1taghllxih6/pic-8.jpg?rlkey=0tqlkcxlw2yqr46elr2aidif5&raw=1",
+  "https://www.dropbox.com/scl/fi/p95ekvg6xcvk4ao48ul52/pic-18.jpg?rlkey=hnyzw6tki59326n3i8ytevcdr&raw=1",
+  "https://www.dropbox.com/scl/fi/37ni6uiuda2e5hztudoox/pic-20.jpg?rlkey=ij206dn25tx2texel3aa1v4cr&raw=1",
+  "https://www.dropbox.com/scl/fi/tmeihc1i24pd596i672ot/pic-19.jpg?rlkey=1sm9qd7srr5lg3tlfzows5pqj&raw=1"
+];
 
 const generateNewsItems = (images: string[], category: 'highlight' | 'event' | 'normal', prefix: string): NewsItem[] => {
   const titles = {
@@ -218,6 +216,7 @@ function App() {
                           src="https://www.dropbox.com/scl/fi/28ybkxy6k4fwv3esmn2lw/.svg?rlkey=ttwp7q5t9rtwn2oe3gujgr14w&raw=1"
                           alt="kangaroo"
                           className="absolute bottom-0 left-1/2 w-[1.25em] h-[1.25em]"
+                          referrerPolicy="no-referrer"
                           style={{ 
                             opacity: 0,
                             transform: 'translateX(-50%) translateY(100%)',

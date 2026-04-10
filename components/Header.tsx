@@ -63,42 +63,61 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
       }
 
       // If changing pages, wait longer for the new page to mount and layout to stabilize.
-      // 800ms allows for initial render and some image loading.
-      const startDelay = isPageChange ? 800 : 0;
+      // 1200ms allows for initial render and some image loading.
+      const startDelay = isPageChange ? 1200 : 0;
       
       let attempts = 0;
-      const maxAttempts = 50; // 5 seconds max polling
+      const maxAttempts = 60; // 6 seconds max polling
+      let hasScrolled = false;
 
       const pollElement = () => {
+        if (hasScrolled) return;
+
         const element = document.getElementById(sectionId);
         if (element) {
-          const headerOffset = 80; // Adjusted for sticky header height
-          let lastTargetTop = -1;
-          let scrollStartTime = Date.now();
-          const duration = 2000; // Follow the target for 2 seconds to fight layout shifts
-          
-          const followTarget = () => {
-            const rect = element.getBoundingClientRect();
-            const currentTargetTop = rect.top + window.pageYOffset - headerOffset;
+          // Stability check: wait for the element's position to stop shifting
+          let lastTop = element.getBoundingClientRect().top + window.pageYOffset;
+          let stableCount = 0;
+          const requiredStable = 8; // Increased for better stability
+          const checkInterval = 100;
+
+          const checkStability = () => {
+            if (hasScrolled) return;
+
+            const elementNow = document.getElementById(sectionId);
+            if (!elementNow) {
+              attempts++;
+              setTimeout(pollElement, 150);
+              return;
+            }
+
+            const currentTop = elementNow.getBoundingClientRect().top + window.pageYOffset;
             
-            // If the target position has shifted significantly, or it's the first run
-            if (Math.abs(currentTargetTop - lastTargetTop) > 1) {
+            // If position is very close to last check, increment stable count
+            if (Math.abs(currentTop - lastTop) < 1) {
+              stableCount++;
+            } else {
+              stableCount = 0;
+              lastTop = currentTop;
+            }
+
+            if (stableCount >= requiredStable) {
+              hasScrolled = true;
+              // One-shot scroll using window.scrollTo for more control
               window.scrollTo({
-                top: currentTargetTop,
+                top: currentTop - 80, // Offset for header
                 behavior: 'smooth'
               });
-              lastTargetTop = currentTargetTop;
-            }
-            
-            if (Date.now() - scrollStartTime < duration) {
-              requestAnimationFrame(followTarget);
+            } else if (attempts < maxAttempts) {
+              attempts++;
+              setTimeout(checkStability, checkInterval);
             }
           };
-          
-          followTarget();
+
+          checkStability();
         } else if (attempts < maxAttempts) {
           attempts++;
-          setTimeout(pollElement, 100);
+          setTimeout(pollElement, 150);
         }
       };
 

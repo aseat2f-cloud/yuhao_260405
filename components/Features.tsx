@@ -119,7 +119,7 @@ const Features: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section id="features" className="py-24 bg-white relative overflow-hidden">
       {/* Background Decor - Subtler */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary-50 rounded-full blur-3xl opacity-60 -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-50 translate-x-1/3 translate-y-1/3"></div>
@@ -166,7 +166,7 @@ const Features: React.FC = () => {
               className={`relative px-12 py-5 rounded-full font-bold text-xl transition-all duration-500 flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 active:scale-95 ${
                 isExpanded 
                   ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' 
-                  : 'bg-yellow-400 text-slate-900 hover:bg-yellow-300 animate-subtle-glow'
+                  : 'bg-yellow-400 text-slate-900 hover:bg-yellow-300 animate-soft-scale'
               }`}
             >
             {!isExpanded && (
@@ -330,6 +330,7 @@ const Features: React.FC = () => {
                           src={video.image} 
                           alt={video.title} 
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                          referrerPolicy="no-referrer"
                         />
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
                           <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 transition-all duration-300">

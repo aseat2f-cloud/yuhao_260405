@@ -32,6 +32,7 @@ const SeniorBanner: React.FC = () => {
               src={img} 
               alt={`Senior Banner ${index + 1}`} 
               className="w-full h-full object-cover block" 
+              referrerPolicy="no-referrer"
             />
           </div>
         ))}

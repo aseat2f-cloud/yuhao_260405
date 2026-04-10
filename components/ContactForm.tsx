@@ -319,6 +319,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ theme = 'primary' }) => {
             src={src}
             alt="animation char"
             className="yuhao-anim-item"
+            referrerPolicy="no-referrer"
             style={{ 
               animationDelay: `${index * 2}s`, // Stagger delay
             }}

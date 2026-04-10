@@ -49,12 +49,12 @@ const CourseRoadmap: React.FC = () => {
       icon: <Languages size={20} />,
       color: 'text-teal-500',
       classes: [
-        { name: '劍橋英檢．KET養成班', desc: '針對劍橋英檢 KET 級數，強化聽說讀寫全方位實力', age: '小五 ~ 小六', time: '週三/六 晚上', objectives: '熟悉劍橋英檢 KET 考試題型，強化聽說讀寫綜合能力，順利取得國際認證。', target: '計畫報考 KET 英檢 or 希望檢視英語學習成效的學生。', features: ['仿真模考實戰演練', '口試技巧個別指導', '聽力解題策略分析', '閱讀寫作重點強化'], roadmap: ['檢定觀念建立', '分項能力強化', '模考衝刺與檢討'] },
-        { name: '美語程度分班', desc: '依據入學測驗程度能力分班，適性教學成效最佳', age: '小一 ~ 小六', time: '平日/週六 晚上', objectives: '適性分級教學，讓每個孩子在最適合的難度下學習，循序漸進提升聽說讀寫能力。', target: '所有國小學齡兒童，需透過測驗分班。', features: ['全美語沉浸式教學環境', '主題式情境教學，學以致用', '定期成果發表，展現自信', '結合線上學習資源，延伸學習'], roadmap: ['L1-L2: 啟蒙與發音', 'L3-L4: 生活會話與閱讀', 'L5-L6: 寫作與進階表達'] },
-        { name: '外師發音班', desc: '純正口音引導，掌握自然發音 (Phonics) 技巧', age: '小一 ~ 小三', time: '週一/四 晚上', objectives: '建立正確發音嘴型與聽音辨位能力，看到單字能讀，聽到單字能拼。', target: '初學美語 or 希望矯正發音的孩子。', features: ['專業外師親自授課', '趣味發音遊戲與歌謠', '矯正台式發音習慣', '建立拼讀自信心'], roadmap: ['Level A: 字母與短母音', 'Level B: 長母音與混合音', 'Level C: 特殊發音規則'] },
-        { name: '英文閱讀班', desc: '精選分級繪本與讀本，培養閱讀理解力與語感', age: '小三 ~ 小五', time: '週二/五 晚上', objectives: '透過大量閱讀累積單字量，培養語感與閱讀理解策略，養成閱讀英文書籍的習慣。', target: '具備基礎拼讀能力，希望提升閱讀速度與廣度的學生。', features: ['精選國外分級讀本', '引導式閱讀討論', '閱讀理解策略教學', '讀後心得分享與寫作'], roadmap: ['繪本閱讀期', '橋樑書閱讀期', '章節小說閱讀期'] },
-        { name: '口說美語班', desc: '全美語情境對話練習，鼓勵孩子大膽開口說英語', age: '小一 ~ 小六', time: '週三/六 晚上', objectives: '打破不敢開口的心理障礙，在模擬情境中自然運用英語溝通，提升口語流利度。', target: '害羞不敢開口或希望增加口語練習機會的學生。', features: ['角色扮演與情境模擬', '小組討論與發表', '生活實用對話練習', '即席演講訓練'], roadmap: ['日常問候與自我介紹', '生活情境應對', '議題討論與表達'] },
-        { name: '外師寫作班', desc: '創意寫作引導，建立邏輯思維與正確文法架構', age: '小四 ~ 小六', time: '週六 上午', objectives: '從句子到段落，從段落到文章，循序漸進培養英文寫作能力與邏輯架構。', target: '已有一定單字量與文法基礎，希望提升寫作能力的學生。', features: ['心智圖構思與大綱擬定', '各種文體寫作指導', '個別化作文批改', '優美句型與修辭運用'], roadmap: ['句型練習期', '段落寫作期', '短文創作期'] },
+        { name: '劍橋英檢．KET養成班', desc: '針對劍橋英檢 KET 級數，強化聽說讀寫全方位實力，並透過模考訓練讓孩子熟悉國際檢定題型，建立應試自信。', age: '小五 ~ 小六', time: '週三/六 晚上', objectives: '熟悉劍橋英檢 KET 考試題型，強化聽說讀寫綜合能力，順利取得國際認證。', target: '計畫報考 KET 英檢 or 希望檢視英語學習成效的學生。', features: ['仿真模考實戰演練', '口試技巧個別指導', '聽力解題策略分析', '閱讀寫作重點強化'], roadmap: ['檢定觀念建立', '分項能力強化', '模考衝刺與檢討'] },
+        { name: '美語程度分班', desc: '依據入學測驗程度能力分班，提供最適合孩子的學習難度，循序漸進提升聽說讀寫實力，達成適性教學的最佳成效。', age: '小一 ~ 小六', time: '平日/週六 晚上', objectives: '適性分級教學，讓每個孩子在最適合的難度下學習，循序漸進提升聽說讀寫能力。', target: '所有國小學齡兒童，需透過測驗分班。', features: ['全美語沉浸式教學環境', '主題式情境教學，學以致用', '定期成果發表，展現自信', '結合線上學習資源，延伸學習'], roadmap: ['L1-L2: 啟蒙與發音', 'L3-L4: 生活會話與閱讀', 'L5-L6: 寫作與進階表達'] },
+        { name: '外師發音班', desc: '由專業外師親自引導純正口音，掌握自然發音 (Phonics) 技巧，讓孩子看到單字能讀、聽到單字能拼，奠定語感。', age: '小一 ~ 小三', time: '週一/四 晚上', objectives: '建立正確發音嘴型與聽音辨位能力，看到單字能讀，聽到單字能拼。', target: '初學美語 or 希望矯正發音的孩子。', features: ['專業外師親自授課', '趣味發音遊戲與歌謠', '矯正台式發音習慣', '建立拼讀自信心'], roadmap: ['Level A: 字母與短母音', 'Level B: 長母音與混合音', 'Level C: 特殊發音規則'] },
+        { name: '英文閱讀班', desc: '精選國外分級繪本與讀本，透過引導式閱讀討論培養理解力與語感，讓孩子養成主動閱讀英文書籍的良好習慣。', age: '小三 ~ 小五', time: '週二/五 晚上', objectives: '透過大量閱讀累積單字量，培養語感與閱讀理解策略，養成閱讀英文書籍的習慣。', target: '具備基礎拼讀能力，希望提升閱讀速度與廣度的學生。', features: ['精選國外分級讀本', '引導式閱讀討論', '閱讀理解策略教學', '讀後心得分享與寫作'], roadmap: ['繪本閱讀期', '橋樑書閱讀期', '章節小說閱讀期'] },
+        { name: '口說美語班', desc: '打造全美語情境對話練習環境，透過角色扮演與互動遊戲，鼓勵孩子大膽開口說英語，提升口語表達的流利度。', age: '小一 ~ 小六', time: '週三/六 晚上', objectives: '打破不敢開口的心理障礙，在模擬情境中自然運用英語溝通，提升口語流利度。', target: '害羞不敢開口或希望增加口語練習機會的學生。', features: ['角色扮演與情境模擬', '小組討論與發表', '生活實用對話練習', '即席演講訓練'], roadmap: ['日常問候與自我介紹', '生活情境應對', '議題討論與表達'] },
+        { name: '外師寫作班', desc: '由外師引導創意寫作，從句子到段落循序漸進，建立嚴謹的邏輯思維與正確文法架構，培養孩子優雅的文字表達力。', age: '小四 ~ 小六', time: '週六 上午', objectives: '從句子到段落，從段落到文章，循序漸進培養英文寫作能力與邏輯架構。', target: '已有一定單字量與文法基礎，希望提升寫作能力的學生。', features: ['心智圖構思與大綱擬定', '各種文體寫作指導', '個別化作文批改', '優美句型與修辭運用'], roadmap: ['句型練習期', '段落寫作期', '短文創作期'] },
       ]
     },
     {
@@ -66,7 +66,7 @@ const CourseRoadmap: React.FC = () => {
       classes: [
         { 
           name: '進度數學班', 
-          desc: '搭配學校進度，穩紮穩打建立數學觀念與運算基礎', 
+          desc: '緊密配合學校教學進度，透過系統化教學穩紮穩打建立數學核心觀念與運算基礎，培養孩子解決問題的邏輯能力與自信心。', 
           age: '小一 ~ 小六', 
           time: '週二五/三/六',
           objectives: '鞏固學校課堂所學，強化運算準確度，並建立正確的數學解題觀念，培養自信心。',
@@ -81,7 +81,7 @@ const CourseRoadmap: React.FC = () => {
         },
         { 
           name: '種子超前數學班', 
-          desc: '啟發數學潛能，培養邏輯思考種子，為資優之路鋪路', 
+          desc: '專為潛力學子設計，透過啟發式引導激發數學潛能，培養深厚的邏輯思考種子，為未來的資優學習之路奠定堅實基礎。', 
           age: '小五', 
           time: '週六',
           objectives: '跳脫制式框架，透過操作與遊戲激發數學興趣，提早開發邏輯思維與空間概念。',
@@ -96,7 +96,7 @@ const CourseRoadmap: React.FC = () => {
         },
         { 
           name: '超前數學班', 
-          desc: '前進私中及公校資優班，挑戰高階思維題型，訓練解題速度', 
+          desc: '鎖定私中及公校資優班目標，挑戰高階思維題型與奧數邏輯，訓練極致的解題速度與精準度，全面提升學生的競爭實力。', 
           age: '小六', 
           time: '週六',
           objectives: '針對高年級課程進行加深加廣，訓練複雜問題的分析能力，為國中數理資優班做準備。',
@@ -120,7 +120,7 @@ const CourseRoadmap: React.FC = () => {
       classes: [
         { 
           name: '閱讀素養班', 
-          desc: '長文閱讀理解訓練，培養批判性思考與分析能力', 
+          desc: '針對長文閱讀進行深度理解訓練，教導擷取資訊與統整分析的技巧，培養孩子獨立思考與批判性分析的關鍵素養能力。', 
           age: '小一~小二', 
           time: '週六 下午', 
           objectives: '提升長篇文章閱讀速度與理解力，培養擷取資訊、統統分析與批判思考的能力。', 
@@ -161,7 +161,7 @@ const CourseRoadmap: React.FC = () => {
         },
         { 
           name: '閱讀寫作班', 
-          desc: '結合經典文學導讀與創意寫作，提升表達力與文采', 
+          desc: '結合經典文學賞析與創意寫作引導，透過感官摹寫與修辭練習提升文字表現力，讓孩子能自信流暢地表達個人想法與文采。', 
           age: '小四~小六', 
           time: '週六 上午', 
           objectives: '培養閱讀興趣，激發寫作靈感，能流暢表達個人想法與情感。', 
@@ -209,8 +209,8 @@ const CourseRoadmap: React.FC = () => {
       icon: <FlaskConical size={20} />,
       color: 'text-blue-500',
       classes: [
-        { name: '小小科學家', desc: '生活科學實驗，激發好奇心', age: '小一 ~ 小三', time: '週六 下午', objectives: '透過趣味實驗引發科學興趣，培養觀察力與動手操作的能力。', target: '充滿好奇心，喜歡動手做的低年級學生。', features: ['安全有趣的科學實驗', '生活化科學原理介紹', '觀察記錄與分享', '培養科學探究精神'], roadmap: ['物理現象探索', '化學變化觀察', '生物與環境認識'] },
-        { name: '科展培訓班', desc: '專題研究與實驗設計，培養探究精神', age: '小四 ~ 小六', time: '週日 下午', objectives: '學習完整的科學研究方法，從選題、實驗設計到數據分析，完成專題研究。', target: '對科學研究有濃厚興趣，有意參加科展的高年級學生。', features: ['專題研究方法指導', '實驗設計與變因控制', '數據分析與圖表製作', '報告撰寫與口頭發表'], roadmap: ['研究主題確立', '實驗執行與記錄', '成果發表與競賽'] },
+        { name: '小小科學家', desc: '透過趣味的生活科學實驗激發孩子的好奇心，在動手做的過程中學習觀察與假設，培養實事求是的科學探究精神。', age: '小一 ~ 小三', time: '週六 下午', objectives: '透過趣味實驗引發科學興趣，培養觀察力與動手操作的能力。', target: '充滿好奇心，喜歡動手做的低年級學生。', features: ['安全有趣的科學實驗', '生活化科學原理介紹', '觀察記錄與分享', '培養科學探究精神'], roadmap: ['物理現象探索', '化學變化觀察', '生物與環境認識'] },
+        { name: '科展培訓班', desc: '引導學生進行專題研究與實驗設計，從選題到數據分析完整體驗科學方法，培養嚴謹的邏輯思維與解決問題的實戰能力。', age: '小四 ~ 小六', time: '週日 下午', objectives: '學習完整的科學研究方法，從選題、實驗設計到數據分析，完成專題研究。', target: '對科學研究有濃厚興趣，有意參加科展的高年級學生。', features: ['專題研究方法指導', '實驗設計與變因控制', '數據分析與圖表製作', '報告撰寫與口頭發表'], roadmap: ['研究主題確立', '實驗執行與記錄', '成果發表與競賽'] },
       ]
     },
     {
@@ -220,10 +220,10 @@ const CourseRoadmap: React.FC = () => {
       icon: <Rocket size={20} />,
       color: 'text-purple-500',
       classes: [
-        { name: '超前數學班', desc: '針對資優鑑定需求，深化數學邏輯與難題解析', age: '小四 ~ 小六', time: '週三/五 晚上', objectives: '針對資優鑑定數學題型進行深度解析，強化邏輯推理與解題技巧。', target: '目標報考數理資優班或私中入學考的學生。', features: ['歷屆資優試題全解析', '邏輯推理與空間觀念', '難題破解策略教學', '模擬測驗實戰演練'], roadmap: ['基礎資優觀念', '進階題型挑戰', '考前密集衝刺'] },
-        { name: '自然實驗班', desc: '實作科學實驗，強化自然科觀念與探究實力', age: '小三 ~ 小六', time: '週六 上午', objectives: '透過實驗操作加深自然科觀念，培養科學實作能力與應試實力。', target: '目標報考自然資優班 or 對科學實驗有興趣的學生。', features: ['配合資優鑑定實驗主題', '強調實驗操作與原理', '科學探究能力訓練', '自然科筆試重點複習'], roadmap: ['基礎實驗操作', '進階探究實驗', '術科實作模擬'] },
-        { name: '公校黑馬營', desc: '針對公立數理資優班鑑定，全方位衝刺培訓', age: '小六', time: '寒暑假/考前 上午', objectives: '針對公立資優班鑑定考試進行密集訓練，全面提升數理能力。', target: '目標考取公立國中數理資優班的小六學生。', features: ['性向測驗模擬練習', '數理實作能力強化', '口試面試技巧指導', '考前重點總整理'], roadmap: ['初試性向測驗準備', '複試實作評量準備', '全真模擬演練'] },
-        { name: '私中黑馬營', desc: '私中入學考全科衝刺，高強度模擬考實戰演練', age: '小六', time: '週六/日 上午', objectives: '針對私中入學考試科目進行全方位複習與衝刺，確保金榜題名。', target: '目標考取延平、薇閣、東山等明星私中的小六學生. ', features: ['國英數三科重點複習', '私中命題趨勢分析', '高強度模擬考演練', '落點分析與志願選填'], roadmap: ['單元複習期', '綜合演練期', '考前衝刺期'] },
+        { name: '超前數學班', desc: '精準鎖定資優鑑定需求，深化數學邏輯思維與難題解析技巧，透過歷屆試題實戰演練，協助孩子在升學挑戰中脫穎而出。', age: '小四 ~ 小六', time: '週三/五 晚上', objectives: '針對資優鑑定數學題型進行深度解析，強化邏輯推理與解題技巧。', target: '目標報考數理資優班 or 私中入學考的學生。', features: ['歷屆資優試題全解析', '邏輯推理與空間觀念', '難題破解策略教學', '模擬測驗實戰演練'], roadmap: ['基礎資優觀念', '進階題型挑戰', '考前密集衝刺'] },
+        { name: '自然實驗班', desc: '強調科學實作與探究實力，透過配合鑑定主題的實驗操作強化自然科核心觀念，讓孩子具備應對術科實作評量的堅實能力。', age: '小三 ~ 小六', time: '週六 上午', objectives: '透過實驗操作加深自然科觀念，培養科學實作能力與應試實力。', target: '目標報考自然資優班 or 對科學實驗有興趣的學生。', features: ['配合資優鑑定實驗主題', '強調實驗操作與原理', '科學探究能力訓練', '自然科筆試重點複習'], roadmap: ['基礎實驗操作', '進階探究實驗', '術科實作模擬'] },
+        { name: '公校黑馬營', desc: '專為公立數理資優班鑑定設計的全方位衝刺培訓，涵蓋性向測驗與數理實作強化，在關鍵時刻助孩子一臂之力，成就黑馬之姿。', age: '小六', time: '寒暑假/考前 上午', objectives: '針對公立資優班鑑定考試進行密集訓練，全面提升數理能力。', target: '目標考取公立國中數理資優班的小六學生。', features: ['性向測驗模擬練習', '數理實作能力強化', '口試面試技巧指導', '考前重點總整理'], roadmap: ['初試性向測驗準備', '複試實作評量準備', '全真模擬演練'] },
+        { name: '私中黑馬營', desc: '針對明星私中入學考進行高強度全科衝刺，結合命題趨勢分析與全真模擬演練，精準提升應試技巧，確保孩子順利金榜題名。', age: '小六', time: '週六/日 上午', objectives: '針對私中入學考試科目進行全方位複習與衝刺，確保金榜題名。', target: '目標考取延平、薇閣、東山等明星私中的小六學生. ', features: ['國英數三科重點複習', '私中命題趨勢分析', '高強度模擬考演練', '落點分析與志願選填'], roadmap: ['單元複習期', '綜合演練期', '考前衝刺期'] },
       ]
     },
     {
@@ -232,11 +232,13 @@ const CourseRoadmap: React.FC = () => {
       description: '艾森樂小玩家系列課程，結合寒暑假主題營隊與週末多元工作坊，旨在讓學習延伸至教室之外。透過科學實驗、藝術創作、戶外探索與體能活動，啟發孩子的多元興趣與潛能。我們相信「玩」是最好的學習，在遊戲與團隊合作中，培養解決問題的能力與人際互動技巧，讓孩子在歡笑中快樂成長，玩出屬於自己的競爭力。',
       icon: <Clock size={20} />,
       color: 'text-pink-500',
-      classes: [
-        { name: '艾森樂夏令營', desc: '主題式教學，結合科學、藝術、體能與戶外參訪', age: '升小一 ~ 小六', time: '暑假期間 上午', objectives: '透過多元主題活動，豐富暑假生活，培養團隊合作與探索精神。', target: '希望度過充實快樂暑假的國小學生。', features: ['每週不同主題課程', '戶外教學與參訪', '專業師資帶領活動', '成果發表與展示'], roadmap: ['科學探索週', '藝術創作週', '體能挑戰週'] },
-        { name: '艾森樂冬令營', desc: '短期密集營隊，專注力訓練與多元智能開發', age: '小一 ~ 小六', time: '寒假期間 上午', objectives: '利用寒假時間進行集中式學習與體驗，激發多元智能發展。', target: '希望在寒假期間學習新技能或體驗多元活動的學生。', features: ['專注力與記憶力訓練', '創客 Maker 動手做', '邏輯桌遊挑戰', '情緒管理與人際互動'], roadmap: ['大腦潛能開發', '創客實作體驗', '團隊合作挑戰'] },
-        { name: '週六多元課程', desc: '科學實驗、創意積木、邏輯桌遊，豐富週末生活', age: '小一 ~ 小六', time: '週六 上午', objectives: '提供平日課業以外的興趣探索機會，發掘孩子的天賦與熱情。', target: '希望利用週末時間培養興趣 or 專長的學生。', features: ['多元領域課程選擇', '小班制精緻教學', '著重動手做與體驗', '培養跨領域素養'], roadmap: ['科學實驗班', '創意積木班', '邏輯桌遊班'] },
-      ]
+      displayType: 'images',
+      images: [
+        "https://www.dropbox.com/scl/fi/p44tfmhi1jlzh1boavv4t/1118_-PO-_R2_A.jpg?rlkey=n5cul8ota63vn05mpa9lhulcl&raw=1",
+        "https://www.dropbox.com/scl/fi/pnm2c2o3cxd5c7q7i5rn5/1129_-PO-_A.jpg?rlkey=a8bt2jiqtuc59ncpu7eh8fgay&raw=1",
+        "https://www.dropbox.com/scl/fi/1zrjbf0ifu841tp6fs91j/1109_-PO-_JZ_01-01.jpg?rlkey=3gpwtreuj30l49r3g8g3tqdug&raw=1"
+      ],
+      classes: []
     }
   ];
 
@@ -326,19 +328,6 @@ const CourseRoadmap: React.FC = () => {
   const openSchedule = (cls: any) => {
     setSelectedClass(cls);
     setModalMode('schedule');
-    if (cls.name === '進度數學班') {
-      setSelectedGrade('三年級');
-    } else if (cls.name === '閱讀素養班') {
-      setSelectedGrade('一年級');
-    } else if (cls.name === '閱讀寫作班') {
-      setSelectedGrade('中年級');
-    }
-  };
-
-  const openDetail = (cls: any) => {
-    setSelectedClass(cls);
-    setModalMode('detail');
-    setActiveDetailTab('main');
     if (cls.name === '進度數學班') {
       setSelectedGrade('三年級');
     } else if (cls.name === '閱讀素養班') {
@@ -652,52 +641,60 @@ const CourseRoadmap: React.FC = () => {
                </p>
             </div>
 
-            {/* Class Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-right-4 duration-300">
-              {COURSE_DATA[activeTab].classes.map((cls, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-white border border-green-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col h-full"
-                >
-                  <div className="flex-1">
-                    <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-green-600 transition-colors">
-                      {cls.name}
-                    </h4>
-
-                    {/* Meta Tags: Age & Time */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
-                         <Users size={14} className="text-green-600" /> 
-                         <span>{cls.age}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
-                         <Clock size={14} className="text-green-600" /> 
-                         <span>{cls.time}</span>
-                      </div>
-                    </div>
-
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                      {cls.desc}
-                    </p>
-                  </div>
-                  
-                  {/* Action Buttons */}
-                  <div className="flex gap-2 mt-auto">
-                     <button 
-                       onClick={() => openSchedule(cls)}
-                       className="flex-1 py-2.5 rounded-lg bg-green-50 text-green-700 text-sm font-bold hover:bg-green-100 transition-colors flex items-center justify-center gap-1.5 border border-green-200"
-                     >
-                        查看課表 <Calendar size={14} />
-                     </button>
-                     <button 
-                       onClick={() => openDetail(cls)}
-                       className="flex-1 py-2.5 rounded-lg bg-green-600 text-white text-sm font-bold hover:bg-green-700 transition-colors text-center flex items-center justify-center gap-1.5 shadow-md shadow-green-200"
-                     >
-                        了解課程 <ArrowRight size={14} />
-                     </button>
-                  </div>
+            {/* Class Cards or Images */}
+            <div className={`animate-in fade-in slide-in-from-right-4 duration-300 ${COURSE_DATA[activeTab].displayType === 'images' ? 'space-y-6' : 'grid grid-cols-1 sm:grid-cols-2 gap-4'}`}>
+              {COURSE_DATA[activeTab].displayType === 'images' ? (
+                <div className="flex flex-col gap-6">
+                  {COURSE_DATA[activeTab].images?.map((url: string, i: number) => (
+                    <img 
+                      key={i} 
+                      src={url} 
+                      alt={`艾森樂小玩家 ${i + 1}`} 
+                      className="w-full h-auto rounded-2xl shadow-lg border border-green-100"
+                      referrerPolicy="no-referrer"
+                    />
+                  ))}
                 </div>
-              ))}
+              ) : (
+                COURSE_DATA[activeTab].classes.map((cls, idx) => (
+                  <div 
+                    key={idx} 
+                    className="bg-white border border-green-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col h-full"
+                  >
+                    <div className="flex-1">
+                      <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-green-600 transition-colors">
+                        {cls.name}
+                      </h4>
+  
+                      {/* Meta Tags: Age & Time & Schedule Button */}
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div className="flex flex-wrap gap-2">
+                          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
+                             <Users size={14} className="text-green-600" /> 
+                             <span>{cls.age}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
+                             <Clock size={14} className="text-green-600" /> 
+                             <span>{cls.time}</span>
+                          </div>
+                        </div>
+                        {['math', 'chinese', 'gifted'].includes(COURSE_DATA[activeTab].id) && (
+                          <button 
+                            onClick={() => openSchedule(cls)}
+                            className="py-1.5 px-3 rounded-lg bg-green-50 text-green-700 text-xs font-bold hover:bg-green-100 transition-colors flex items-center gap-1.5 border border-green-200"
+                          >
+                             查看課表 <Calendar size={12} />
+                          </button>
+                        )}
+                      </div>
+  
+                      <p className="text-slate-600 text-sm leading-relaxed mb-2">
+                        {cls.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
 
              {/* Mobile Action Buttons (Moved below cards) */}

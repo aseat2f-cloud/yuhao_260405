@@ -40,6 +40,7 @@ const HomeBanner: React.FC = () => {
               src={img} 
               alt={`Banner ${index + 1}`} 
               className="w-full h-auto block" 
+              referrerPolicy="no-referrer"
             />
           </div>
         ))}

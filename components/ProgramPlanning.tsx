@@ -384,6 +384,7 @@ const ProgramContent: React.FC<{
                               src={img.url} 
                               alt={cat.name} 
                               className="w-full h-auto object-contain block"
+                              referrerPolicy="no-referrer"
                               loading="eager"
                             />
                         </div>

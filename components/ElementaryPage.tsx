@@ -87,22 +87,22 @@ const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate })
       <ElementaryBanner />
 
       {/* 1. 亮眼成績 (ID: outstanding-results) */}
-      <div id="outstanding-results" className="scroll-mt-32 min-h-[800px]">
+      <div id="outstanding-results" className="scroll-mt-32">
         <OutstandingResults theme="green" />
       </div>
 
       {/* 3. 課程規劃 (ID: course-roadmap) - Has internal green theme */}
-      <div id="course-roadmap" className="scroll-mt-32 min-h-[1500px]">
+      <div id="course-roadmap" className="scroll-mt-32">
         <CourseRoadmap />
       </div>
 
       {/* 4. 榮耀金榜 (Elementary Specific) */}
-      <div id="honor-roll" className="scroll-mt-32 min-h-[1000px]">
+      <div id="honor-roll" className="scroll-mt-32">
         <HonorRoll variant="elementary" theme="green" />
       </div>
 
       {/* 5. 環境介紹 (ID: environment) */}
-      <div id="environment" className="scroll-mt-32 min-h-[800px] pb-64">
+      <div id="environment" className="scroll-mt-32 pb-32">
         <EnvironmentIntro 
           theme="green" 
           images={[

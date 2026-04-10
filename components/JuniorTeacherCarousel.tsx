@@ -149,6 +149,7 @@ const JuniorTeacherCarousel: React.FC = () => {
                     src={teacher.image} 
                     alt={teacher.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                   
@@ -223,7 +224,7 @@ const JuniorTeacherCarousel: React.FC = () => {
            <div className="flex flex-col gap-6">
            <div className="aspect-video bg-black rounded-xl overflow-hidden flex items-center justify-center relative group shadow-2xl">
               {/* Mock Video UI */}
-              <img src={selectedTeacher.image} className="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm" />
+              <img src={selectedTeacher.image} className="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm" referrerPolicy="no-referrer" />
               <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform z-10 group-hover:bg-blue-500">
                  <Play size={32} className="text-white fill-white ml-1" />
               </div>

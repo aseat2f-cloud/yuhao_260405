@@ -35,6 +35,7 @@ const ElementaryBanner: React.FC = () => {
               src={img} 
               alt={`Elementary Banner ${index + 1}`} 
               className="w-full h-full object-cover block" 
+              referrerPolicy="no-referrer"
             />
           </div>
         ))}

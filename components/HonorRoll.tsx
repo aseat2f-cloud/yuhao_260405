@@ -411,19 +411,19 @@ const HonorRoll: React.FC<HonorRollProps> = ({ variant = 'default', theme = 'pri
           {variant === 'elementary' ? (
             <div key={gridKey} className="flex flex-col items-center gap-6 sm:gap-10">
               {ELEMENTARY_IMAGE_DATA[activeTab as keyof typeof ELEMENTARY_IMAGE_DATA]?.map((img, idx) => (
-                <div 
-                  key={idx} 
-                  className={`w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-100 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                  style={{ transitionDelay: `${idx * 150}ms` }}
-                >
-                  <img 
-                    src={img} 
-                    alt={`${activeTab} honor roll ${idx + 1}`} 
-                    className="w-full h-auto block hover:scale-[1.02] transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                    loading="lazy"
-                  />
-                </div>
+                  <div 
+                    key={idx} 
+                    className={`w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-100 transform transition-all duration-700 min-h-[300px] sm:min-h-[500px] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                    style={{ transitionDelay: `${idx * 150}ms` }}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${activeTab} honor roll ${idx + 1}`} 
+                      className="w-full h-auto block hover:scale-[1.02] transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                      loading="eager"
+                    />
+                  </div>
               ))}
             </div>
           ) : (
@@ -451,6 +451,7 @@ const HonorRoll: React.FC<HonorRollProps> = ({ variant = 'default', theme = 'pri
                             src={item.photo} 
                             alt={item.name} 
                             className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
                             loading="lazy"
                           />
                         </div>

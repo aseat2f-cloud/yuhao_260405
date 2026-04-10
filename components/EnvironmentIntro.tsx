@@ -149,7 +149,7 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
                   <div className={`
                     relative overflow-hidden rounded-full border-white shadow-2xl bg-slate-200
                     w-20 h-20 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64
-                    ${isCenter ? 'border-2 md:border-[3px]' : 'border-2'}
+                    ${isCenter ? 'border md:border-2' : 'border'}
                   `}>
                     <img 
                       src={images[imgIndex]} 
@@ -163,7 +163,7 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
                   {isCenter && (
                     <motion.div 
                       layoutId="active-ring"
-                      className={`absolute -inset-0.5 md:-inset-1 rounded-full border-2 border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none`}
+                      className={`absolute -inset-[1px] md:-inset-[2px] rounded-full border-[1.5px] border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none`}
                       style={{ animationDuration: '30s' }}
                     />
                   )}

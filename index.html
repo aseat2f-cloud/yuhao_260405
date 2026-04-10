@@ -122,6 +122,10 @@
               'subtle-glow': {
                 '0%, 100%': { boxShadow: '0 0 15px 2px rgba(250, 204, 21, 0.3)' },
                 '50%': { boxShadow: '0 0 25px 5px rgba(250, 204, 21, 0.6)' },
+              },
+              'soft-scale': {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.02)' },
               }
             },
             animation: {
@@ -130,6 +134,7 @@
               'spin-slow': 'spin-slow 12s linear infinite',
               'marching-ants': 'marching-ants 1s linear infinite',
               'subtle-glow': 'subtle-glow 3s ease-in-out infinite',
+              'soft-scale': 'soft-scale 4s ease-in-out infinite',
             }
           },
         },
