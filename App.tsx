@@ -127,6 +127,16 @@ function App() {
   // Scroll to top removed here as it is handled by Header.tsx to avoid two-stage jumps
 
   useEffect(() => {
+    // Preload critical assets
+    const criticalAssets = [
+      "https://www.dropbox.com/scl/fi/rumhay1jnqh6ihrq47ciq/LOGO-31.png?rlkey=ahgteqcxvjvzqhunuy96zndu8&raw=1",
+      "https://www.dropbox.com/scl/fi/28ybkxy6k4fwv3esmn2lw/.svg?rlkey=ttwp7q5t9rtwn2oe3gujgr14w&raw=1"
+    ];
+    criticalAssets.forEach(url => {
+      const img = new Image();
+      img.src = url;
+    });
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };

@@ -554,7 +554,7 @@ const CourseRoadmap: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-green-600 relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 bg-green-600 relative overflow-hidden">
       {/* Texture Background */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
@@ -650,7 +650,7 @@ const CourseRoadmap: React.FC = () => {
                       key={i} 
                       src={url} 
                       alt={`艾森樂小玩家 ${i + 1}`} 
-                      className="w-full h-auto rounded-2xl shadow-lg border border-green-100"
+                      className="w-full h-auto rounded-2xl shadow-lg border border-green-100 min-h-[200px] bg-green-50/50"
                       referrerPolicy="no-referrer"
                     />
                   ))}

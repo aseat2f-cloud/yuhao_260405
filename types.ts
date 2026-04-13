@@ -40,15 +40,3 @@ export interface EventItem {
   status: 'upcoming' | 'past';
   description: string;
 }
-
-export interface Teacher {
-  id: string;
-  name: string;
-  subject: string;
-  image: string;
-  videoUrl?: string; // For the video modal
-  intro: string;
-  // New fields for professional card design
-  experience?: string[];
-  philosophy?: string;
-}

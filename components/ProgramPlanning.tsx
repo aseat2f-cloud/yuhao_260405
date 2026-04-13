@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Users, BookOpen, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, BookOpen, Search } from 'lucide-react';
 import { PageType } from '../types';
 
 interface ProgramPlanningProps {
@@ -32,7 +32,6 @@ interface ProgramData {
   activeButtonClass: string;
   page: PageType;
   categories: CourseCategory[];
-  teacherSectionId: string;
 }
 
 const convertDropboxLink = (url: string) => url.replace('dl=0', 'raw=1');
@@ -51,7 +50,6 @@ const PROGRAMS_DATA: Record<string, ProgramData> = {
     activeTabStyle: 'bg-white text-green-700 shadow-lg',
     activeButtonClass: 'bg-green-600 text-white border-green-600 ring-2 ring-green-200',
     page: 'elementary',
-    teacherSectionId: 'teacher-carousel',
     categories: [
       {
         id: 'math',
@@ -116,7 +114,6 @@ const PROGRAMS_DATA: Record<string, ProgramData> = {
     activeTabStyle: 'bg-white text-blue-700 shadow-lg',
     activeButtonClass: 'bg-blue-600 text-white border-blue-600 ring-2 ring-blue-200',
     page: 'junior',
-    teacherSectionId: 'junior-teachers',
     categories: [
       {
         id: 'math',
@@ -173,7 +170,6 @@ const PROGRAMS_DATA: Record<string, ProgramData> = {
     activeTabStyle: 'bg-white text-purple-700 shadow-lg',
     activeButtonClass: 'bg-purple-600 text-white border-purple-600 ring-2 ring-purple-200',
     page: 'senior',
-    teacherSectionId: 'senior-teachers',
     categories: [
       {
         id: 'g10_pre',
@@ -238,6 +234,15 @@ const ProgramContent: React.FC<{
   const activeImages = activeCategory.images;
   const currentImage = activeImages[activeImageIndex];
   const isElementary = program.id === 'elementary';
+
+  // Optimization: Preload only the NEXT image in the current category
+  useEffect(() => {
+    if (activeImages.length > 1) {
+      const nextIdx = (activeImageIndex + 1) % activeImages.length;
+      const img = new Image();
+      img.src = activeImages[nextIdx].url;
+    }
+  }, [activeImageIndex, activeImages]);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -373,24 +378,21 @@ const ProgramContent: React.FC<{
       <div className="lg:w-[43%] bg-slate-50 flex flex-col justify-start">
          <div className="w-full relative group"> 
             
-            {/* RENDER ALL IMAGES (Hidden vs Block) to prevent flickering */}
-            {program.categories.map((cat, catIdx) => (
-                cat.images.map((img, imgIdx) => {
-                    // Only show the image if both category and image index match
-                    const isVisible = (catIdx === activeCategoryIndex && imgIdx === activeImageIndex);
-                    return (
-                        <div key={`${cat.id}-${imgIdx}`} className={isVisible ? 'block' : 'hidden'}>
-                            <img 
-                              src={img.url} 
-                              alt={cat.name} 
-                              className="w-full h-auto object-contain block"
-                              referrerPolicy="no-referrer"
-                              loading="eager"
-                            />
-                        </div>
-                    );
-                })
-            ))}
+            {/* RENDER IMAGES - Only render current category's images to reduce DOM size */}
+            {activeCategory.images.map((img, imgIdx) => {
+                const isVisible = imgIdx === activeImageIndex;
+                return (
+                    <div key={`${activeCategory.id}-${imgIdx}`} className={isVisible ? 'block' : 'hidden'}>
+                        <img 
+                          src={img.url} 
+                          alt={activeCategory.name} 
+                          className="w-full h-auto object-contain block"
+                          referrerPolicy="no-referrer"
+                          loading={isActive && isVisible ? "eager" : "lazy"}
+                        />
+                    </div>
+                );
+            })}
             
             {/* Category Badge - Always visible, updates text based on state */}
             <span className={`absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm text-slate-800 text-sm font-bold rounded-full shadow-sm border ${program.borderColor} z-10`}>
@@ -445,16 +447,13 @@ const ProgramContent: React.FC<{
 const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'elementary' | 'junior' | 'senior'>('elementary');
 
-  // Preload all images to prevent flickering/delay
+  // Optimization: Preload only the first image of each main tab
   useEffect(() => {
-    const allImages = Object.values(PROGRAMS_DATA).flatMap(program => 
-      program.categories.flatMap(category => 
-        category.images.map(img => img.url)
-      )
+    const primaryImages = Object.values(PROGRAMS_DATA).map(program => 
+      program.categories[0].images[0].url
     );
     
-    // Create Image objects to force browser cache
-    allImages.forEach(url => {
+    primaryImages.forEach(url => {
       const img = new Image();
       img.src = url;
     });
@@ -531,19 +530,12 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
           ))}
 
           {/* Bottom Buttons - Dependent on activeTab logic */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-2xl mx-auto px-4">
              <button 
               onClick={() => handleNavAndScroll(currentProgram.page, 'course-roadmap')}
               className="py-3.5 px-6 rounded-xl bg-white text-slate-700 font-bold hover:bg-slate-50 hover:text-slate-900 transition-colors flex items-center justify-center gap-2 shadow-sm"
             >
               <BookOpen size={18} /> 班別列表
-            </button>
-
-            <button 
-              onClick={() => handleNavAndScroll(currentProgram.page, currentProgram.teacherSectionId)}
-              className="py-3.5 px-6 rounded-xl bg-white text-slate-700 font-bold hover:bg-slate-50 hover:text-slate-900 transition-colors flex items-center justify-center gap-2 shadow-sm"
-            >
-              <Users size={18} /> 師資陣容
             </button>
 
             <button 

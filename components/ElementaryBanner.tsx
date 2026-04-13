@@ -19,7 +19,7 @@ const ElementaryBanner: React.FC = () => {
 
   return (
     // Hidden on mobile (md:block) to match HomeBanner style as requested "版面同首頁"
-    <section className="w-full bg-slate-50 hidden md:block">
+    <section className="w-full bg-slate-50 hidden md:block min-h-[300px] lg:min-h-[400px]">
       <div className="relative w-full overflow-hidden group aspect-[3/1]">
         {IMAGES.map((img, index) => (
           <div

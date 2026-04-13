@@ -72,6 +72,7 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news, onNavigate }) => {
             src={currentItem.image} 
             alt={currentItem.title} 
             className="w-full h-auto absolute top-0 left-0 transition-transform duration-700 group-hover:scale-105"
+            referrerPolicy="no-referrer"
           />
           
           {/* Controls - Bottom Right */}

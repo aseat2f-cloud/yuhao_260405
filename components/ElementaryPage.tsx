@@ -102,7 +102,7 @@ const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate })
       </div>
 
       {/* 5. 環境介紹 (ID: environment) */}
-      <div id="environment" className="scroll-mt-32 pb-32">
+      <div id="environment" className="scroll-mt-32">
         <EnvironmentIntro 
           theme="green" 
           images={[

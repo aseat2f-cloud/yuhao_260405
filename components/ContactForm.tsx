@@ -99,7 +99,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ theme = 'primary' }) => {
 
   return (
     // Increased bottom padding to accommodate the animation without overlap
-    <section id="contact" className={`pt-24 pb-64 bg-${t}-600 relative overflow-hidden transition-colors duration-500`}>
+    <section id="contact" className={`pt-12 pb-48 bg-${t}-600 relative overflow-hidden transition-colors duration-500`}>
       <style>{`
         @keyframes complexRun {
           0% {

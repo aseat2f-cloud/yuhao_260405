@@ -63,11 +63,11 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
       }
 
       // If changing pages, wait longer for the new page to mount and layout to stabilize.
-      // 1200ms allows for initial render and some image loading.
-      const startDelay = isPageChange ? 1200 : 0;
+      // 2000ms allows for initial render and some image loading.
+      const startDelay = isPageChange ? 2000 : 0; 
       
       let attempts = 0;
-      const maxAttempts = 60; // 6 seconds max polling
+      const maxAttempts = 150; // 15 seconds max polling
       let hasScrolled = false;
 
       const pollElement = () => {
@@ -78,8 +78,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
           // Stability check: wait for the element's position to stop shifting
           let lastTop = element.getBoundingClientRect().top + window.pageYOffset;
           let stableCount = 0;
-          const requiredStable = 8; // Increased for better stability
-          const checkInterval = 100;
+          const requiredStable = 5; 
+          const checkInterval = 100; 
 
           const checkStability = () => {
             if (hasScrolled) return;
@@ -87,14 +87,13 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
             const elementNow = document.getElementById(sectionId);
             if (!elementNow) {
               attempts++;
-              setTimeout(pollElement, 150);
+              setTimeout(pollElement, 200);
               return;
             }
 
             const currentTop = elementNow.getBoundingClientRect().top + window.pageYOffset;
             
-            // If position is very close to last check, increment stable count
-            if (Math.abs(currentTop - lastTop) < 1) {
+            if (Math.abs(currentTop - lastTop) < 2) {
               stableCount++;
             } else {
               stableCount = 0;
@@ -103,11 +102,25 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
 
             if (stableCount >= requiredStable) {
               hasScrolled = true;
-              // One-shot scroll using window.scrollTo for more control
               window.scrollTo({
-                top: currentTop - 80, // Offset for header
+                top: currentTop - 120,
                 behavior: 'smooth'
               });
+
+              // Fallback: Check again after 1500ms to ensure we are still at the right spot (in case of late image loads)
+              setTimeout(() => {
+                const finalElement = document.getElementById(sectionId);
+                if (finalElement) {
+                  const finalTop = finalElement.getBoundingClientRect().top + window.pageYOffset;
+                  if (Math.abs(window.pageYOffset - (finalTop - 120)) > 20) {
+                    window.scrollTo({
+                      top: finalTop - 120,
+                      behavior: 'smooth'
+                    });
+                  }
+                }
+              }, 1500);
+
             } else if (attempts < maxAttempts) {
               attempts++;
               setTimeout(checkStability, checkInterval);
@@ -117,7 +130,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
           checkStability();
         } else if (attempts < maxAttempts) {
           attempts++;
-          setTimeout(pollElement, 150);
+          setTimeout(pollElement, 200);
         }
       };
 

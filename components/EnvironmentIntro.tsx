@@ -30,6 +30,14 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
   subtitle = "舒適、明亮、專業的教學空間，讓孩子在最優質的環境中專注學習，發揮最大潛能。"
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const themeColors = {
     purple: {
@@ -60,13 +68,12 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
 
   const activeTheme = themeColors[theme];
 
-  // Preload images
+  // Optimization: Preload only the NEXT image
   useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [images]);
+    const nextIndex = (currentIndex + 1) % images.length;
+    const img = new Image();
+    img.src = images[nextIndex];
+  }, [currentIndex, images]);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -89,9 +96,9 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
   };
 
   return (
-    <section className="py-6 bg-slate-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-4">
+    <section className="py-2 bg-slate-50 overflow-hidden w-full">
+      <div className="w-full px-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-4">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -121,49 +128,53 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
           </motion.p>
         </div>
 
-        <div className="relative h-[220px] sm:h-[320px] md:h-[420px] flex items-center justify-center">
-          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-12 w-full">
+        <div className="relative h-[260px] sm:h-[380px] md:h-[520px] flex items-center justify-center w-full overflow-visible">
+          <div className="relative w-full h-full flex items-center justify-center">
             {getVisibleIndices().map((imgIndex, displayIdx) => {
               const isCenter = displayIdx === 1;
+              const isLeft = displayIdx === 0;
+              const isRight = displayIdx === 2;
+              
+              const xOffset = isCenter ? '0' : isLeft ? (isMobile ? '-48vw' : '-350px') : (isMobile ? '48vw' : '350px');
+
               return (
                 <motion.div
                   key={imgIndex}
-                  layout
-                  initial={{ opacity: 0, scale: 0.7 }}
+                  initial={false}
                   animate={{ 
-                    opacity: isCenter ? 1 : 0.8, 
-                    scale: isCenter ? 1.4 : 0.75,
+                    x: xOffset,
+                    opacity: isCenter ? 1 : 0.4, 
+                    scale: isCenter ? 1 : 0.6,
                     zIndex: isCenter ? 20 : 10
                   }}
                   transition={{
-                    layout: { duration: 0.35, ease: "easeOut" },
-                    opacity: { duration: 0.25 },
-                    scale: { duration: 0.35 }
+                    duration: 0.6,
+                    ease: [0.32, 0.72, 0, 1]
                   }}
                   onClick={() => {
-                    if (displayIdx === 0) prevSlide();
-                    if (displayIdx === 2) nextSlide();
+                    if (isLeft) prevSlide();
+                    if (isRight) nextSlide();
                   }}
-                  className={`relative cursor-pointer`}
+                  className="absolute cursor-pointer shrink-0"
                 >
                   <div className={`
                     relative overflow-hidden rounded-full border-white shadow-2xl bg-slate-200
-                    w-20 h-20 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64
-                    ${isCenter ? 'border md:border-2' : 'border'}
+                    w-[60vw] h-[60vw] md:w-[500px] md:h-[500px]
+                    ${isCenter ? 'border-4 md:border-8' : 'border-2'}
                   `}>
                     <img 
                       src={images[imgIndex]} 
                       alt={`環境照片 ${imgIndex + 1}`} 
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
-                      loading="eager"
+                      loading={isCenter ? "eager" : "lazy"}
                     />
                   </div>
                   
                   {isCenter && (
                     <motion.div 
                       layoutId="active-ring"
-                      className={`absolute -inset-[1px] md:-inset-[2px] rounded-full border-[1.5px] border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none`}
+                      className={`absolute -inset-[3px] md:-inset-[6px] rounded-full border-[2px] md:border-[4px] border-dashed ${activeTheme.ring} animate-spin-slow pointer-events-none`}
                       style={{ animationDuration: '30s' }}
                     />
                   )}
@@ -173,24 +184,26 @@ const EnvironmentIntro: React.FC<EnvironmentIntroProps> = ({
           </div>
 
           {/* Navigation Buttons */}
-          <button 
-            onClick={prevSlide}
-            className={`absolute left-0 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all z-30`}
-            aria-label="Previous slide"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button 
-            onClick={nextSlide}
-            className={`absolute right-0 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all z-30`}
-            aria-label="Next slide"
-          >
-            <ChevronRight size={24} />
-          </button>
+          <div className="absolute inset-0 flex items-center justify-between px-4 md:px-8 pointer-events-none">
+            <button 
+              onClick={prevSlide}
+              className={`w-8 h-8 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all pointer-events-auto z-30`}
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className={`w-8 h-8 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-400 ${activeTheme.hover} hover:scale-110 active:scale-95 transition-all pointer-events-auto z-30`}
+              aria-label="Next slide"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
 
         {/* Indicators */}
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-2 pb-2">
           {images.map((_, idx) => (
             <button
               key={idx}
