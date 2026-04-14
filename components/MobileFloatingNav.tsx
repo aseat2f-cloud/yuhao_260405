@@ -28,23 +28,25 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
     switch (currentPage) {
       case 'elementary':
         return [
-          { label: '課程班別', href: '#course-roadmap' },
           { label: '教學成果', href: '#outstanding-results' },
+          { label: '課程班別', href: '#course-roadmap' },
           { label: '學員金榜', href: '#honor-roll' },
-          { label: '學員心得', href: '#testimonials' },
+          { label: '環境介紹', href: '#environment' },
         ];
       case 'junior':
         return [
-          { label: '課程班別', href: '#course-roadmap' },
           { label: '教學成果', href: '#outstanding-results' },
+          { label: '學員心得', href: '#student-testimonials' },
+          { label: '家長見證', href: '#parent-testimonials' },
+          { label: '課程班別', href: '#course-roadmap' },
           { label: '學員金榜', href: '#honor-roll' },
-          { label: '家長見證', href: '#testimonials' },
         ];
       case 'senior':
         return [
           { label: '課程班別', href: '#course-roadmap' },
           { label: '學員金榜', href: '#honor-roll' },
           { label: '環境介紹', href: '#environment' },
+          { label: '育豪優勢', href: '#advantages' },
         ];
       case 'bulletin':
         // No quick links for bulletin, only action buttons on the right

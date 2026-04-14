@@ -8,8 +8,8 @@ const NAV_ITEMS: NavItem[] = [
     label: '國小築基', 
     page: 'elementary',
     dropdown: [
-      { label: '課程班別', id: 'course-roadmap' },
       { label: '教學成果', id: 'outstanding-results' },
+      { label: '課程班別', id: 'course-roadmap' },
       { label: '學員金榜', id: 'honor-roll' },
       { label: '環境介紹', id: 'environment' },
     ]
@@ -18,10 +18,11 @@ const NAV_ITEMS: NavItem[] = [
     label: '國中突破', 
     page: 'junior',
     dropdown: [
-      { label: '課程班別', id: 'course-roadmap' },
       { label: '教學成果', id: 'outstanding-results' },
-      { label: '學員金榜', id: 'honor-roll' },
       { label: '學員心得', id: 'student-testimonials' },
+      { label: '家長見證', id: 'parent-testimonials' },
+      { label: '課程班別', id: 'course-roadmap' },
+      { label: '學員金榜', id: 'honor-roll' },
     ]
   },
   { 
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: '課程班別', id: 'course-roadmap' },
       { label: '學員金榜', id: 'honor-roll' },
       { label: '環境介紹', id: 'environment' },
+      { label: '育豪優勢', id: 'advantages' },
     ]
   },
   { label: '育豪快訊', page: 'bulletin' },

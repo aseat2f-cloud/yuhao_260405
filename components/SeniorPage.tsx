@@ -6,6 +6,7 @@ import HonorRoll from './HonorRoll';
 import SeniorBanner from './SeniorBanner';
 import GSATCountdown from './GSATCountdown';
 import EnvironmentIntro from './EnvironmentIntro';
+import SeniorAdvantages from './SeniorAdvantages';
 import { NewsItem, PageType } from '../types';
 import { Target } from 'lucide-react';
 
@@ -20,6 +21,7 @@ const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
     { label: '課程班別', href: '#course-roadmap' },
     { label: '學員金榜', href: '#honor-roll' },
     { label: '環境介紹', href: '#environment' },
+    { label: '育豪優勢', href: '#advantages' },
   ];
 
   return (
@@ -100,6 +102,11 @@ const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
       {/* 5. Environment Introduction (環境介紹) */}
       <div id="environment" className="scroll-mt-32">
         <EnvironmentIntro theme="purple" />
+      </div>
+
+      {/* 6. Senior Advantages (育豪優勢) */}
+      <div id="advantages" className="scroll-mt-32">
+        <SeniorAdvantages />
       </div>
 
     </div>

@@ -17,8 +17,8 @@ interface ElementaryPageProps {
 const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate }) => {
   
   const ELEMENTARY_QUICK_LINKS = [
-    { label: '課程班別', href: '#course-roadmap' },
     { label: '教學成果', href: '#outstanding-results' },
+    { label: '課程班別', href: '#course-roadmap' },
     { label: '學員金榜', href: '#honor-roll' },
     { label: '環境介紹', href: '#environment' },
   ];

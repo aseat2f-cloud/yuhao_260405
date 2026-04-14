@@ -201,15 +201,20 @@ const AnimatedCounter: React.FC<{ value: string }> = ({ value }) => {
 
 interface OutstandingResultsProps {
   theme?: 'primary' | 'green' | 'blue' | 'purple';
+  limit?: number;
 }
 
-const OutstandingResults: React.FC<OutstandingResultsProps> = ({ theme = 'primary' }) => {
+const OutstandingResults: React.FC<OutstandingResultsProps> = ({ theme = 'primary', limit }) => {
   const t = theme === 'primary' ? 'primary' : theme;
   const [replayCounts, setReplayCounts] = useState<Record<number, number>>({});
 
-  const statsToRender = theme === 'green' ? ELEMENTARY_STATS : 
-                        theme === 'blue' ? JUNIOR_STATS :
-                        theme === 'purple' ? SENIOR_STATS : JUNIOR_STATS;
+  let statsToRender = theme === 'green' ? ELEMENTARY_STATS : 
+                      theme === 'blue' ? JUNIOR_STATS :
+                      theme === 'purple' ? SENIOR_STATS : JUNIOR_STATS;
+
+  if (limit) {
+    statsToRender = statsToRender.slice(0, limit);
+  }
 
   const handleReplay = (index: number) => {
     setReplayCounts(prev => ({

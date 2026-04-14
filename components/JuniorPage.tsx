@@ -6,6 +6,7 @@ import StudentTestimonials from './StudentTestimonials';
 import JuniorCourseRoadmap from './JuniorCourseRoadmap';
 import HonorRoll from './HonorRoll';
 import JuniorBanner from './JuniorBanner';
+import JuniorParentTestimonials from './JuniorParentTestimonials';
 import { NewsItem, PageType } from '../types';
 import { FileCheck } from 'lucide-react';
 
@@ -17,10 +18,11 @@ interface JuniorPageProps {
 const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
   
   const JUNIOR_QUICK_LINKS = [
-    { label: '課程班別', href: '#course-roadmap' },
     { label: '教學成果', href: '#outstanding-results' },
-    { label: '學員金榜', href: '#honor-roll' },
     { label: '學員心得', href: '#student-testimonials' },
+    { label: '家長見證', href: '#parent-testimonials' },
+    { label: '課程班別', href: '#course-roadmap' },
+    { label: '學員金榜', href: '#honor-roll' },
   ];
 
   return (
@@ -87,12 +89,17 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
 
       {/* 2. Outstanding Results (亮眼成績 - 版面同首頁) */}
       <div id="outstanding-results" className="scroll-mt-32">
-        <OutstandingResults theme="blue" />
+        <OutstandingResults theme="blue" limit={4} />
       </div>
 
       {/* 3. Student Testimonials (學員心得 - 版面同國小) */}
       <div id="student-testimonials" className="scroll-mt-32">
-        <StudentTestimonials theme="blue" />
+        <StudentTestimonials theme="blue" showClass={false} />
+      </div>
+
+      {/* 3.5 Parent Testimonials (家長見證) */}
+      <div id="parent-testimonials" className="scroll-mt-32">
+        <JuniorParentTestimonials theme="blue" />
       </div>
 
       {/* 4. Course Roadmap (課程規劃 - 版面同國小, 國中專屬內容) */}

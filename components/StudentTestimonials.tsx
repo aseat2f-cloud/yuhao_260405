@@ -13,9 +13,10 @@ const TESTIMONIALS = [
 
 interface StudentTestimonialsProps {
   theme?: 'primary' | 'green' | 'blue' | 'purple';
+  showClass?: boolean;
 }
 
-const StudentTestimonials: React.FC<StudentTestimonialsProps> = ({ theme = 'green' }) => {
+const StudentTestimonials: React.FC<StudentTestimonialsProps> = ({ theme = 'green', showClass = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const t = theme === 'primary' ? 'primary' : theme;
@@ -81,11 +82,13 @@ const StudentTestimonials: React.FC<StudentTestimonialsProps> = ({ theme = 'gree
                   <div className="text-xs text-slate-500">{item.school}</div>
                 </div>
               </div>
-              <div className="mb-4">
-                <span className={`inline-block px-3 py-1 bg-white text-${t}-600 text-xs font-bold rounded-full shadow-sm`}>
-                  {item.class}
-                </span>
-              </div>
+              {showClass && (
+                <div className="mb-4">
+                  <span className={`inline-block px-3 py-1 bg-white text-${t}-600 text-xs font-bold rounded-full shadow-sm`}>
+                    {item.class}
+                  </span>
+                </div>
+              )}
               <p className="text-slate-700 text-sm leading-relaxed min-h-[80px]">
                 {item.content}
               </p>
