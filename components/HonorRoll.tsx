@@ -413,13 +413,13 @@ const HonorRoll: React.FC<HonorRollProps> = ({ variant = 'default', theme = 'pri
               {ELEMENTARY_IMAGE_DATA[activeTab as keyof typeof ELEMENTARY_IMAGE_DATA]?.map((img, idx) => (
                   <div 
                     key={idx} 
-                    className={`w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-100 transform transition-all duration-700 aspect-[3/2] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                    className={`w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-100 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                     style={{ transitionDelay: `${idx * 150}ms` }}
                   >
                     <img 
                       src={img} 
                       alt={`${activeTab} honor roll ${idx + 1}`} 
-                      className="w-full h-full object-cover block hover:scale-[1.02] transition-transform duration-500"
+                      className="w-full h-auto block hover:scale-[1.02] transition-transform duration-500"
                       referrerPolicy="no-referrer"
                       loading="lazy"
                     />

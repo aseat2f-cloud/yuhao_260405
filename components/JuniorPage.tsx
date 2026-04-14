@@ -18,10 +18,10 @@ interface JuniorPageProps {
 const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
   
   const JUNIOR_QUICK_LINKS = [
+    { label: '課程規劃', href: '#course-roadmap' },
+    { label: '學員金榜', href: '#honor-roll' },
     { label: '學員心得', href: '#student-testimonials' },
     { label: '家長見證', href: '#parent-testimonials' },
-    { label: '課程班別', href: '#course-roadmap' },
-    { label: '學員金榜', href: '#honor-roll' },
   ];
 
   return (
@@ -86,32 +86,32 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
       {/* 1. Image Carousel Banner */}
       <JuniorBanner />
 
-      {/* 2. Teaching Results (教學成果 - 僅保留區塊, 移除快捷按鈕) */}
+      {/* 2. Teaching Results (教學成果) */}
       <div id="outstanding-results" className="scroll-mt-32">
         <OutstandingResults theme="blue" limit={4} />
       </div>
 
-      {/* 3. Student Testimonials (學員心得 - 版面同國小) */}
-      <div id="student-testimonials" className="scroll-mt-32">
-        <StudentTestimonials theme="blue" showClass={false} />
-      </div>
-
-      {/* 4. Parent Testimonials (家長見證) */}
-      <div id="parent-testimonials" className="scroll-mt-32">
-        <JuniorParentTestimonials theme="blue" />
-      </div>
-
-      {/* 5. Course Roadmap (課程規劃 - 版面同國小, 國中專屬內容) */}
+      {/* 3. Course Roadmap (課程規劃) */}
       <div id="course-roadmap" className="scroll-mt-32">
         <JuniorCourseRoadmap />
       </div>
 
-      {/* 6. Honor Roll (榮耀金榜 - 校排前十/會考滿分/建北錄取) */}
+      {/* 4. Honor Roll (學員金榜) */}
       <div id="honor-roll" className="scroll-mt-32">
         <HonorRoll variant="junior" theme="blue" />
       </div>
 
-      {/* 7. CAPE Countdown Section */}
+      {/* 5. Student Testimonials (學員心得) */}
+      <div id="student-testimonials" className="scroll-mt-32">
+        <StudentTestimonials theme="blue" showClass={false} />
+      </div>
+
+      {/* 6. Parent Testimonials (家長見證) */}
+      <div id="parent-testimonials" className="scroll-mt-32">
+        <JuniorParentTestimonials theme="blue" />
+      </div>
+
+      {/* 7. CAPE Countdown Section (會考倒數) */}
       <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative bg-blue-600 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-200 overflow-hidden">
