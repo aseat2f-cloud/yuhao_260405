@@ -457,7 +457,7 @@ const JuniorCourseRoadmap: React.FC = () => {
                              <th className="px-4 py-4">週日</th>
                           </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-100 bg-white">
+                        <tbody className="divide-y divide-slate-100 bg-white">
                           {[
                             { period: '早', time: '09:00 - 12:00', schedule: ['', '', '', '', '', '數學', '自習'] },
                             { period: '午', time: '13:30 - 16:30', schedule: ['', '', '', '', '', '英文', '自習'] },
@@ -468,19 +468,24 @@ const JuniorCourseRoadmap: React.FC = () => {
                                 <div className="font-bold text-blue-700 text-lg mb-1">{row.period}</div>
                                 <div className="text-[10px] text-slate-400 font-medium whitespace-nowrap">{row.time}</div>
                               </td>
-                              {row.schedule.map((cell, cIdx) => (
-                                <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell ? 'bg-blue-50/30' : ''}`}>
-                                  {cell && (
-                                    <div className="flex flex-col items-center gap-1">
-                                      <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                                      <span className="font-bold text-slate-700">{cell}</span>
-                                    </div>
-                                  )}
-                                </td>
-                              ))}
+                              {row.schedule.map((cell, cIdx) => {
+                                const isTargetSubject = cell === selectedClass.subject || (selectedClass.subject === '自然' && cell === '理化');
+                                return (
+                                  <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell ? (isTargetSubject ? 'bg-blue-50/50' : 'bg-slate-50/30') : ''}`}>
+                                    {cell && (
+                                      <div className="flex flex-col items-center gap-1">
+                                        <span className={`w-2 h-2 rounded-full ${isTargetSubject ? 'bg-blue-500' : 'bg-slate-300'}`}></span>
+                                        <span className={`font-bold ${isTargetSubject ? 'text-blue-700' : 'text-slate-400'}`}>
+                                          {cell}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </td>
+                                );
+                              })}
                             </tr>
                           ))}
-                       </tbody>
+                        </tbody>
                     </table>
                 </div>
              </div>
