@@ -71,7 +71,6 @@ const JuniorParentTestimonials: React.FC<JuniorParentTestimonialsProps> = ({ the
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 text-sm">{item.name}</div>
-                  <div className="text-xs text-slate-500">{item.role}</div>
                 </div>
               </div>
             </div>
