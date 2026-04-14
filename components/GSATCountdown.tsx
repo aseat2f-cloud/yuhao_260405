@@ -26,7 +26,7 @@ const GSATCountdown: React.FC = () => {
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
   return (
-    <section id="gsat-countdown" className="py-20 bg-white overflow-hidden">
+    <section id="gsat-countdown" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative bg-purple-600 rounded-3xl p-8 md:p-12 shadow-2xl shadow-purple-200 overflow-hidden">
           {/* Background Decoration */}

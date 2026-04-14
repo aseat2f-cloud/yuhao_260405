@@ -368,7 +368,7 @@ const HonorRoll: React.FC<HonorRollProps> = ({ variant = 'default', theme = 'pri
   const gridKey = `${activeTab}-${currentPage}-${isVisible ? 'show' : 'hide'}`;
 
   return (
-    <section ref={sectionRef} className="py-12 bg-white">
+    <section ref={sectionRef} className="py-24 bg-white">
       <style>{`
         @keyframes flipInY {
           0% {
