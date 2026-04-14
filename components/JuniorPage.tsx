@@ -8,7 +8,7 @@ import HonorRoll from './HonorRoll';
 import JuniorBanner from './JuniorBanner';
 import JuniorParentTestimonials from './JuniorParentTestimonials';
 import { NewsItem, PageType } from '../types';
-import { FileCheck } from 'lucide-react';
+import { MessageCircle, FileCheck } from 'lucide-react';
 
 interface JuniorPageProps {
   heroNews: NewsItem[];
@@ -71,16 +71,17 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
           </div>
         }
         topLabel="育豪資優 國中部"
-        gradeLabel="國七 ~ 國九"
-        courseLabel="新生先修. 國中全科. 寒暑衝刺"
+        gradeLabel="升國七 ~ 國九"
+        courseLabel="新生先修 • 國中全科 • 寒暑衝刺"
         subtitle="會考衝刺首選，精準命題，弱點擊破。陪伴青春期的孩子找到讀書的方法與目標。"
         newsItems={heroNews}
         onNavigate={onNavigate}
         showQuickLinks={true}
         quickLinks={JUNIOR_QUICK_LINKS}
         theme="blue"
-        secondaryBtnLabel="學歷程度測驗"
-        secondaryBtnIcon={<FileCheck size={20} />}
+        secondaryBtnLabel="即時線上詢課"
+        secondaryBtnIcon={<MessageCircle size={20} />}
+        secondaryBtnLink="https://line.me/R/ti/p/@yuhaoschool"
       />
 
       {/* 1. Image Carousel Banner */}

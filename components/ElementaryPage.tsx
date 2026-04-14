@@ -71,7 +71,7 @@ const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate })
         }
         topLabel="艾森樂美語 x 小育豪資優數學"
         gradeLabel="幼兒大班 ~ 小六"
-        courseLabel="國.英.數.科學.資優升學"
+        courseLabel="國英數 • 科學實驗 • 資優升學"
         subtitle="啟發學習興趣，奠定紮實基礎。我們重視品格教育與全人發展，讓孩子快樂學習，自信成長。"
         newsItems={heroNews}
         onNavigate={onNavigate}

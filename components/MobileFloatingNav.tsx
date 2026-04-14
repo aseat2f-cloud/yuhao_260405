@@ -54,6 +54,7 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
       default:
         return [
           { label: '分齡學程', href: '#program-planning' },
+          { label: '學員金榜', href: '#honor-roll' },
           { label: '家長見證', href: '#testimonials' },
           { label: '學生專區', href: '#student-zone' },
         ];

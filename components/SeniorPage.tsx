@@ -71,8 +71,8 @@ const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
           </div>
         }
         topLabel="育豪資優 高中部"
-        gradeLabel="高一 ~ 高三"
-        courseLabel="升高一. 高一規劃. 高二規劃. 高三規劃. K書班"
+        gradeLabel="升高一 ~ 高三"
+        courseLabel="升高一 • 完整規劃 • 分科適性 • K書班"
         subtitle="學測分科雙軌並進，打造完美學習歷程。針對頂尖大學校系需求，提供客製化升學指導。"
         newsItems={heroNews}
         onNavigate={onNavigate}

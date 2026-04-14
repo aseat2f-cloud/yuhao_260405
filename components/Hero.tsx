@@ -46,6 +46,7 @@ const Hero: React.FC<HeroProps> = ({
   // Default Home Page Links
   const DEFAULT_LINKS: QuickLink[] = [
     { label: '分齡學程', href: '#program-planning' },
+    { label: '學員金榜', href: '#honor-roll' },
     { label: '家長見證', href: '#testimonials' },
     { label: '學生專區', href: '#student-zone' },
   ];
@@ -115,14 +116,14 @@ const Hero: React.FC<HeroProps> = ({
 
                 {/* Grade & Course Labels */}
                 {(gradeLabel || courseLabel) && (
-                  <div className="mb-10 flex flex-nowrap justify-center lg:justify-start gap-3">
+                  <div className="mb-10 flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
                     {gradeLabel && (
-                      <span className="inline-block px-4 py-1.5 bg-slate-100 text-slate-600 font-bold rounded-md text-base border border-slate-200 whitespace-nowrap flex-shrink-0">
+                      <span className="inline-block px-3 md:px-4 py-1.5 bg-slate-100 text-slate-600 font-bold rounded-md text-sm md:text-base border border-slate-200 whitespace-nowrap flex-shrink-0">
                         {gradeLabel}
                       </span>
                     )}
                     {courseLabel && (
-                      <span className="inline-block px-4 py-1.5 bg-orange-50 text-orange-700 font-bold rounded-md text-base border border-orange-100 whitespace-nowrap flex-shrink-0">
+                      <span className="inline-block px-3 md:px-4 py-1.5 bg-orange-50 text-orange-700 font-bold rounded-md text-sm md:text-base border border-orange-100 whitespace-nowrap flex-shrink-0">
                         {courseLabel}
                       </span>
                     )}
