@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { Lightbulb, Heart, Target, Trophy, GraduationCap, ShieldCheck, X, Play, Sparkles, Youtube, Crown } from 'lucide-react';
+import { Lightbulb, Heart, Target, Trophy, GraduationCap, ShieldCheck, X, Sparkles, Youtube, Crown } from 'lucide-react';
 import { FeatureItem } from '../types';
 import Modal from './Modal';
 
@@ -45,7 +45,7 @@ const COMPARISON_DATA = [
   { feature: '親師溝通', yuhao: '主動回報，共同解決問題', others: '僅通知成績與繳費' },
 ];
 
-const SUCCESS_VIDEOS = [
+export const SUCCESS_VIDEOS = [
   { 
     id: 'v1', 
     title: '【榜首專訪】從抗拒數學到會考滿分的心路歷程', 
@@ -73,50 +73,8 @@ const SUCCESS_VIDEOS = [
 ];
 
 const Features: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<typeof SUCCESS_VIDEOS[0] | null>(null);
   const expandedRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const toggleExpand = () => {
-    if (isExpanded) {
-      // Closing
-      setIsExpanded(false);
-      
-      // Use a more robust scroll back to the top of the section
-      // We use a small delay to allow the state change to trigger re-render
-      setTimeout(() => {
-        const section = document.getElementById('features');
-        if (section) {
-          const headerOffset = 100;
-          const elementPosition = section.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 10);
-    } else {
-      // Opening
-      setIsExpanded(true);
-      
-      // Use scrollIntoView with a delay to allow content to render
-      setTimeout(() => {
-        if (expandedRef.current) {
-          const headerOffset = 120;
-          const elementPosition = expandedRef.current.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 300);
-    }
-  };
 
   return (
     <section id="features" className="py-24 bg-white relative overflow-hidden">
@@ -157,38 +115,8 @@ const Features: React.FC = () => {
           ))}
         </div>
 
-        {/* Toggle Button */}
-        <div className="flex justify-center">
-          <div className="relative inline-flex group">
-            <button
-              ref={buttonRef}
-              onClick={toggleExpand}
-              className={`relative px-12 py-5 rounded-full font-bold text-xl transition-all duration-500 flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 active:scale-95 ${
-                isExpanded 
-                  ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' 
-                  : 'bg-yellow-400 text-slate-900 hover:bg-yellow-300 animate-soft-scale'
-              }`}
-            >
-            {!isExpanded && (
-              <>
-                {/* Shimmer Effect (Hover Only) */}
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer pointer-events-none"></div>
-                
-                {/* Subtle Glow Pulse */}
-                <div className="absolute inset-0 rounded-full bg-yellow-300/50 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-              </>
-            )}
-
-            <span className="relative z-10">
-              {isExpanded ? '收起詳細介紹' : '我們哪裡不一樣'}
-            </span>
-          </button>
-        </div>
-      </div>
-
-        {/* Expandable Section */}
-        {isExpanded && (
-          <div ref={expandedRef} className="mt-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+        {/* Expandable Section - Now Always Visible */}
+        <div ref={expandedRef} className="mt-12">
             {/* Changed background to white with a soft border instead of gray block */}
             <div className="bg-white rounded-[2.5rem] p-6 md:p-16 border border-slate-200 shadow-xl relative overflow-hidden">
               
@@ -216,7 +144,7 @@ const Features: React.FC = () => {
               </div>
 
               {/* Part 2: Comparison Table - Desktop (Table) & Mobile (Cards) */}
-              <div className="mb-20">
+              <div className="mb-8">
                 {/* Desktop View */}
                 <div className="hidden md:block overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
                   <table className="w-full text-left border-collapse">
@@ -303,61 +231,9 @@ const Features: React.FC = () => {
                 </div>
               </div>
 
-              {/* Part 3: Video Gallery - 4 Columns, Square, Centered Title with Lines & Subtitle */}
-              <div className="mb-12">
-                <div className="text-center mb-10">
-                  <span className="text-slate-900 font-bold tracking-wider uppercase text-xs mb-2 block">SUCCESS STORIES</span>
-                  <div className="flex items-center justify-center gap-4 mb-3">
-                    <div className="h-px bg-slate-400 w-12 md:w-24"></div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-primary-600">成功案例與訪談</h3>
-                    <div className="h-px bg-slate-400 w-12 md:w-24"></div>
-                  </div>
-                  <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base">
-                    聽聽學長姐與家長的真實心聲，見證改變的起點
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {SUCCESS_VIDEOS.map((video) => (
-                    <div 
-                      key={video.id} 
-                      className="group cursor-pointer"
-                      onClick={() => setSelectedVideo(video)}
-                    >
-                      {/* Square Aspect Ratio */}
-                      <div className="relative aspect-square rounded-xl overflow-hidden shadow-sm border border-slate-100 mb-4 bg-slate-100">
-                        <img 
-                          src={video.image} 
-                          alt={video.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                          <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 transition-all duration-300">
-                            <Play size={20} className="text-primary-600 ml-1" fill="currentColor" />
-                          </div>
-                        </div>
-                      </div>
-                      <h5 className="font-bold text-slate-800 group-hover:text-primary-600 transition-colors line-clamp-2 mb-1 leading-snug">{video.title}</h5>
-                      <p className="text-xs font-bold text-primary-500">{video.person}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Collapse Button */}
-              <div className="flex justify-center pt-8 border-t border-slate-100">
-                <button
-                  onClick={toggleExpand}
-                  className="flex items-center gap-2 text-slate-400 hover:text-slate-600 font-medium px-6 py-3 rounded-full hover:bg-slate-50 transition-all"
-                >
-                  收起內容
-                </button>
-              </div>
-
+              {/* Bottom Collapse Button - Removed */}
             </div>
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Video Modal */}

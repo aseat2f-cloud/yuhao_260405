@@ -46,7 +46,6 @@ const Hero: React.FC<HeroProps> = ({
   // Default Home Page Links
   const DEFAULT_LINKS: QuickLink[] = [
     { label: '分齡學程', href: '#program-planning' },
-    { label: '教學成果', href: '#outstanding-results' },
     { label: '家長見證', href: '#testimonials' },
     { label: '學生專區', href: '#student-zone' },
   ];

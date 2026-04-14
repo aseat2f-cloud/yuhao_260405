@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { Calculator, Languages, BookOpen, Rocket, ArrowRight, FlaskConical, ChevronLeft, ChevronRight, FileText, Clock, Users, Calendar, Map, Target, CheckCircle2, ChevronUp, ChevronsDown, Lightbulb, Waypoints } from 'lucide-react';
+import { Rocket, ArrowRight, FlaskConical, ChevronLeft, ChevronRight, Users, Calendar, Map, Target, CheckCircle2, ChevronUp, ChevronsDown, Lightbulb, Waypoints } from 'lucide-react';
 import BrochureViewer from './BrochureViewer';
 import Modal from './Modal';
 
@@ -11,63 +11,55 @@ const BROCHURE_IMAGES = [
 
 const COURSE_DATA = [
   {
-    id: 'math',
-    label: '數學',
-    description: '數學不僅是計算，更是邏輯思維的訓練。育豪國中部數學課程強調「觀念理解」與「嚴謹推演」，從國七的代數基礎到國八的幾何證明，循序漸進建立完整的數學架構。我們深入分析各版本教科書與歷屆會考題型，透過獨創的圖解教學與系統化筆記，引導學生突破思考盲點，培養舉一反三的解題能力，讓數學成為會考最強的得分利器。',
-    icon: <Calculator size={20} />,
-    color: 'text-blue-500', 
-    classes: [
-      { name: '國七數學班', desc: '銜接國小數學，建立代數觀念基礎', age: '國七', time: '週二/五 18:30', objectives: '順利銜接國小與國中數學落差，建立負數、代數與方程式的基礎觀念。', target: '國一新生，希望打好國中數學基礎的學生。', features: ['圖像化代數教學，抽象變具象', '強化計算細心度與驗算習慣', '段考題型精準命中', '個別輔導解決學習盲點'], roadmap: ['G7: 代數基礎與一元一次方程式', 'G8: 幾何證明與乘法公式', 'G9: 總複習與模考衝刺'] },
-      { name: '國八數學班', desc: '幾何圖形證明與乘法公式精熟', age: '國八', time: '週三/六 18:30', objectives: '掌握國中幾何證明技巧，熟練乘法公式與多項式運算，提升邏輯推演能力。', target: '國二學生，希望強化幾何與進階代數能力的學生。', features: ['幾何輔助線技巧全解析', '嚴謹的證明過程訓練', '挑戰高難度素養題型', '針對段考弱點單元加強'], roadmap: ['G8上: 乘法公式與多項式', 'G8下: 三角形與平行四邊形', 'G9: 會考全範圍複習'] },
-      { name: '國九數學班', desc: '總複習與模考演練，衝刺A++', age: '國九', time: '週日 09:00', objectives: '統整國中三年數學觀念，透過大量模考演練與錯題訂正，目標會考 A++。', target: '國三考生，目標第一志願與 A++ 的學生。', features: ['主題式複習，串聯跨單元觀念', '歷屆會考題型深度剖析', '高強度模考實戰演練', '精準猜題與考前衝刺'], roadmap: ['暑期: 1-4冊總複習', '寒假: 5-6冊與全範圍模考', '考前: 關鍵題型最終掃描'] },
-    ]
-  },
-  {
-    id: 'english',
-    label: '英文',
-    description: '英語是接軌國際的必備工具。課程著重於紮實的文法架構建立與閱讀測驗技巧訓練，並透過系統化教學大幅擴充會考必備單字量。結合時事議題與跨領域主題教學，提升長篇閱讀理解與聽力實戰能力。我們不只教考試技巧，更培養語感，讓學生在面對會考素養題型時能游刃有餘，輕鬆拿下 A++。',
-    icon: <Languages size={20} />,
-    color: 'text-purple-400', 
-    classes: [
-      { name: '國七英文班', desc: '基礎文法與句型架構建立', age: '國七', time: '週一/四 18:30', objectives: '建立正確的文法架構，擴充基礎單字量，培養英語學習興趣。', target: '國一新生，希望紮實英文基礎的學生。', features: ['系統化文法教學', '單字記憶法傳授', '生活化聽力訓練', '基礎閱讀理解策略'], roadmap: ['G7: 基礎文法與2000單字', 'G8: 進階文法與閱讀技巧', 'G9: 會考綜合題型'] },
-      { name: '國八英文班', desc: '進階閱讀與克漏字解析技巧', age: '國八', time: '週二/五 18:30', objectives: '提升長篇閱讀理解速度，掌握克漏字解題技巧，強化複雜句型分析。', target: '國二學生，希望突破閱讀測驗瓶頸的學生。', features: ['時事新聞英語導讀', '長難句結構分析', '克漏字邏輯推理解析', '主題式單字擴充'], roadmap: ['G8: 三大子句與長文閱讀', 'G9: 模考實戰與聽力強化'] },
-      { name: '國九英文班', desc: '會考題型全攻略，聽讀實力養成', age: '國九', time: '週六 13:30', objectives: '全面攻略會考聽力與閱讀題型，目標精熟 A++ 等級。', target: '國三考生，全力衝刺會考英文滿分的學生。', features: ['會考必考單字片語總整理', '素養閱讀題型專題講座', '英聽實戰模擬演練', '易混淆文法觀念釐清'], roadmap: ['暑期: 文法總複習', '寒假: 閱讀題組特訓', '考前: 歷屆試題全攻略'] },
-    ]
-  },
-  {
-    id: 'chinese',
-    label: '國文',
-    description: '面對素養導向的國文命題，閱讀理解是關鍵。課程精選古文觀止與現代文學名篇，深入解析文章意涵與寫作背景，提升閱讀素養與批判性思考能力。針對會考作文，提供模組化的寫作架構與修辭技巧指導，引導學生從生活經驗出發，運用名言佳句豐富內容，精準掌握評分標準，寫出有深度、有溫度的佳作。',
-    icon: <BookOpen size={20} />,
-    color: 'text-teal-400', 
-    classes: [
-      { name: '國七國文班', desc: '閱讀素養與基礎寫作訓練', age: '國七', time: '週六 13:30', objectives: '培養廣泛閱讀習慣，提升白話文與基礎文言文理解能力。', target: '國一新生，希望提升國語文素養的學生。', features: ['多元文本閱讀引導', '基礎寫作技巧訓練', '成語典故與國學常識', '閱讀理解策略教學'], roadmap: ['G7: 閱讀習慣養成', 'G8: 文言文深究', 'G9: 會考作文衝刺'] },
-      { name: '國八國文班', desc: '文言文閱讀理解與修辭應用', age: '國八', time: '週六 15:30', objectives: '克服文言文閱讀障礙，精熟修辭技巧，提升寫作深度。', target: '國二學生，對文言文感到困難的學生。', features: ['經典古文逐字逐句解析', '修辭法與寫作應用', '歷代文學流派整理', '混合題型作答技巧'], roadmap: ['G8: 古文觀止選讀', 'G9: 總複習與實戰'] },
-      { name: '國九國文班', desc: '會考重點複習與作文衝刺', age: '國九', time: '週六 18:30', objectives: '掌握會考命題趨勢，精準判讀長文重點，作文目標六級分。', target: '國三考生，目標國文 A++ 與作文滿分的學生。', features: ['形音義與成語總複習', '長篇閱讀速讀技巧', '作文六級分範文解析', '會考關鍵字解題法'], roadmap: ['暑期: 國學常識統整', '寒假: 寫作密集特訓', '考前: 必考古文衝刺'] },
-    ]
-  },
-  {
-    id: 'science',
-    label: '自然',
-    description: '自然科包含生物、理化與地科，範圍廣且觀念抽象。育豪自然團隊堅持「觀念重於死背」，透過生動的實驗演示與圖解教學，將抽象的科學原理具象化，讓學生深刻理解自然現象背後的成因。課程緊扣會考趨勢，強化跨科整合與圖表分析能力，幫助學生釐清易混淆觀念，輕鬆應對靈活多變的素養題型。',
-    icon: <FlaskConical size={20} />,
-    color: 'text-orange-400', 
-    classes: [
-      { name: '國七生物班', desc: '生命科學與生態環境探討', age: '國七', time: '週六 10:00', objectives: '建立完整的生物學架構，理解生命現象與生態系運作原理。', target: '國一新生，對生物科學有興趣的學生。', features: ['圖解生物構造與功能', '顯微鏡觀察與實驗', '生態環境議題探討', '生物圖表分析訓練'], roadmap: ['G7: 基礎生物學', 'G8: 理化觀念銜接', 'G9: 自然科總複習'] },
-      { name: '國八理化班', desc: '物理化學基礎觀念與計算', age: '國八', time: '週六 13:30', objectives: '奠定物理與化學基礎，精熟公式運用與實驗原理。', target: '國二學生，剛接觸理化需要打好基礎的學生。', features: ['實驗影片輔助教學', '化學反應式平衡技巧', '物理力學觀念解析', '生活化理化知識應用'], roadmap: ['G8上: 基本測量與物質', 'G8下: 化學反應與力學', 'G9: 電學與地科'] },
-      { name: '國九理化班', desc: '力學、電學與地科總整理', age: '國九', time: '週五 18:30', objectives: '統整國中三年自然科觀念，強化跨科整合與圖表判讀能力。', target: '國三考生，目標自然科 A++ 的學生。', features: ['力學與電學難題破解', '地球科學重點圖表整理', '實驗題型專題複習', '素養題解題邏輯訓練'], roadmap: ['暑期: 生物與理化複習', '寒假: 地科與模考', '考前: 跨科整合衝刺'] },
-    ]
-  },
-  {
-    id: 'sprint',
-    label: '寒暑衝刺',
-    description: '寒暑假是超前進度與弭平落差的黃金時期。我們規劃了紮實的銜接課程與考前衝刺班，利用假期進行重點單元的預習或複習。提供安靜舒適的 K 書中心與專職導師的解惑輔導，營造專注的讀書氛圍。透過規律的作息安排與高強度的模擬考演練，幫助學生調整最佳備戰狀態，贏在起跑點。',
+    id: 'transition',
+    label: '銜接課程',
+    description: '國小升國中是學習生涯的重要轉折點。我們的銜接課程專為小六畢業生設計，涵蓋國、英、數、自四大核心科目，幫助學生提前適應國中的學習強度與節奏，建立正確的讀書方法，贏在起跑點。',
     icon: <Rocket size={20} />,
     color: 'text-red-400', 
     classes: [
-      { name: '新生銜接課程', desc: '國小升國中暑期先修，贏在起跑點', age: '小六升國七', time: '暑期 09:00', objectives: '順利適應國中課程難度與學習模式，提前掌握國七關鍵知識。', target: '小六畢業生，希望贏在起跑點的學生。', features: ['國英數自四科均衡先修', '國中學習方法指導', '時間管理與讀書計畫', '銜接教材專屬編撰'], roadmap: ['暑期先修', '開學進度', '第一次段考'] },
-      { name: '模考K書班', desc: '模擬考前密集複習與解題輔導', age: '國七 ~ 國九', time: '考前週日', objectives: '提供專注的讀書環境與即時解惑，提升段考與模考成績。', target: '需要安靜讀書環境或有個別問題需要解答的學生。', features: ['五星級安靜K書中心', '專職導師駐班解惑', '考前重點講義發放', '讀書進度管理與督促'], roadmap: ['考前三週衝刺', '考前兩週複習', '考前一週驗收'] },
-      { name: '國九考衝班', desc: '會考前最後衝刺，精準猜題', age: '國九', time: '考前一個月', objectives: '在最後一個月進行高強度密集訓練，穩定軍心，衝刺最高分。', target: '國三考生，希望在最後階段全力衝刺的學生。', features: ['每日全科複習進度', '高頻率模擬考演練', '名師考前精準猜題', '考前心理建設與輔導'], roadmap: ['全範圍地毯式複習', '錯題弱點補強', '考前叮嚀與猜題'] },
+      { name: '暑期數學銜接班', desc: '掌握國中代數基礎，建立負數與方程式觀念，順利銜接國小數學落差。', subject: '數學' },
+      { name: '暑期英文先修班', desc: '系統化複習基礎文法，擴充國中必備單字量，強化聽力與閱讀基礎。', subject: '英文' },
+      { name: '國一國文素養班', desc: '培養國中程度的閱讀理解能力，掌握基礎寫作技巧與國學常識。', subject: '國文' },
+      { name: '自然科學啟蒙班', desc: '引發對生物與理化的興趣，透過生動教學將抽象科學原理具象化。', subject: '自然' },
+    ]
+  },
+  {
+    id: 'g7',
+    label: '國七階段',
+    description: '國七是打穩學科根基的關鍵年。我們強調觀念的透徹理解而非死背，透過系統化的教學與嚴謹的練習，幫助學生在國中第一年就建立強大的競爭力，穩定校內排名。',
+    icon: <Target size={20} />,
+    color: 'text-blue-500', 
+    classes: [
+      { name: '國七數學進度班', desc: '深入解析代數、幾何基礎，培養嚴謹的邏輯推演與解題習慣。', subject: '數學' },
+      { name: '國七英文實力班', desc: '紮實文法架構建立，系統化擴充單字量，提升聽說讀寫全方位能力。', subject: '英文' },
+      { name: '國七國文精進班', desc: '精選古文與現代文學導讀，強化閱讀素養與作文模組化訓練。', subject: '國文' },
+      { name: '國七生物專題班', desc: '圖解生物構造與功能，強化圖表分析能力，輕鬆應對素養題型。', subject: '自然' },
+    ]
+  },
+  {
+    id: 'g8',
+    label: '國八階段',
+    description: '國八課程難度大幅提升，是實力拉開差距的時期。我們針對理化、幾何等難點單元進行深度剖析，並強化跨領域整合能力，確保學生在繁重的課業中依然能游刃有餘。',
+    icon: <FlaskConical size={20} />,
+    color: 'text-orange-400', 
+    classes: [
+      { name: '國八數學幾何班', desc: '精熟幾何證明技巧與乘法公式，挑戰進階素養題型，提升邏輯深度。', subject: '數學' },
+      { name: '國八英文進階班', desc: '掌握長篇閱讀與克漏字解析技巧，強化複雜句型分析與時事英語。', subject: '英文' },
+      { name: '國八理化觀念班', desc: '理化觀念重於死背，透過實驗演示將抽象原理具象化，破解計算難題。', subject: '自然' },
+      { name: '國八國文深究班', desc: '克服文言文閱讀障礙，精熟修辭應用，提升寫作深度與文學底蘊。', subject: '國文' },
+    ]
+  },
+  {
+    id: 'g9',
+    label: '國九階段',
+    description: '國九進入會考衝刺期。我們提供全科總複習與高強度模考演練，透過主題式統整與歷屆試題剖析，幫助學生精準掌握命題趨勢，目標會考 A++，前進第一志願。',
+    icon: <CheckCircle2 size={20} />,
+    color: 'text-purple-500', 
+    classes: [
+      { name: '國九數學衝刺班', desc: '統整三年觀念，大量模考演練與錯題訂正，精準掌握會考關鍵題型。', subject: '數學' },
+      { name: '國九英文滿分班', desc: '全面攻略會考聽力與閱讀，素養題型專題講座，衝刺英文精熟等級。', subject: '英文' },
+      { name: '國九自然總複習', desc: '力學、電學與地科重點圖表整理，強化跨科整合與圖表判讀能力。', subject: '自然' },
+      { name: '國九國文作文班', desc: '形音義成語總複習，長文速讀技巧傳授，作文目標六級分密集特訓。', subject: '國文' },
     ]
   }
 ];
@@ -170,42 +162,6 @@ const JuniorCourseRoadmap: React.FC = () => {
     setModalMode('schedule');
   };
 
-  const openDetail = (cls: any) => {
-    setSelectedClass(cls);
-    setModalMode('detail');
-  };
-
-  // Generate Mock Schedule Data
-  const generateSchedule = (cls: any) => {
-    const daysMap: Record<string, string> = { '週一': 'Mon', '週二': 'Tue', '週三': 'Wed', '週四': 'Thu', '週五': 'Fri', '週六': 'Sat', '週日': 'Sun' };
-    let primaryDay = '週六';
-    for (const d of Object.keys(daysMap)) {
-      if (cls.time.includes(d)) {
-        primaryDay = d;
-        break;
-      }
-    }
-
-    const topics = [
-      '課程介紹 & 重點觀念建立',
-      '核心單元導讀 & 範例解析',
-      '精選試題演練 (一)',
-      '精選試題演練 (二)',
-      '進階題型解析與實作',
-      '歷屆會考題型分析',
-      '模擬測驗與檢討',
-      '階段性總結評量'
-    ];
-
-    return Array.from({ length: 8 }).map((_, i) => ({
-      date: `07/${String(i * 7 + 5).padStart(2, '0')}`,
-      day: primaryDay,
-      time: cls.time.includes(':') ? cls.time.split(' ')[1] + '-' + (parseInt(cls.time.split(' ')[1].split(':')[0]) + 3) + ':00' : '18:30-21:30',
-      unit: `第 ${i+1} 單元`,
-      courseName: topics[i]
-    }));
-  };
-
   const commonNotes = [
     "請準時出席，遲到超過 15 分鐘請先至櫃檯報到。",
     "請攜帶指定教材、筆記本與文具用品。",
@@ -272,16 +228,8 @@ const JuniorCourseRoadmap: React.FC = () => {
 
             {/* Desktop Action Buttons */}
             <button
-              onClick={() => setIsBrochureOpen(true)}
-              className="mt-4 flex items-center justify-center gap-2 px-6 py-4 rounded-xl transition-all bg-yellow-400 text-blue-900 font-bold hover:bg-yellow-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >
-              <FileText size={20} />
-              <span className="text-lg">熱門課程</span>
-            </button>
-
-            <button
               onClick={handleTogglePlan}
-              className={`mt-2 flex items-center justify-center gap-2 px-6 py-4 rounded-xl transition-all font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
+              className={`mt-4 flex items-center justify-center gap-2 px-6 py-4 rounded-xl transition-all font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
                 isPlanOpen 
                   ? 'bg-white text-blue-800 ring-2 ring-white' 
                   : 'bg-blue-800 text-white hover:bg-blue-700 border border-blue-600'
@@ -310,20 +258,13 @@ const JuniorCourseRoadmap: React.FC = () => {
                   className="bg-white border border-blue-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col h-full"
                 >
                   <div className="flex-1">
-                    <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {cls.name}
-                    </h4>
-
-                    {/* Meta Tags: Age & Time */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-blue-50 px-2.5 py-1.5 rounded-md border border-blue-100">
-                         <Users size={14} className="text-blue-600" /> 
-                         <span>{cls.age}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-blue-50 px-2.5 py-1.5 rounded-md border border-blue-100">
-                         <Clock size={14} className="text-blue-600" /> 
-                         <span>{cls.time}</span>
-                      </div>
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                        {cls.name}
+                      </h4>
+                      <span className="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded border border-blue-100">
+                        {cls.subject}
+                      </span>
                     </div>
 
                     <p className="text-slate-600 text-sm leading-relaxed mb-6">
@@ -339,29 +280,24 @@ const JuniorCourseRoadmap: React.FC = () => {
                      >
                         查看課表 <Calendar size={14} />
                      </button>
-                     <button 
-                       onClick={() => openDetail(cls)}
+                     <a 
+                       href="https://lin.ee/f53mxGL"
+                       target="_blank"
+                       rel="noopener noreferrer"
                        className="flex-1 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors text-center flex items-center justify-center gap-1.5 shadow-md shadow-blue-200"
                      >
                         了解課程 <ArrowRight size={14} />
-                     </button>
+                     </a>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Mobile Action Buttons (Moved below cards) */}
-             <div className="grid grid-cols-2 gap-3 mt-6 md:hidden">
-               <button
-                onClick={() => setIsBrochureOpen(true)}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all bg-yellow-400 text-blue-900 font-bold hover:bg-yellow-300 shadow-sm"
-              >
-                <FileText size={18} />
-                <span>熱門課程</span>
-              </button>
+             <div className="flex justify-center mt-6 md:hidden">
               <button
                 onClick={handleTogglePlan}
-                className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all font-bold shadow-sm ${isPlanOpen ? 'bg-white text-blue-700' : 'bg-blue-700 text-white border border-blue-500'}`}
+                className={`flex items-center justify-center gap-2 px-8 py-3 rounded-xl transition-all font-bold shadow-sm ${isPlanOpen ? 'bg-white text-blue-700' : 'bg-blue-700 text-white border border-blue-500'}`}
               >
                 <Map size={18} />
                 <span>完整規劃</span>
@@ -505,40 +441,44 @@ const JuniorCourseRoadmap: React.FC = () => {
       >
         {selectedClass && modalMode === 'schedule' && (
           <div className="space-y-6">
-             {/* Info Header */}
-             <div className="flex flex-wrap gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-2">
-                   <span className="text-slate-500 font-bold text-sm">上課對象：</span>
-                   <span className="text-slate-900 font-medium">{selectedClass.age}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                   <span className="text-slate-500 font-bold text-sm">上課時間：</span>
-                   <span className="text-slate-900 font-medium">{selectedClass.time}</span>
-                </div>
-             </div>
-
-             {/* Schedule Table */}
+             {/* Weekly Schedule Table */}
              <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left min-w-[600px]">
-                       <thead className="bg-[#1D4ED8] text-white font-bold uppercase">
+                    <table className="w-full text-sm text-center min-w-[700px]">
+                       <thead className="bg-[#1D4ED8] text-white font-bold">
                           <tr>
-                             <th className="px-4 py-3 whitespace-nowrap">日期</th>
-                             <th className="px-4 py-3 whitespace-nowrap">星期</th>
-                             <th className="px-4 py-3 whitespace-nowrap">時間</th>
-                             <th className="px-4 py-3 whitespace-nowrap">單元名稱</th>
-                             <th className="px-4 py-3 whitespace-nowrap">課程名稱</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">時段</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週一</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週二</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週三</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週四</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週五</th>
+                             <th className="px-4 py-4 border-r border-blue-600/30">週六</th>
+                             <th className="px-4 py-4">週日</th>
                           </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-100">
-                          {generateSchedule(selectedClass).map((row, idx) => (
-                             <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                                <td className="px-4 py-3 font-medium text-slate-900">{row.date}</td>
-                                <td className="px-4 py-3 text-slate-500">{row.day}</td>
-                                <td className="px-4 py-3 text-slate-500">{row.time}</td>
-                                <td className="px-4 py-3 text-blue-600 font-bold">{row.unit}</td>
-                                <td className="px-4 py-3 text-slate-700">{row.courseName}</td>
-                             </tr>
+                       <tbody className="divide-y divide-slate-100 bg-white">
+                          {[
+                            { period: '早', time: '09:00 - 12:00', schedule: ['', '', '', '', '', '數學', '自習'] },
+                            { period: '午', time: '13:30 - 16:30', schedule: ['', '', '', '', '', '英文', '自習'] },
+                            { period: '晚', time: '18:30 - 21:30', schedule: ['國文', '數學', '理化', '英文', '數學', '自習', ''] },
+                          ].map((row, idx) => (
+                            <tr key={idx} className="hover:bg-slate-50 transition-colors">
+                              <td className="px-4 py-6 bg-slate-50 border-r border-slate-200">
+                                <div className="font-bold text-blue-700 text-lg mb-1">{row.period}</div>
+                                <div className="text-[10px] text-slate-400 font-medium whitespace-nowrap">{row.time}</div>
+                              </td>
+                              {row.schedule.map((cell, cIdx) => (
+                                <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell ? 'bg-blue-50/30' : ''}`}>
+                                  {cell && (
+                                    <div className="flex flex-col items-center gap-1">
+                                      <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                      <span className="font-bold text-slate-700">{cell}</span>
+                                    </div>
+                                  )}
+                                </td>
+                              ))}
+                            </tr>
                           ))}
                        </tbody>
                     </table>

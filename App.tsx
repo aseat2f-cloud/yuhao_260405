@@ -3,7 +3,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { ArrowUp, Loader2, HelpCircle, MessageCircle } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Features from './components/Features';
+import Features, { SUCCESS_VIDEOS } from './components/Features';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
 import ContactForm from './components/ContactForm';
@@ -14,7 +14,9 @@ import OutstandingResults from './components/OutstandingResults';
 import HonorRoll from './components/HonorRoll';
 import ParentTestimonials from './components/ParentTestimonials';
 import MobileFloatingNav from './components/MobileFloatingNav';
+import Modal from './components/Modal';
 import { PageType, NewsItem } from './types';
+import { Play } from 'lucide-react';
 
 // Lazy load heavy page components
 const ElementaryPage = lazy(() => import('./components/ElementaryPage'));
@@ -123,6 +125,7 @@ function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isLineModalOpen, setIsLineModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<typeof SUCCESS_VIDEOS[0] | null>(null);
 
   // Scroll to top removed here as it is handled by Header.tsx to avoid two-stage jumps
 
@@ -249,17 +252,57 @@ function App() {
               secondaryBtnLink="#features"
             />
             <HomeBanner />
-            <div id="features" className="scroll-mt-32">
-              <Features />
+            <div id="outstanding-results" className="scroll-mt-32">
+              <OutstandingResults />
             </div>
             <div id="program-planning" className="scroll-mt-32">
               <ProgramPlanning onNavigate={setCurrentPage} />
             </div>
-            <div id="outstanding-results" className="scroll-mt-32">
-              <OutstandingResults />
-            </div>
             <div id="honor-roll" className="scroll-mt-32">
               <HonorRoll />
+            </div>
+            <div id="features" className="scroll-mt-32">
+              <Features />
+            </div>
+            {/* Part 3: Video Gallery - 4 Columns, Square, Centered Title with Lines & Subtitle */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+              <div className="text-center mb-10">
+                <span className="text-slate-900 font-bold tracking-wider uppercase text-xs mb-2 block">SUCCESS STORIES</span>
+                <div className="flex items-center justify-center gap-4 mb-3">
+                  <div className="h-px bg-slate-400 w-12 md:w-24"></div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-primary-600">成功案例與訪談</h3>
+                  <div className="h-px bg-slate-400 w-12 md:w-24"></div>
+                </div>
+                <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base">
+                  聽聽學長姐與家長的真實心聲，見證改變的起點
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {SUCCESS_VIDEOS.map((video) => (
+                  <div 
+                    key={video.id} 
+                    className="group cursor-pointer"
+                    onClick={() => setSelectedVideo(video)}
+                  >
+                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-sm border border-slate-100 mb-4 bg-slate-100">
+                      <img 
+                        src={video.image} 
+                        alt={video.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                        <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 transition-all duration-300">
+                          <Play size={20} className="text-primary-600 ml-1" fill="currentColor" />
+                        </div>
+                      </div>
+                    </div>
+                    <h5 className="font-bold text-slate-800 group-hover:text-primary-600 transition-colors line-clamp-2 mb-1 leading-snug">{video.title}</h5>
+                    <p className="text-xs font-bold text-primary-500">{video.person}</p>
+                  </div>
+                ))}
+              </div>
             </div>
             <div id="testimonials" className="scroll-mt-32">
               <ParentTestimonials />
@@ -334,6 +377,36 @@ function App() {
       <Footer />
       <ChatBot isOpen={isChatOpen} onToggle={setIsChatOpen} />
       <LineConsultationModal isOpen={isLineModalOpen} onClose={() => setIsLineModalOpen(false)} />
+      
+      {/* Video Modal */}
+      <Modal
+        isOpen={!!selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+        title={selectedVideo?.title}
+        maxWidth="max-w-4xl"
+      >
+        {selectedVideo && (
+          <div className="flex flex-col gap-4">
+            <div className="aspect-video bg-black rounded-xl overflow-hidden relative shadow-2xl flex items-center justify-center">
+              <div className="absolute inset-0 opacity-30 bg-cover bg-center blur-sm" style={{ backgroundImage: `url(${selectedVideo.image})` }}></div>
+              <div className="z-10 text-center">
+                <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                  <Play size={32} className="text-white ml-1" fill="currentColor" />
+                </div>
+                <p className="text-white font-bold text-lg">影片載入中...</p>
+                <p className="text-white/60 text-sm">(此為模擬播放器)</p>
+              </div>
+            </div>
+            <div className="p-2">
+              <h3 className="text-xl font-bold text-slate-900 mb-1">{selectedVideo.title}</h3>
+              <p className="text-primary-600 font-medium">{selectedVideo.person}</p>
+              <p className="text-slate-500 text-sm mt-4 leading-relaxed">
+                在這段影片中，我們將深入了解{selectedVideo.person}在育豪的學習點滴，以及他們如何克服困難，最終達成目標的感人故事。
+              </p>
+            </div>
+          </div>
+        )}
+      </Modal>
       
       {/* Desktop Floating LINE Button */}
       <button
