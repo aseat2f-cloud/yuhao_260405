@@ -116,7 +116,7 @@ const Hero: React.FC<HeroProps> = ({
 
                 {/* Grade & Course Labels */}
                 {(gradeLabel || courseLabel) && (
-                  <div className="mb-10 flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3">
+                  <div id="hero-labels" className="mb-10 flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3 scroll-mt-20">
                     {gradeLabel && (
                       <span className="inline-block px-3 md:px-4 py-1.5 bg-slate-100 text-slate-600 font-bold rounded-md text-sm md:text-base border border-slate-200 whitespace-nowrap flex-shrink-0">
                         {gradeLabel}

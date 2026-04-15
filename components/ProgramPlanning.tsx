@@ -462,20 +462,24 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
   const handleNavAndScroll = (page: PageType, sectionId: string) => {
     onNavigate(page);
     let attempts = 0;
-    const maxAttempts = 20; 
+    const maxAttempts = 30; 
     
     const pollElement = () => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Add a small delay to ensure App's scrollTo(0,0) has finished
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
         return;
       }
       attempts++;
       if (attempts < maxAttempts) {
-        setTimeout(pollElement, 100);
+        setTimeout(pollElement, 150);
       }
     };
-    setTimeout(pollElement, 50);
+    // Wait a bit longer before first poll to let page transition start
+    setTimeout(pollElement, 200);
   };
 
   const currentProgram = PROGRAMS_DATA[activeTab];
@@ -539,7 +543,7 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
             </button>
 
             <button 
-              onClick={() => onNavigate(currentProgram.page)}
+              onClick={() => handleNavAndScroll(currentProgram.page, 'hero-labels')}
               className="py-3.5 px-6 rounded-xl bg-yellow-400 text-slate-900 font-bold shadow-lg transition-all flex items-center justify-center gap-2 hover:bg-yellow-300 hover:shadow-xl hover:-translate-y-0.5"
             >
               <Search size={18} /> 了解更多

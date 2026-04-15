@@ -281,7 +281,7 @@ const JuniorCourseRoadmap: React.FC = () => {
                         查看課表 <Calendar size={14} />
                      </button>
                      <a 
-                       href="https://lin.ee/f53mxGL"
+                       href="https://line.me/R/ti/p/@yuhaoschool"
                        target="_blank"
                        rel="noopener noreferrer"
                        className="flex-1 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors text-center flex items-center justify-center gap-1.5 shadow-md shadow-blue-200"
