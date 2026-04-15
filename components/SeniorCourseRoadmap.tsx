@@ -16,6 +16,7 @@ const COURSE_DATA = [
   {
     id: 'pre_g10',
     label: '升高一',
+    shortLabel: '先修',
     icon: <Rocket size={20} />,
     color: 'text-green-500', 
     classes: [
@@ -28,6 +29,7 @@ const COURSE_DATA = [
   {
     id: 'g10',
     label: '高一規劃',
+    shortLabel: '高一',
     icon: <TrendingUp size={20} />,
     color: 'text-emerald-500', 
     classes: [
@@ -40,6 +42,7 @@ const COURSE_DATA = [
   {
     id: 'g11',
     label: '高二規劃',
+    shortLabel: '高二',
     icon: <Crown size={20} />,
     color: 'text-blue-500', 
     classes: [
@@ -52,6 +55,7 @@ const COURSE_DATA = [
   {
     id: 'g12',
     label: '高三規劃',
+    shortLabel: '高三',
     icon: <Zap size={20} />,
     color: 'text-purple-500', 
     classes: [
@@ -64,6 +68,7 @@ const COURSE_DATA = [
   {
     id: 'study_hall',
     label: 'K書班',
+    shortLabel: 'K書',
     icon: <Clock size={20} />,
     color: 'text-red-500', 
     classes: [
@@ -228,8 +233,25 @@ const SeniorCourseRoadmap: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-3 md:gap-8">
           
-          {/* Mobile Navigation (Arrows) */}
+          {/* Mobile Navigation (Buttons & Arrows) */}
           <div className="md:hidden flex flex-col gap-4">
+            {/* Category Buttons Row */}
+            <div className="flex justify-center gap-3 py-2 overflow-x-auto scrollbar-hide -mx-4 px-4">
+              {COURSE_DATA.map((subject, index) => (
+                <button
+                  key={subject.id}
+                  onClick={() => setActiveTab(index)}
+                  className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-all text-xs font-bold border-2 ${
+                    activeTab === index 
+                      ? 'bg-white text-purple-600 border-white shadow-lg scale-110' 
+                      : 'bg-purple-900/50 text-purple-200 border-purple-800'
+                  }`}
+                >
+                  {subject.shortLabel}
+                </button>
+              ))}
+            </div>
+
             <div className="flex items-center justify-between bg-purple-800 rounded-xl p-2 border border-purple-700">
               <button 
                 onClick={prevTab}

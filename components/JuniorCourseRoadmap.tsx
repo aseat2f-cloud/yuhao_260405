@@ -13,6 +13,7 @@ const COURSE_DATA = [
   {
     id: 'transition',
     label: '銜接課程',
+    shortLabel: '銜接',
     description: '國小升國中是學習生涯的重要轉折點。我們的銜接課程專為小六畢業生設計，涵蓋國、英、數、自四大核心科目，幫助學生提前適應國中的學習強度與節奏，建立正確的讀書方法，贏在起跑點。',
     icon: <Rocket size={20} />,
     color: 'text-red-400', 
@@ -26,6 +27,7 @@ const COURSE_DATA = [
   {
     id: 'g7',
     label: '國七階段',
+    shortLabel: '國七',
     description: '國七是打穩學科根基的關鍵年。我們強調觀念的透徹理解而非死背，透過系統化的教學與嚴謹的練習，幫助學生在國中第一年就建立強大的競爭力，穩定校內排名。',
     icon: <Target size={20} />,
     color: 'text-blue-500', 
@@ -39,6 +41,7 @@ const COURSE_DATA = [
   {
     id: 'g8',
     label: '國八階段',
+    shortLabel: '國八',
     description: '國八課程難度大幅提升，是實力拉開差距的時期。我們針對理化、幾何等難點單元進行深度剖析，並強化跨領域整合能力，確保學生在繁重的課業中依然能游刃有餘。',
     icon: <FlaskConical size={20} />,
     color: 'text-orange-400', 
@@ -52,6 +55,7 @@ const COURSE_DATA = [
   {
     id: 'g9',
     label: '國九階段',
+    shortLabel: '國九',
     description: '國九進入會考衝刺期。我們提供全科總複習與高強度模考演練，透過主題式統整與歷屆試題剖析，幫助學生精準掌握命題趨勢，目標會考 A++，前進第一志願。',
     icon: <CheckCircle2 size={20} />,
     color: 'text-purple-500', 
@@ -183,8 +187,25 @@ const JuniorCourseRoadmap: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-3 md:gap-8">
           
-          {/* Mobile Navigation (Arrows) */}
+          {/* Mobile Navigation (Buttons & Arrows) */}
           <div className="md:hidden flex flex-col gap-4">
+            {/* Category Buttons Row */}
+            <div className="flex justify-center gap-3 py-2 overflow-x-auto scrollbar-hide -mx-4 px-4">
+              {COURSE_DATA.map((subject, index) => (
+                <button
+                  key={subject.id}
+                  onClick={() => setActiveTab(index)}
+                  className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-all text-xs font-bold border-2 ${
+                    activeTab === index 
+                      ? 'bg-white text-blue-600 border-white shadow-lg scale-110' 
+                      : 'bg-blue-700/50 text-blue-200 border-blue-500/30'
+                  }`}
+                >
+                  {subject.shortLabel}
+                </button>
+              ))}
+            </div>
+
             <div className="flex items-center justify-between bg-blue-700/50 rounded-xl p-2 backdrop-blur-sm border border-blue-500/30">
               <button 
                 onClick={prevTab}
