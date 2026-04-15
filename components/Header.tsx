@@ -58,88 +58,37 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
     setIsMenuOpen(false);
     
     if (sectionId) {
-      // If changing pages, reset scroll to top instantly first to avoid "jumping" from previous page position
+      // If changing pages, reset scroll to top instantly
       if (isPageChange) {
         window.scrollTo(0, 0);
       }
 
-      // If changing pages, wait longer for the new page to mount and layout to stabilize.
-      // 2000ms allows for initial render and some image loading.
-      const startDelay = isPageChange ? 2000 : 0; 
-      
       let attempts = 0;
-      const maxAttempts = 150; // 15 seconds max polling
-      let hasScrolled = false;
-
+      const maxAttempts = 60; // 3 seconds max polling
+      
       const pollElement = () => {
-        if (hasScrolled) return;
-
         const element = document.getElementById(sectionId);
         if (element) {
-          // Stability check: wait for the element's position to stop shifting
-          let lastTop = element.getBoundingClientRect().top + window.pageYOffset;
-          let stableCount = 0;
-          const requiredStable = 5; 
-          const checkInterval = 100; 
-
-          const checkStability = () => {
-            if (hasScrolled) return;
-
-            const elementNow = document.getElementById(sectionId);
-            if (!elementNow) {
-              attempts++;
-              setTimeout(pollElement, 200);
-              return;
-            }
-
-            const currentTop = elementNow.getBoundingClientRect().top + window.pageYOffset;
-            
-            if (Math.abs(currentTop - lastTop) < 2) {
-              stableCount++;
-            } else {
-              stableCount = 0;
-              lastTop = currentTop;
-            }
-
-            if (stableCount >= requiredStable) {
-              hasScrolled = true;
-              window.scrollTo({
-                top: currentTop - 120,
-                behavior: 'smooth'
-              });
-
-              // Fallback: Check again after 1500ms to ensure we are still at the right spot (in case of late image loads)
-              setTimeout(() => {
-                const finalElement = document.getElementById(sectionId);
-                if (finalElement) {
-                  const finalTop = finalElement.getBoundingClientRect().top + window.pageYOffset;
-                  if (Math.abs(window.pageYOffset - (finalTop - 120)) > 20) {
-                    window.scrollTo({
-                      top: finalTop - 120,
-                      behavior: 'smooth'
-                    });
-                  }
-                }
-              }, 1500);
-
-            } else if (attempts < maxAttempts) {
-              attempts++;
-              setTimeout(checkStability, checkInterval);
-            }
-          };
-
-          checkStability();
+          // Use native scrollIntoView which respects scroll-margin-top
+          element.scrollIntoView({ behavior: 'smooth' });
+          
+          // Fallback: If it's a page change, images might load and shift the layout.
+          // Do a second check after a short delay to ensure we're still at the right spot.
+          if (isPageChange) {
+            setTimeout(() => {
+              const el = document.getElementById(sectionId);
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+          }
         } else if (attempts < maxAttempts) {
           attempts++;
-          setTimeout(pollElement, 200);
+          setTimeout(pollElement, 50);
         }
       };
 
-      if (startDelay === 0) {
-        pollElement();
-      } else {
-        setTimeout(pollElement, startDelay);
-      }
+      // Start polling. If it's the same page, start immediately.
+      // If it's a new page, give it a tiny bit of time to start mounting.
+      setTimeout(pollElement, isPageChange ? 100 : 0);
     } else {
        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
