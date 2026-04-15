@@ -461,25 +461,67 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
 
   const handleNavAndScroll = (page: PageType, sectionId: string) => {
     onNavigate(page);
+    
+    // Reset scroll to top instantly to avoid "jumping"
+    window.scrollTo(0, 0);
+
     let attempts = 0;
-    const maxAttempts = 30; 
+    const maxAttempts = 100; 
+    let hasScrolled = false;
     
     const pollElement = () => {
+      if (hasScrolled) return;
+
       const element = document.getElementById(sectionId);
       if (element) {
-        // Add a small delay to ensure App's scrollTo(0,0) has finished
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-        return;
-      }
-      attempts++;
-      if (attempts < maxAttempts) {
+        // Stability check: wait for the element's position to stop shifting
+        let lastTop = element.getBoundingClientRect().top + window.pageYOffset;
+        let stableCount = 0;
+        const requiredStable = 3; 
+        const checkInterval = 100; 
+
+        const checkStability = () => {
+          if (hasScrolled) return;
+
+          const elementNow = document.getElementById(sectionId);
+          if (!elementNow) {
+            attempts++;
+            setTimeout(pollElement, 150);
+            return;
+          }
+
+          const currentTop = elementNow.getBoundingClientRect().top + window.pageYOffset;
+          
+          if (Math.abs(currentTop - lastTop) < 2) {
+            stableCount++;
+          } else {
+            stableCount = 0;
+            lastTop = currentTop;
+          }
+
+          if (stableCount >= requiredStable) {
+            hasScrolled = true;
+            // Use a slightly larger offset for mobile to ensure the labels are well-positioned
+            const offset = window.innerWidth < 768 ? 100 : 120;
+            window.scrollTo({
+              top: currentTop - offset,
+              behavior: 'smooth'
+            });
+          } else if (attempts < maxAttempts) {
+            attempts++;
+            setTimeout(checkStability, checkInterval);
+          }
+        };
+
+        checkStability();
+      } else if (attempts < maxAttempts) {
+        attempts++;
         setTimeout(pollElement, 150);
       }
     };
-    // Wait a bit longer before first poll to let page transition start
-    setTimeout(pollElement, 200);
+    
+    // Start polling after a short delay to allow the new page to start mounting
+    setTimeout(pollElement, 300);
   };
 
   const currentProgram = PROGRAMS_DATA[activeTab];
