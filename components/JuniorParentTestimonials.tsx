@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const PARENT_TESTIMONIALS = [
-  { id: 1, name: '李O宣 媽媽', school: '中山國中', role: '七年級家長', content: '自從孩子進入育豪後，對學習的態度有了很大的轉變。老師們不僅專業，更有一顆懂孩子的心，讓家長非常放心。', rating: 5 },
-  { id: 2, name: '黃O慈 爸爸', school: '海山國中', role: '八年級家長', content: '育豪的教學環境與師資都是板橋頂尖的。孩子在這裡不僅成績進步，也學會了如何規劃自己的讀書計畫。', rating: 5 },
-  { id: 3, name: '陳O安 爸爸', school: '江翠國中', role: '九年級家長', content: '會考衝刺階段，育豪的精準命題與輔導機制幫了孩子大忙。感謝老師們的陪伴，讓孩子能順利錄取理想高中。', rating: 5 },
-  { id: 4, name: '林O軒 媽媽', school: '板橋國中', role: '七年級家長', content: '很喜歡育豪的親師溝通，老師會主動回報孩子的學習狀況，讓我們能即時了解並給予孩子支持。', rating: 5 },
-  { id: 5, name: '王O凱 媽媽', school: '重慶國中', role: '八年級家長', content: '孩子以前很怕數學，但在育豪老師的引導下，現在反而最喜歡數學課，這真的是我們始料未及的改變。', rating: 5 },
-  { id: 6, name: '張O豪 爸爸', school: '溪崑國中', role: '九年級家長', content: '育豪不只是教書，更在教人。老師對孩子品格的重視，讓我深感把孩子交給育豪是正確的決定。', rating: 5 },
-  { id: 7, name: '許O涵 媽媽', school: '光復國中', role: '七年級家長', content: '環境乾淨明亮，K書中心的氛圍非常好，孩子放學後很喜歡留在這裡複習功課，效率提高很多。', rating: 5 },
-  { id: 8, name: '郭O廷 爸爸', school: '新埔國中', role: '八年級家長', content: '課程安排非常紮實，講義內容精簡扼要，讓孩子在繁重的課業中能快速掌握重點，事半功倍。', rating: 5 },
+  { id: 1, name: '李O宣 媽媽', school: '板橋區 中山國中', role: '七年級家長', content: '自從孩子進入育豪後，對學習的態度有了很大的轉變。老師們不僅專業，更有一顆懂孩子的心，讓家長非常放心。', rating: 5 },
+  { id: 2, name: '黃O慈 爸爸', school: '板橋區 海山國中', role: '八年級家長', content: '育豪的教學環境與師資都是板橋頂尖的。孩子在這裡不僅成績進步，也學會了如何規劃自己的讀書計畫。', rating: 5 },
+  { id: 3, name: '陳O安 爸爸', school: '板橋區 江翠國中', role: '九年級家長', content: '會考衝刺階段，育豪的精準命題與輔導機制幫了孩子大忙。感謝老師們的陪伴，讓孩子能順利錄取理想高中。', rating: 5 },
+  { id: 4, name: '林O軒 媽媽', school: '板橋區 板橋國中', role: '七年級家長', content: '很喜歡育豪的親師溝通，老師會主動回報孩子的學習狀況，讓我們能即時了解並給予孩子支持。', rating: 5 },
+  { id: 5, name: '王O凱 媽媽', school: '板橋區 重慶國中', role: '八年級家長', content: '孩子以前很怕數學，但在育豪老師的引導下，現在反而最喜歡數學課，這真的是我們始料未及的改變。', rating: 5 },
+  { id: 6, name: '張O豪 爸爸', school: '板橋區 溪崑國中', role: '九年級家長', content: '育豪不只是教書，更在教人。老師對孩子品格的重視，讓我深感把孩子交給育豪是正確的決定。', rating: 5 },
+  { id: 7, name: '許O涵 媽媽', school: '板橋區 光復國中', role: '七年級家長', content: '環境乾淨明亮，K書中心的氛圍非常好，孩子放學後很喜歡留在這裡複習功課，效率提高很多。', rating: 5 },
+  { id: 8, name: '郭O廷 爸爸', school: '板橋區 新埔國中', role: '八年級家長', content: '課程安排非常紮實，講義內容精簡扼要，讓孩子在繁重的課業中能快速掌握重點，事半功倍。', rating: 5 },
 ];
 
 interface JuniorParentTestimonialsProps {

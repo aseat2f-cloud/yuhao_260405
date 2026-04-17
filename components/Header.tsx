@@ -78,17 +78,17 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
             setTimeout(() => {
               const el = document.getElementById(sectionId);
               if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 800);
+            }, 600);
           }
         } else if (attempts < maxAttempts) {
           attempts++;
-          setTimeout(pollElement, 50);
+          setTimeout(pollElement, 20);
         }
       };
 
       // Start polling. If it's the same page, start immediately.
       // If it's a new page, give it a tiny bit of time to start mounting.
-      setTimeout(pollElement, isPageChange ? 100 : 0);
+      setTimeout(pollElement, isPageChange ? 50 : 0);
     } else {
        window.scrollTo({ top: 0, behavior: 'smooth' });
     }

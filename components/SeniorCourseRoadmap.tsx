@@ -12,7 +12,29 @@ const BROCHURE_IMAGES = [
   "https://www.dropbox.com/scl/fi/e5ns81cucqjhw9v65h8jz/251204_-K-_03.jpg?rlkey=ytefc19dpfvy7vj49da6lvnhf&raw=1"
 ];
 
-const COURSE_DATA = [
+interface CourseClass {
+  name: string;
+  desc: string;
+  age: string;
+  time?: string;
+  summerTime?: string;
+  semesterTime?: string;
+  objectives: string;
+  target: string;
+  features: string[];
+  roadmap: string[];
+}
+
+interface CourseCategory {
+  id: string;
+  label: string;
+  shortLabel: string;
+  icon: React.ReactNode;
+  color: string;
+  classes: CourseClass[];
+}
+
+const COURSE_DATA: CourseCategory[] = [
   {
     id: 'pre_g10',
     label: '升高一',
@@ -20,10 +42,10 @@ const COURSE_DATA = [
     icon: <Rocket size={20} />,
     color: 'text-green-500', 
     classes: [
-      { name: '高一先修數學', desc: '銜接國高中落差，提前掌握高中邏輯', age: '升高一', time: '暑期班', objectives: '弭平國高中數學斷層，建立高中數學嚴謹邏輯。', target: '國三畢業生，目標頂尖高中的學生。', features: ['銜接教材精準切入重點', '重視定義與定理推導', '每週進度檢測', '資深名師親自授課'], roadmap: ['7月: 數與式', '8月: 多項式函數', '9月: 銜接校內進度'] },
-      { name: '高一先修英文', desc: '字彙量大躍進，掌握高中五大句型', age: '升高一', time: '暑期班', objectives: '擴充字彙至 4500 單字，精熟高中核心文法架構。', target: '國三畢業生，希望提前適應高中英文難度的學生。', features: ['字根字首記憶法', '長篇閱讀技巧導讀', '基礎翻譯寫作訓練', '英聽實力養成'], roadmap: ['7月: 核心文法總整理', '8月: 閱讀技巧特訓', '9月: 銜接校內進度'] },
-      { name: '高一先修國文', desc: '奠定高中素養閱讀基礎，掌握文言文精要', age: '升高一', time: '暑期班', objectives: '提升閱讀理解能力，提早適應高中素養題型。', target: '國三畢業生，希望強化國文素養的學生。', features: ['主題式閱讀訓練', '文言文基礎語法', '寫作架構初步建立', '名篇導讀與賞析'], roadmap: ['7月: 文言文基礎', '8月: 素養閱讀特訓', '9月: 銜接校內進度'] },
-      { name: '高一先修物化', desc: '銜接高中自然科學難度，建立科學邏輯', age: '升高一', time: '暑期班', objectives: '預習高中物理化學核心觀念，降低學習門檻。', target: '國三畢業生，目標理工醫農科系的學生。', features: ['物理力學基礎', '化學計量與原子結構', '實驗原理深入淺出', '邏輯推理能力訓練'], roadmap: ['7月: 物理核心觀念', '8月: 化學基礎原理', '9月: 銜接校內進度'] },
+      { name: '高一先修數學', desc: '銜接國高中落差，提前掌握高中邏輯', age: '升高一', time: '週一至五 09:00', objectives: '弭平國高中數學斷層，建立高中數學嚴謹邏輯。', target: '國三畢業生，目標頂尖高中的學生。', features: ['銜接教材精準切入重點', '重視定義與定理推導', '每週進度檢測', '資深名師親自授課'], roadmap: ['7月: 數與式', '8月: 多項式函數', '9月: 銜接校內進度'] },
+      { name: '高一先修英文', desc: '字彙量大躍進，掌握高中五大句型', age: '升高一', time: '週一至五 09:00', objectives: '擴充字彙至 4500 單字，精熟高中核心文法架構。', target: '國三畢業生，希望提前適應高中英文難度的學生。', features: ['字根字首記憶法', '長篇閱讀技巧導讀', '基礎翻譯寫作訓練', '英聽實力養成'], roadmap: ['7月: 核心文法總整理', '8月: 閱讀技巧特訓', '9月: 銜接校內進度'] },
+      { name: '高一先修國文', desc: '奠定高中素養閱讀基礎，掌握文言文精要', age: '升高一', time: '週一至五 09:00', objectives: '提升閱讀理解能力，提早適應高中素養題型。', target: '國三畢業生，希望強化國文素養的學生。', features: ['主題式閱讀訓練', '文言文基礎語法', '寫作架構初步建立', '名篇導讀與賞析'], roadmap: ['7月: 文言文基礎', '8月: 素養閱讀特訓', '9月: 銜接校內進度'] },
+      { name: '高一先修物化', desc: '銜接高中自然科學難度，建立科學邏輯', age: '升高一', time: '週一至五 09:00', objectives: '預習高中物理化學核心觀念，降低學習門檻。', target: '國三畢業生，目標理工醫農科系的學生。', features: ['物理力學基礎', '化學計量與原子結構', '實驗原理深入淺出', '邏輯推理能力訓練'], roadmap: ['7月: 物理核心觀念', '8月: 化學基礎原理', '9月: 銜接校內進度'] },
     ]
   },
   {
@@ -33,10 +55,10 @@ const COURSE_DATA = [
     icon: <TrendingUp size={20} />,
     color: 'text-emerald-500', 
     classes: [
-      { name: '高一數學班', desc: '校內進度同步，段考高分攻略', age: '高一', time: '週一/四 18:30', objectives: '精通校內進度，掌握段考必考題型，建立紮實基礎。', target: '高一學生，追求校內成績優異者。', features: ['各校版本精準分流', '段考重點題型精析', '錯題追蹤與個別輔導', '考前密集衝刺演練'], roadmap: ['上學期: 多項式與指對數', '下學期: 三角比與數列級數'] },
-      { name: '高一英文班', desc: '許豪英文體系，全方位實力提升', age: '高一', time: '週二/五 18:30', objectives: '提升閱讀深度與寫作精準度，同步強化聽力與口說。', target: '高一學生，目標學測英文滿級分者。', features: ['主題式單字擴充', '新聞英語與雜誌導讀', '翻譯寫作架構建立', '全真模擬考演練'], roadmap: ['上學期: 4500單字與閱讀', '下學期: 雜誌閱讀與聽力'] },
-      { name: '高一國文班', desc: '素養閱讀與寫作訓練，強化國綜實力', age: '高一', time: '週三 18:30', objectives: '提升閱讀素養，精進寫作技巧，應對新課綱考題。', target: '高一學生，希望提升國文成績與素養者。', features: ['跨領域素養閱讀', '國寫作文分階段訓練', '古文三十篇精析', '段考重點複習'], roadmap: ['上學期: 文言文與閱讀', '下學期: 寫作與素養題'] },
-      { name: '高一物化班', desc: '基礎觀念建構與實驗原理，自然科高分關鍵', age: '高一', time: '週六 09:00', objectives: '建立物理化學紮實基礎，掌握段考必考重點。', target: '高一學生，目標自然科高分者。', features: ['物理基礎觀念釐清', '化學反應與結構精講', '實驗原理圖解分析', '段考考古題演練'], roadmap: ['上學期: 基礎物理化學', '下學期: 進階自然科學'] },
+      { name: '高一數學班', desc: '校內進度同步，段考高分攻略', age: '高一上/高一下', semesterTime: '週一/四 18:30', objectives: '精通校內進度，掌握段考必考題型，建立紮實基礎。', target: '高一學生，追求校內成績優異者。', features: ['各校版本精準分流', '段考重點題型精析', '錯題追蹤與個別輔導', '考前密集衝刺演練'], roadmap: ['上學期: 多項式與指對數', '下學期: 三角比與數列級數'] },
+      { name: '高一英文班', desc: '許豪英文體系，全方位實力提升', age: '高一上/高一下', semesterTime: '週二/五 18:30', objectives: '提升閱讀深度與寫作精準度，同步強化聽力與口說。', target: '高一學生，目標學測英文滿級分者。', features: ['主題式單字擴充', '新聞英語與雜誌導讀', '翻譯寫作架構建立', '全真模擬考演練'], roadmap: ['上學期: 4500單字與閱讀', '下學期: 雜誌閱讀與聽力'] },
+      { name: '高一國文班', desc: '素養閱讀與寫作訓練，強化國綜實力', age: '高一上/高一下', semesterTime: '週三 18:30', objectives: '提升閱讀素養，精進寫作技巧，應對新課綱考題。', target: '高一學生，希望提升國文成績與素養者。', features: ['跨領域素養閱讀', '國寫作文分階段訓練', '古文三十篇精析', '段考重點複習'], roadmap: ['上學期: 文言文與閱讀', '下學期: 寫作與素養題'] },
+      { name: '高一物化班', desc: '基礎觀念建構與實驗原理，自然科高分關鍵', age: '高一上/高一下', semesterTime: '週六 09:00', objectives: '建立物理化學紮實基礎，掌握段考必考重點。', target: '高一學生，目標自然科高分者。', features: ['物理基礎觀念釐清', '化學反應與結構精講', '實驗原理圖解分析', '段考考古題演練'], roadmap: ['上學期: 基礎物理化學', '下學期: 進階自然科學'] },
     ]
   },
   {
@@ -46,10 +68,10 @@ const COURSE_DATA = [
     icon: <Crown size={20} />,
     color: 'text-blue-500', 
     classes: [
-      { name: '高二數學班', desc: '代數、幾何進階與三角函數', age: '高二', time: '週二/五 18:30', objectives: '深入探討三角函數、平面向量與空間幾何，培養空間想像力與運算能力。', target: '高二學生，數A/數B分流強化學習。', features: ['數A/數B分流專業教學', '空間幾何教具輔助理解', '難題破解思路引導', '歷屆考題趨勢分析'], roadmap: ['暑期: 三角函數先修', '上學期: 平面向量與直線圓', '下學期: 空間向量與矩陣'] },
-      { name: '高二英文班', desc: '進階文法與寫作架構訓練', age: '高二', time: '週一/四 18:30', objectives: '精熟進階文法句型，提升長篇作文撰寫能力，目標學測英文滿級分。', target: '高二學生，目標學測英文 15 級分的學生。', features: ['主題式寫作模組訓練', '高級單字與片語擴充', 'CNN/BBC 新聞英語選讀', '翻譯寫作個別批改'], roadmap: ['暑期: 寫作句型特訓', '上學期: 7000單字與閱讀', '下學期: 模考實戰與寫作'] },
-      { name: '高二國文班', desc: '進階古文與現代文學鑑賞，深化閱讀深度', age: '高二', time: '週三 18:30', objectives: '深入解析經典文學，強化長篇閱讀與寫作深度。', target: '高二學生，目標國文頂標者。', features: ['進階古文精讀', '現代文學主題分析', '國寫深度寫作指導', '學測題型提前接觸'], roadmap: ['上學期: 經典古文精析', '下學期: 現代文學與寫作'] },
-      { name: '高二物化班', desc: '力學、電學與化學反應平衡，理工科必修', age: '高二', time: '週六 13:30', objectives: '掌握高二物理化學進階觀念，為高三複習奠基。', target: '高二自然組學生。', features: ['物理力學與電學精講', '化學平衡與酸鹼反應', '難題解析與觀念整合', '段考高分攻略'], roadmap: ['上學期: 力學與化學平衡', '下學期: 電學與有機化學'] },
+      { name: '高二數學班', desc: '代數、幾何進階與三角函數', age: '升高二/高二上/高二下', summerTime: '週一至五 09:00', semesterTime: '週二/五 18:30', objectives: '深入探討三角函數、平面向量與空間幾何，培養空間想像力與運算能力。', target: '高二學生，數A/數B分流強化學習。', features: ['數A/數B分流專業教學', '空間幾何教具輔助理解', '難題破解思路引導', '歷屆考題趨勢分析'], roadmap: ['暑期: 三角函數先修', '上學期: 平面向量與直線圓', '下學期: 空間向量與矩陣'] },
+      { name: '高二英文班', desc: '進階文法與寫作架構訓練', age: '升高二/高二上/高二下', summerTime: '週一至五 13:30', semesterTime: '週一/四 18:30', objectives: '精熟進階文法句型，提升長篇作文撰寫能力，目標學測英文滿級分。', target: '高二學生，目標學測英文 15 級分的學生。', features: ['主題式寫作模組訓練', '高級單字與片語擴充', 'CNN/BBC 新聞英語選讀', '翻譯寫作個別批改'], roadmap: ['暑期: 寫作句型特訓', '上學期: 7000單字與閱讀', '下學期: 模考實戰與寫作'] },
+      { name: '高二國文班', desc: '進階古文與現代文學鑑賞，深化閱讀深度', age: '升高二/高二上/高二下', summerTime: '週三 09:00', semesterTime: '週五 18:30', objectives: '深入解析經典文學，強化長篇閱讀與寫作深度。', target: '高二學生，目標國文頂標者。', features: ['進階古文精讀', '現代文學主題分析', '國寫深度寫作指導', '學測題型提前接觸'], roadmap: ['上學期: 經典古文精析', '下學期: 現代文學與寫作'] },
+      { name: '高二物化班', desc: '力學、電學與化學反應平衡，理工科必修', age: '升高二/高二上/高二下', summerTime: '週四 09:00', semesterTime: '週六 13:30', objectives: '掌握高二物理化學進階觀念，為高三複習奠基。', target: '高二自然組學生。', features: ['物理力學與電學精講', '化學平衡與酸鹼反應', '難題解析與觀念整合', '段考高分攻略'], roadmap: ['上學期: 力學與化學平衡', '下學期: 電學與有機化學'] },
     ]
   },
   {
@@ -59,10 +81,11 @@ const COURSE_DATA = [
     icon: <Zap size={20} />,
     color: 'text-purple-500', 
     classes: [
-      { name: '高三數學班', desc: '學測範圍總複習與難題解析', age: '高三', time: '週六 13:30', objectives: '針對學測數學範圍進行地毯式複習，強化跨單元整合與解題速度。', target: '高三考生，目標學測數學滿級分。', features: ['學測重點觀念總整理', '混合題型與素養題攻略', '高強度模考實戰演練', '錯題分析與弱點補強'], roadmap: ['暑期: 1-2冊總複習', '開學: 3-4冊總複習', '考前: 全範圍模考衝刺'] },
-      { name: '高三英文班', desc: '模擬試題演練與翻譯寫作衝刺', age: '高三', time: '週六 10:00', objectives: '透過大量模考題型演練，維持語感與解題手感，衝刺學測英文高分。', target: '高三考生，目標學測英文頂標以上。', features: ['每週一份全真模擬試題', '翻譯寫作即時批改檢討', '時事關鍵字彙補充', '閱讀測驗速讀技巧'], roadmap: ['暑期: 文法單字總複習', '開學: 歷屆試題全攻略', '考前: 寫作與翻譯衝刺'] },
-      { name: '高三國文班', desc: '學測國綜與國寫全攻略，精準奪分', age: '高三', time: '週日 09:00', objectives: '全面複習學測國文範圍，精準掌握國寫得分關鍵。', target: '高三考生，目標國文滿級分者。', features: ['學測國綜重點整理', '國寫作文模組化訓練', '歷屆試題深度解析', '考前猜題與模考'], roadmap: ['暑期: 基礎觀念複習', '開學: 歷屆試題演練', '考前: 國寫與總複習'] },
-      { name: '高三物化班', desc: '物理化學全範圍複習與模考，衝刺頂大', age: '高三', time: '週日 13:30', objectives: '整合高中物理化學全範圍，強化解題邏輯與速度。', target: '高三自然組考生。', features: ['物化全範圍觀念整合', '高難度題型破解技巧', '全真模擬考實戰', '考前重點精華掃描'], roadmap: ['暑期: 基礎範圍複習', '開學: 進階題型演練', '考前: 全範圍模考衝刺'] },
+      { name: '高三數學班', desc: '學測範圍總複習與難題解析', age: '升高三/高三上/高三下', summerTime: '週一至五 09:00', semesterTime: '週六 13:30', objectives: '針對學測數學範圍進行地毯式複習，強化跨單元整合與解題速度。', target: '高三考生，目標學測數學滿級分。', features: ['學測重點觀念總整理', '混合題型與素養題攻略', '高強度模考實戰演練', '錯題分析與弱點補強'], roadmap: ['暑期: 1-2冊總複習', '開學: 3-4冊總複習', '考前: 全範圍模考衝刺'] },
+      { name: '高三英文班', desc: '模擬試題演練與翻譯寫作衝刺', age: '升高三/高三上/高三下', summerTime: '週一至五 13:30', semesterTime: '週六 10:00', objectives: '透過大量模考題型演練，維持語感與解題手感，衝刺學測英文高分。', target: '高三考生，目標學測英文頂標以上。', features: ['每週一份全真模擬試題', '翻譯寫作即時批改檢討', '時事關鍵字彙補充', '閱讀測驗速讀技巧'], roadmap: ['暑期: 文法單字總複習', '開學: 歷屆試題全攻略', '考前: 寫作與翻譯衝刺'] },
+      { name: '高三國文班', desc: '學測國綜與國寫全攻略，精準奪分', age: '升高三/高三上/高三下', summerTime: '週五 09:00', semesterTime: '週日 09:00', objectives: '全面複習學測國文範圍，精準掌握國寫得分關鍵。', target: '高三考生，目標國文滿級分者。', features: ['學測國綜重點整理', '國寫作文模組化訓練', '歷屆試題深度解析', '考前猜題與模考'], roadmap: ['暑期: 基礎觀念複習', '開學: 歷屆試題演練', '考前: 國寫與總複習'] },
+      { name: '高三自然班', desc: '自然科學全範圍複習與模考，衝刺頂大', age: '升高三/高三上/高三下', summerTime: '週四 13:30', semesterTime: '週日 13:30', objectives: '整合高中物理化學全範圍，強化解題邏輯與速度。', target: '高三自然組考生。', features: ['自然全範圍觀念整合', '高難度題型破解技巧', '全真模擬考實戰', '考前重點精華掃描'], roadmap: ['暑期: 基礎範圍複習', '開學: 進階題型演練', '考前: 全範圍模考衝刺'] },
+      { name: '高三學測複習班', desc: '全方位學測重點總整理，精準鎖定必考題型', age: '高三', semesterTime: '週六 18:30 / 週日 09:00', objectives: '在學測前進行最後一輪地毯式複習，強化解題速度與準確度。', target: '高三考生，衝刺學測高分者。', features: ['各科精華講義整理', '歷屆試題深度剖析', '考前精準猜題', '弱點單元快速補強'], roadmap: ['第一階段: 核心觀念整合', '第二階段: 歷屆試題演練', '第三階段: 考前衝刺模考'] },
     ]
   },
   {
@@ -72,8 +95,10 @@ const COURSE_DATA = [
     icon: <Clock size={20} />,
     color: 'text-red-500', 
     classes: [
-      { name: '模考K書班', desc: '仿真模擬考與專人解惑輔導', age: '高一 ~ 高三', time: '考前/週日', objectives: '提供安靜專注的讀書空間，透過規律作息與考試，調整備戰狀態。', target: '需要高效率讀書環境與個別問題解答的學生。', features: ['比照大考規格模擬考試', '各科專業輔導老師駐班', '嚴格門禁與作息管理', '手機集中保管杜絕分心'], roadmap: ['段考前: 密集K書週', '學測前: 魔鬼衝刺營', '分科前: 最後加強班'] },
-      { name: '考前總複習班', desc: '重點觀念地毯式複習與猜題', age: '高三', time: '考前衝刺', objectives: '在考前最後階段進行高濃度的重點複習，快速掃描必考觀念。', target: '高三考生，希望在最後關頭衝高分數。', features: ['名師考前精準猜題', '易混淆觀念最終釐清', '時事題型總整理', '考前心理建設與輔導'], roadmap: ['考前30天: 重點掃描', '考前14天: 錯題回顧', '考前7天: 穩定軍心'] },
+      { name: '高二主科寒假K書營', desc: '寒假密集衝刺，強化高二核心主科，為高三複習提前暖身。', age: '高二', time: '寒假期間', objectives: '利用寒假黃金時間，針對國英數等核心科目進行深度補強。', target: '高二學生，希望利用寒假提升競爭力者。', features: ['各科重點單元複習', '專人解惑輔導', '高強度讀書氛圍', '學習進度追蹤'], roadmap: ['第一週: 核心觀念複習', '第二週: 難題解析與實作'] },
+      { name: '升高三暑期K書班', desc: '暑假黃金期，展開學測第一輪複習，建立完整知識架構。', age: '升高三', time: '暑假期間', objectives: '全面複習學測範圍，建立紮實基礎，搶佔升學先機。', target: '升高三考生，目標學測頂標者。', features: ['學測範圍地毯式複習', '規律作息管理', '每日進度檢測', '專業助教現場解惑'], roadmap: ['7月: 第一、二冊複習', '8月: 第三、四冊複習'] },
+      { name: '高三平日K書班', desc: '放學後的專注時光，規律作息穩定進步，遠離手機分心。', age: '高三', semesterTime: '週一至週五 18:00', objectives: '提供穩定、安靜的讀書環境，協助學生建立規律的讀書習慣。', target: '高三考生，需要專注讀書空間者。', features: ['嚴格門禁與手機管理', '安靜舒適的K書空間', '專人點名與作息督導', '各科輔導老師駐班'], roadmap: ['每日: 自主讀書與解惑', '每週: 學習進度檢核'] },
+      { name: '高三元月K書營', desc: '學測前最後衝刺，全天候模擬大考作息，調整最佳戰力。', age: '高三', time: '一月學測前', objectives: '模擬學測考試作息，進行最後階段的弱點補強與心理建設。', target: '高三考生，進行最後衝刺者。', features: ['全真模擬考作息', '考前猜題與重點掃描', '心理諮詢與壓力釋放', '最後衝刺計畫訂定'], roadmap: ['考前14天: 模擬考與檢討', '考前7天: 核心重點回顧'] },
     ]
   }
 ];
@@ -131,6 +156,7 @@ const SeniorCourseRoadmap: React.FC = () => {
   // NEW STATE
   const [selectedClass, setSelectedClass] = useState<any>(null);
   const [modalMode, setModalMode] = useState<'schedule' | 'detail'>('schedule');
+  const [selectedSemester, setSelectedSemester] = useState<string>('first');
 
   const timelineRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -174,6 +200,11 @@ const SeniorCourseRoadmap: React.FC = () => {
   const openSchedule = (cls: any) => {
     setSelectedClass(cls);
     setModalMode('schedule');
+    if (cls.age.includes('升高二') || cls.age.includes('升高三')) {
+      setSelectedSemester('summer');
+    } else {
+      setSelectedSemester('first');
+    }
   };
 
   const openDetail = (cls: any) => {
@@ -182,31 +213,64 @@ const SeniorCourseRoadmap: React.FC = () => {
   };
 
   // Generate Mock Schedule Data
-  const generateSchedule = (cls: any) => {
+  const generateSchedule = (cls: any, semester: string = 'first') => {
     const daysMap: Record<string, string> = { '週一': 'Mon', '週二': 'Tue', '週三': 'Wed', '週四': 'Thu', '週五': 'Fri', '週六': 'Sat', '週日': 'Sun' };
+    
+    const timeStr = semester === 'summer' ? (cls.summerTime || cls.time || '') : (cls.semesterTime || cls.time || '');
+
     let primaryDay = '週六';
     for (const d of Object.keys(daysMap)) {
-      if (cls.time.includes(d)) {
+      if (timeStr.includes(d)) {
         primaryDay = d;
         break;
       }
     }
 
-    const topics = [
-      '高中課程銜接 & 學習方法指導',
-      '核心素養導讀 & 小組討論',
-      '進階觀念推導 (一)',
-      '進階觀念推導 (二)',
-      '歷屆學測考題分析',
-      '素養題型破解技巧',
-      '模擬測驗與個別輔導',
-      '階段性成果檢測'
-    ];
+    let topics = [];
+    let month = '07';
+
+    if (semester === 'summer') {
+      topics = [
+        '暑期先修課程 (一)',
+        '暑期先修課程 (二)',
+        '核心觀念建立',
+        '進階觀念推導',
+        '暑期專題研究',
+        '實驗原理探討',
+        '暑期成果檢測 (一)',
+        '暑期成果檢測 (二)'
+      ];
+      month = '07';
+    } else if (semester === 'first') {
+      topics = [
+        '上學期進度課程 (一)',
+        '上學期進度課程 (二)',
+        '核心素養導讀',
+        '進階觀念解析',
+        '歷屆考題分析',
+        '素養題型破解',
+        '模擬測驗與輔導',
+        '段考衝刺演練'
+      ];
+      month = '09';
+    } else {
+      topics = [
+        '下學期進度預習',
+        '跨單元整合應用',
+        '進階解題技巧',
+        '素養題型演練',
+        '各校考古題精析',
+        '邏輯思維訓練',
+        '模擬測驗與補強',
+        '學期成果總結'
+      ];
+      month = '02';
+    }
 
     return Array.from({ length: 8 }).map((_, i) => ({
-      date: `07/${String(i * 7 + 5).padStart(2, '0')}`,
+      date: `${month}/${String(i * 7 + 5).padStart(2, '0')}`,
       day: primaryDay,
-      time: cls.time.includes(':') ? cls.time.split(' ')[1] + '-' + (parseInt(cls.time.split(' ')[1].split(':')[0]) + 3) + ':00' : '18:30-21:30',
+      time: timeStr.includes(':') ? timeStr.split(' ')[1] + '-' + (parseInt(timeStr.split(' ')[1].split(':')[0]) + 3) + ':00' : '18:30-21:30',
       unit: `第 ${i+1} 單元`,
       courseName: topics[i]
     }));
@@ -336,9 +400,47 @@ const SeniorCourseRoadmap: React.FC = () => {
                          <Users size={14} className="text-purple-600" /> 
                          <span>{cls.age}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-purple-50 px-2.5 py-1.5 rounded-md border border-purple-100">
-                         <Clock size={14} className="text-purple-600" /> 
-                         <span>{cls.time}</span>
+                    </div>
+
+                    {/* Structured Time Info */}
+                    <div className="space-y-2 mb-6">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <Clock size={12} /> 上課時間
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        {cls.summerTime && (
+                          <div className="flex items-center justify-between bg-amber-50/50 px-3 py-2 rounded-lg border border-amber-100/50 group/time hover:bg-amber-50 transition-colors">
+                            <span className="text-[10px] font-bold text-amber-600 bg-white px-1.5 py-0.5 rounded border border-amber-100">暑期</span>
+                            <span className="text-xs font-bold text-slate-700">{cls.summerTime}</span>
+                          </div>
+                        )}
+                        {(cls.semesterTime || cls.time) && (
+                          <div className="flex items-center justify-between bg-blue-50/50 px-3 py-2 rounded-lg border border-blue-100/50 group/time hover:bg-blue-50 transition-colors">
+                            <div className="flex gap-1.5">
+                              {COURSE_DATA[activeTab].id === 'pre_g10' ? (
+                                <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">暑期</span>
+                              ) : COURSE_DATA[activeTab].id === 'study_hall' ? (
+                                <>
+                                  {cls.name.includes('寒假') && <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">寒假</span>}
+                                  {cls.name.includes('暑期') && <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">暑期</span>}
+                                  {cls.name.includes('平日') && (
+                                    <>
+                                      <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">上學期</span>
+                                      <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">下學期</span>
+                                    </>
+                                  )}
+                                  {cls.name.includes('元月') && <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">元月</span>}
+                                </>
+                              ) : (
+                                <>
+                                  <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">上學期</span>
+                                  <span className="text-[10px] font-bold text-blue-600 bg-white px-1.5 py-0.5 rounded border border-blue-100">下學期</span>
+                                </>
+                              )}
+                            </div>
+                            <span className="text-xs font-bold text-slate-700">{cls.semesterTime || cls.time}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -528,15 +630,81 @@ const SeniorCourseRoadmap: React.FC = () => {
         {selectedClass && modalMode === 'schedule' && (
           <div className="space-y-6">
              {/* Info Header */}
-             <div className="flex flex-wrap gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-2">
-                   <span className="text-slate-500 font-bold text-sm">上課對象：</span>
-                   <span className="text-slate-900 font-medium">{selectedClass.age}</span>
+             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-500 font-bold text-sm">上課對象：</span>
+                    <span className="text-slate-900 font-medium">{selectedClass.age}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-500 font-bold text-sm">上課時間：</span>
+                    <span className="text-slate-900 font-medium">
+                      {selectedSemester === 'summer' ? (selectedClass.summerTime || selectedClass.time) : (selectedClass.semesterTime || selectedClass.time)}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                   <span className="text-slate-500 font-bold text-sm">上課時間：</span>
-                   <span className="text-slate-900 font-medium">{selectedClass.time}</span>
-                </div>
+
+                {/* Semester Toggle for Grade 10 */}
+                {selectedClass.age === '高一上/高一下' && (
+                  <div className="flex bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+                    <button
+                      onClick={() => setSelectedSemester('first')}
+                      className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${
+                        selectedSemester === 'first' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'text-slate-500 hover:text-purple-600'
+                      }`}
+                    >
+                      高一上
+                    </button>
+                    <button
+                      onClick={() => setSelectedSemester('second')}
+                      className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${
+                        selectedSemester === 'second' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'text-slate-500 hover:text-purple-600'
+                      }`}
+                    >
+                      高一下
+                    </button>
+                  </div>
+                )}
+
+                {/* Semester Toggle for Grade 11/12 (3 options) */}
+                {(selectedClass.age.includes('升高二') || selectedClass.age.includes('升高三')) && (
+                  <div className="flex bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+                    <button
+                      onClick={() => setSelectedSemester('summer')}
+                      className={`px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all ${
+                        selectedSemester === 'summer' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'text-slate-500 hover:text-purple-600'
+                      }`}
+                    >
+                      {selectedClass.age.includes('升高二') ? '升高二' : '升高三'}
+                    </button>
+                    <button
+                      onClick={() => setSelectedSemester('first')}
+                      className={`px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all ${
+                        selectedSemester === 'first' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'text-slate-500 hover:text-purple-600'
+                      }`}
+                    >
+                      {selectedClass.age.includes('升高二') ? '高二上' : '高三上'}
+                    </button>
+                    <button
+                      onClick={() => setSelectedSemester('second')}
+                      className={`px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all ${
+                        selectedSemester === 'second' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'text-slate-500 hover:text-purple-600'
+                      }`}
+                    >
+                      {selectedClass.age.includes('升高二') ? '高二下' : '高三下'}
+                    </button>
+                  </div>
+                )}
              </div>
 
              {/* Schedule Table */}
@@ -553,7 +721,7 @@ const SeniorCourseRoadmap: React.FC = () => {
                           </tr>
                        </thead>
                        <tbody className="divide-y divide-slate-100">
-                          {generateSchedule(selectedClass).map((row, idx) => (
+                          {generateSchedule(selectedClass, selectedSemester).map((row, idx) => (
                              <tr key={idx} className="hover:bg-slate-50 transition-colors">
                                 <td className="px-4 py-3 font-medium text-slate-900">{row.date}</td>
                                 <td className="px-4 py-3 text-slate-500">{row.day}</td>
