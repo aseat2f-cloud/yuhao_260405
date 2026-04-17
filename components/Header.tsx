@@ -226,23 +226,23 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
           {mobileNavItems.map((item) => (
             <div key={item.label}>
               <button
-                className={`w-full text-left text-lg font-bold py-3 border-b border-gray-50 flex justify-between items-center ${
+                className={`w-full text-left text-base font-bold py-2.5 flex justify-between items-center ${
                     currentPage === item.page ? 'text-primary-600' : 'text-slate-800'
-                } ${item.page === 'bulletin' ? 'bg-yellow-400 px-4 rounded-lg text-slate-900 border-none' : ''}`}
+                } ${item.page === 'bulletin' ? 'bg-yellow-400 px-4 rounded-lg text-slate-900 border-none mb-2' : 'border-b border-gray-50'}`}
                 onClick={() => handleNavClick(item.page)}
               >
                 <span className="flex items-center gap-2">
-                   {item.page === 'bulletin' && <Zap size={18} fill="currentColor" />}
+                   {item.page === 'bulletin' && <Zap size={16} fill="currentColor" />}
                    {item.label}
                 </span>
               </button>
               {item.dropdown && (
-                 <div className="pl-4 flex flex-col mt-1 mb-2 border-l-2 border-slate-100 ml-2">
+                 <div className="grid grid-cols-2 gap-2 mt-2 mb-4">
                     {item.dropdown.map(subItem => (
                          <button
                             key={subItem.id}
                             onClick={() => handleNavClick(item.page, subItem.id)}
-                            className="text-left py-2.5 px-3 text-slate-500 text-base rounded-md hover:bg-slate-50 hover:text-primary-600"
+                            className="text-left py-2 px-3 text-slate-500 text-sm bg-slate-50 rounded-lg active:bg-primary-50 active:text-primary-600 transition-colors"
                          >
                             {subItem.label}
                          </button>
@@ -251,20 +251,20 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
               )}
             </div>
           ))}
-          <div className="mt-6 flex flex-col gap-3">
+          <div className="mt-4 grid grid-cols-2 gap-3">
              <button
                onClick={() => {
                  onOpenChat?.();
                  setIsMenuOpen(false);
                }}
-               className="w-full text-center py-3 bg-primary-50 text-primary-700 font-semibold rounded-lg hover:bg-primary-100 transition-colors flex items-center justify-center gap-2"
+               className="w-full text-center py-2.5 bg-primary-50 text-primary-700 text-sm font-bold rounded-lg active:bg-primary-100 transition-colors flex items-center justify-center gap-2"
              >
                <MessageCircle size={18} />
                線上諮詢
              </button>
              <a
                href="#contact"
-               className="w-full text-center py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 active:scale-95 transition-all"
+               className="w-full text-center py-2.5 bg-primary-600 text-white text-sm font-bold rounded-lg active:bg-primary-700 active:scale-95 transition-all flex items-center justify-center"
                onClick={handleContactClick}
              >
                預約試聽
