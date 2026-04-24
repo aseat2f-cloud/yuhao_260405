@@ -29,6 +29,7 @@ export interface NewsItem {
   image: string;
   date: string;
   category: 'highlight' | 'normal' | 'event';
+  targetGrade?: 'elementary' | 'junior' | 'senior' | 'all';
   externalLink?: string; // Optional external link (e.g., Instagram)
 }
 

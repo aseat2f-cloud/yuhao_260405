@@ -481,8 +481,8 @@ const JuniorCourseRoadmap: React.FC = () => {
                         <tbody className="divide-y divide-slate-100 bg-white">
                           {[
                             { period: '早', time: '09:00 - 12:00', schedule: ['', '', '', '', '', '數學', '自習'] },
-                            { period: '午', time: '13:30 - 16:30', schedule: ['', '', '', '', '', '英文', '自習'] },
-                            { period: '晚', time: '18:30 - 21:30', schedule: ['國文', '數學', '理化', '英文', '數學', '自習', ''] },
+                            { period: '午', time: '13:30 - 16:30', schedule: ['', '', '', '', '', '英文', '輔導'] },
+                            { period: '晚', time: '18:30 - 21:30', schedule: ['國文', '數學', '理化', '英文', '數學', '自習', '輔導'] },
                           ].map((row, idx) => (
                             <tr key={idx} className="hover:bg-slate-50 transition-colors">
                               <td className="px-4 py-6 bg-slate-50 border-r border-slate-200">
@@ -490,10 +490,12 @@ const JuniorCourseRoadmap: React.FC = () => {
                                 <div className="text-[10px] text-slate-400 font-medium whitespace-nowrap">{row.time}</div>
                               </td>
                               {row.schedule.map((cell, cIdx) => {
-                                const isTargetSubject = cell === selectedClass.subject || (selectedClass.subject === '自然' && cell === '理化');
+                                const isTargetSubject = cell === selectedClass.subject || (selectedClass.subject === '自然' && (cell === '理化' || cell === '生物'));
+                                const isSupport = cell === '自習' || cell === '輔導';
+                                const shouldShow = isTargetSubject || isSupport;
                                 return (
-                                  <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell ? (isTargetSubject ? 'bg-blue-50/50' : 'bg-slate-50/30') : ''}`}>
-                                    {cell && (
+                                  <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell && shouldShow ? (isTargetSubject ? 'bg-blue-50/50' : 'bg-slate-50/30') : ''}`}>
+                                    {cell && shouldShow && (
                                       <div className="flex flex-col items-center gap-1">
                                         <span className={`w-2 h-2 rounded-full ${isTargetSubject ? 'bg-blue-500' : 'bg-slate-300'}`}></span>
                                         <span className={`font-bold ${isTargetSubject ? 'text-blue-700' : 'text-slate-400'}`}>

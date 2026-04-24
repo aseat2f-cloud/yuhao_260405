@@ -23,6 +23,7 @@ const BULLETIN_HERO_IMAGES = [
 
 const BulletinPage: React.FC<BulletinPageProps> = ({ news }) => {
   const [activeTab, setActiveTab] = useState<TabType>('highlight');
+  const [selectedGrade, setSelectedGrade] = useState<'all' | 'elementary' | 'junior' | 'senior'>('all');
   
   // Hero Carousel State
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
@@ -42,18 +43,29 @@ const BulletinPage: React.FC<BulletinPageProps> = ({ news }) => {
     }
   };
 
-  // Filter news based on tab
+  // Filter news based on tab and selectedGrade
   const getFilteredNews = () => {
+    let filtered = news;
+    
+    // First by category
     switch (activeTab) {
       case 'highlight':
-        return news.filter(n => n.category === 'highlight');
+        filtered = filtered.filter(n => n.category === 'highlight');
+        break;
       case 'normal':
-        return news.filter(n => n.category === 'normal');
+        filtered = filtered.filter(n => n.category === 'normal');
+        break;
       case 'events':
-        return news.filter(n => n.category === 'event'); // Treat events as news items with 'event' category
-      default:
-        return [];
+        filtered = filtered.filter(n => n.category === 'event');
+        break;
     }
+
+    // Then by grade
+    if (selectedGrade !== 'all') {
+      filtered = filtered.filter(n => n.targetGrade === selectedGrade || n.targetGrade === 'all');
+    }
+
+    return filtered;
   };
 
   const currentNewsList = getFilteredNews();
@@ -183,6 +195,30 @@ const BulletinPage: React.FC<BulletinPageProps> = ({ news }) => {
                <div className="absolute bottom-0 left-0 w-full h-1 bg-primary-600 rounded-t-full"></div>
              )}
            </button>
+        </div>
+      </div>
+
+      {/* Age Group Filter */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 flex justify-center">
+        <div className="inline-flex p-1 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          {[
+            { id: 'all', label: '全部' },
+            { id: 'elementary', label: '國小' },
+            { id: 'junior', label: '國中' },
+            { id: 'senior', label: '高中' }
+          ].map((grade) => (
+            <button
+              key={grade.id}
+              onClick={() => setSelectedGrade(grade.id as any)}
+              className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${
+                selectedGrade === grade.id 
+                  ? 'bg-primary-600 text-white shadow-md' 
+                  : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+              }`}
+            >
+              {grade.label}
+            </button>
+          ))}
         </div>
       </div>
 

@@ -100,6 +100,8 @@ const generateNewsItems = (images: string[], category: 'highlight' | 'event' | '
     ]
   };
 
+  const grades: ('elementary' | 'junior' | 'senior' | 'all')[] = ['elementary', 'junior', 'senior', 'all'];
+
   return images.map((img, index) => ({
     id: `${prefix}-${index}`,
     title: titles[category][index % titles[category].length],
@@ -108,6 +110,7 @@ const generateNewsItems = (images: string[], category: 'highlight' | 'event' | '
     image: img,
     date: '2025-05-20',
     category: category,
+    targetGrade: grades[index % grades.length],
     externalLink: 'https://www.instagram.com/yuhao.school/'
   }));
 };

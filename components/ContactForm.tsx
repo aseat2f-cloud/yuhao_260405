@@ -220,21 +220,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ theme = 'primary' }) => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="parentName" className="text-sm font-semibold text-slate-700">家長姓名 <span className="text-red-500">*</span></label>
+                  <label htmlFor="studentName" className="text-sm font-semibold text-slate-700">學生姓名 <span className="text-red-500">*</span></label>
                   <input
                     required
-                    type="text"
-                    id="parentName"
-                    name="parentName"
-                    value={formData.parentName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-${t}-500 focus:ring-2 focus:ring-${t}-200 transition-all outline-none bg-slate-50/50 focus:bg-white`}
-                    placeholder="請輸入家長姓名"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="studentName" className="text-sm font-semibold text-slate-700">學生姓名</label>
-                  <input
                     type="text"
                     id="studentName"
                     name="studentName"
@@ -242,6 +230,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ theme = 'primary' }) => {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-${t}-500 focus:ring-2 focus:ring-${t}-200 transition-all outline-none bg-slate-50/50 focus:bg-white`}
                     placeholder="請輸入學生姓名"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="parentName" className="text-sm font-semibold text-slate-700">家長姓名</label>
+                  <input
+                    type="text"
+                    id="parentName"
+                    name="parentName"
+                    value={formData.parentName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-${t}-500 focus:ring-2 focus:ring-${t}-200 transition-all outline-none bg-slate-50/50 focus:bg-white`}
+                    placeholder="請輸入家長姓名"
                   />
                 </div>
               </div>

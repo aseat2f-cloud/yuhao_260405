@@ -73,81 +73,80 @@ const Footer: React.FC = () => {
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-32 lg:pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Grid: 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        {/* Main Grid: Contact Info + Student Zone */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-12 gap-y-16 mb-16 items-start">
           
-          {/* Loop through branch groups */}
+          {/* Branch Contact Information (Columns 1-3) */}
           {BRANCHES.map((group, index) => (
-            <div key={index} className="flex flex-col">
+            <div key={index} className="flex flex-col h-full">
               <div className="flex items-center gap-2 mb-6">
                  <div className={`h-6 w-1 rounded-full ${index === 0 ? 'bg-teal-500' : index === 1 ? 'bg-blue-500' : 'bg-purple-500'}`}></div>
                  <h4 className="text-white font-bold text-lg tracking-wide">{group.title}</h4>
               </div>
               
-              <div className="flex flex-col gap-8">
-                {group.locations.map((loc, idx) => (
-                  <div key={idx} className="flex flex-col gap-2">
-                    <h5 className="text-white font-medium text-base leading-tight">{loc.name}</h5>
-                    {loc.license && (
-                      <p className="text-xs text-slate-500">{loc.license}</p>
-                    )}
-                    
-                    <ul className="space-y-2 text-slate-400 mt-1">
-                      {/* Address without icon to save space */}
-                      <li className="text-sm leading-relaxed">
-                        {loc.address}
-                      </li>
-                      <li className="flex items-center gap-3 text-sm">
-                        <Phone className="shrink-0 text-slate-500" size={16} />
-                        <span>{loc.phone}</span>
-                      </li>
-                    </ul>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-8 h-full">
+                <div className="flex flex-col gap-8 flex-grow">
+                  {group.locations.map((loc, idx) => (
+                    <div key={idx} className="flex flex-col gap-2">
+                      <h5 className="text-white font-medium text-base leading-tight">{loc.name}</h5>
+                      {loc.license && (
+                        <p className="text-xs text-slate-500">{loc.license}</p>
+                      )}
+                      
+                      <ul className="space-y-2 text-slate-400 mt-1">
+                        <li className="text-sm leading-relaxed">
+                          {loc.address}
+                        </li>
+                        <li className="flex items-center gap-3 text-sm">
+                          <Phone className="shrink-0 text-slate-500" size={16} />
+                          <span>{loc.phone}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  ))}
+                </div>
 
-                {/* Social Buttons - Show for ALL groups */}
-                <div className="flex items-center gap-3 mt-auto">
-                  <a href="#" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1877F2] hover:text-white transition-all">
-                    <Facebook size={16} />
+                {/* Social Buttons */}
+                <div className="flex items-center gap-3 mt-auto pt-6">
+                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1877F2] hover:text-white transition-all shadow-sm">
+                    <Facebook size={18} />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#06C755] hover:text-white transition-all">
-                    <MessageCircle size={16} />
+                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#06C755] hover:text-white transition-all shadow-sm">
+                    <MessageCircle size={18} />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#fd5949] hover:to-[#d6249f] hover:text-white transition-all">
-                    <Instagram size={16} />
+                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#fd5949] hover:to-[#d6249f] hover:text-white transition-all shadow-sm">
+                    <Instagram size={18} />
                   </a>
                 </div>
               </div>
             </div>
           ))}
 
-          {/* Student Zone */}
-          <div id="student-zone" className="flex flex-col scroll-mt-24">
-            <div className="flex items-center gap-2 mb-6">
-                <div className="h-6 w-1 bg-green-500 rounded-full"></div>
-                <h4 className="text-white font-bold text-lg tracking-wide">學生專區</h4>
+          {/* Student Zone Independent Section (Column 4) */}
+          <div id="student-zone" className="scroll-mt-24 bg-yellow-400 p-8 rounded-3xl border border-yellow-500/20 shadow-lg shadow-yellow-400/10 flex flex-col h-full">
+            <div className="flex items-center gap-3 mb-4">
+                <div className="h-6 w-1.5 bg-slate-900 rounded-full"></div>
+                <h4 className="text-slate-900 font-extrabold text-xl tracking-wide">學生專區</h4>
             </div>
+            <p className="text-slate-800 text-xs font-medium leading-relaxed mb-8">
+              提供育豪學員專屬的線上資源與行政系統。如需帳號密碼請洽各部班導師。
+            </p>
             
             <div className="flex flex-col gap-4">
               {STUDENT_LINKS.map((link, idx) => (
                 <a 
                   key={idx} 
                   href={link.href}
-                  className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group"
+                  className="flex items-center gap-4 text-slate-900 hover:text-slate-700 transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-slate-600 group-hover:bg-slate-900 group-hover:text-white group-hover:shadow-lg transition-all duration-300 transform group-active:scale-95 shadow-sm">
                     {link.icon}
                   </div>
-                  <span className="text-sm font-medium">{link.label}</span>
+                  <span className="text-sm font-bold whitespace-nowrap">{link.label}</span>
                 </a>
               ))}
-              
-              <div className="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-600">
-                僅限內部學員登入使用
-              </div>
             </div>
           </div>
-
         </div>
 
         {/* Copyright */}
