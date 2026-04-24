@@ -491,14 +491,13 @@ const JuniorCourseRoadmap: React.FC = () => {
                               </td>
                               {row.schedule.map((cell, cIdx) => {
                                 const isTargetSubject = cell === selectedClass.subject || (selectedClass.subject === '自然' && (cell === '理化' || cell === '生物'));
-                                const isSupport = cell === '自習' || cell === '輔導';
-                                const shouldShow = isTargetSubject || isSupport;
+                                const shouldShow = isTargetSubject;
                                 return (
-                                  <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell && shouldShow ? (isTargetSubject ? 'bg-blue-50/50' : 'bg-slate-50/30') : ''}`}>
+                                  <td key={cIdx} className={`px-2 py-4 border-r border-slate-100 last:border-r-0 ${cell && shouldShow ? 'bg-blue-50/50' : ''}`}>
                                     {cell && shouldShow && (
                                       <div className="flex flex-col items-center gap-1">
-                                        <span className={`w-2 h-2 rounded-full ${isTargetSubject ? 'bg-blue-500' : 'bg-slate-300'}`}></span>
-                                        <span className={`font-bold ${isTargetSubject ? 'text-blue-700' : 'text-slate-400'}`}>
+                                        <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                        <span className="font-bold text-blue-700">
                                           {cell}
                                         </span>
                                       </div>
