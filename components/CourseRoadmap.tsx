@@ -9,6 +9,10 @@ interface ClassInfo {
   desc: string;
   age: string;
   time: string;
+  summerTime?: string;
+  semesterTime?: string;
+  summerLabel?: string;
+  semesterLabel?: string;
   objectives: string;
   target: string;
   features: string[];
@@ -26,6 +30,18 @@ const BROCHURE_IMAGES = [
   "https://www.dropbox.com/scl/fi/2cxysztok0xjwqflocxf3/250813_-_-PO-_AH_01.jpg?rlkey=we58ed84mufdgg08t1yjkjc4r&raw=1"
 ];
 
+interface CourseCategory {
+  id: string;
+  label: string;
+  shortLabel: string;
+  description: string;
+  icon: React.ReactNode;
+  color: string;
+  displayType?: 'images';
+  images?: string[];
+  classes: ClassInfo[];
+}
+
 const CourseRoadmap: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isBrochureOpen, setIsBrochureOpen] = useState(false);
@@ -41,7 +57,7 @@ const CourseRoadmap: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   // NEW: Updated Course Data with Detail Fields
-  const COURSE_DATA = [
+  const COURSE_DATA: CourseCategory[] = [
     {
       id: 'english',
       label: '艾森樂美語',
@@ -50,7 +66,20 @@ const CourseRoadmap: React.FC = () => {
       icon: <Languages size={20} />,
       color: 'text-teal-500',
       classes: [
-        { name: '劍橋英檢．KET養成班', desc: '針對劍橋英檢 KET 級數，強化聽說讀寫全方位實力，並透過模考訓練讓孩子熟悉國際檢定題型，建立應試自信。', age: '小五 ~ 小六', time: '週三/六 晚上', objectives: '熟悉劍橋英檢 KET 考試題型，強化聽說讀寫綜合能力，順利取得國際認證。', target: '計畫報考 KET 英檢 or 希望檢視英語學習成效的學生。', features: ['仿真模考實戰演練', '口試技巧個別指導', '聽力解題策略分析', '閱讀寫作重點強化'], roadmap: ['檢定觀念建立', '分項能力強化', '模考衝刺與檢討'] },
+        { 
+          name: '劍橋英檢國際證照班', 
+          desc: '私中書審必備： 直接對應南山、東山等名校入學門檻，是書審脫穎而出的關鍵加分亮點。\n\n全方位實力培養： 嚴格遵循國際標準，同步鍛鍊聽、說、讀、寫四項能力，且為全球最具公信力的語言指標。', 
+          age: '小二 ~ 小六', 
+          time: '暑假 / 週六', 
+          summerTime: '暑假',
+          summerLabel: 'Starters/Movers/Flyers',
+          semesterTime: '週六',
+          semesterLabel: 'KET/PET',
+          objectives: '熟悉劍橋英檢 KET 考試題型，強化聽說讀寫綜合能力，順利取得國際認證。', 
+          target: '計畫報考 KET 英檢 or 希望檢視英語學習成效的學生。', 
+          features: ['仿真模考實戰演練', '口試技巧個別指導', '聽力解題策略分析', '閱讀寫作重點強化'], 
+          roadmap: ['檢定觀念建立', '分項能力強化', '模考衝刺與檢討'] 
+        },
         { name: '美語程度分班', desc: '依據入學測驗程度能力分班，提供最適合孩子的學習難度，循序漸進提升聽說讀寫實力，達成適性教學的最佳成效。', age: '小一 ~ 小六', time: '平日/週六 晚上', objectives: '適性分級教學，讓每個孩子在最適合的難度下學習，循序漸進提升聽說讀寫能力。', target: '所有國小學齡兒童，需透過測驗分班。', features: ['全美語沉浸式教學環境', '主題式情境教學，學以致用', '定期成果發表，展現自信', '結合線上學習資源，延伸學習'], roadmap: ['L1-L2: 啟蒙與發音', 'L3-L4: 生活會話與閱讀', 'L5-L6: 寫作與進階表達'] },
         { name: '外師發音班', desc: '由專業外師親自引導純正口音，掌握自然發音 (Phonics) 技巧，讓孩子看到單字能讀、聽到單字能拼，奠定語感。', age: '小一 ~ 小三', time: '週一/四 晚上', objectives: '建立正確發音嘴型與聽音辨位能力，看到單字能讀，聽到單字能拼。', target: '初學美語 or 希望矯正發音的孩子。', features: ['專業外師親自授課', '趣味發音遊戲與歌謠', '矯正台式發音習慣', '建立拼讀自信心'], roadmap: ['Level A: 字母與短母音', 'Level B: 長母音與混合音', 'Level C: 特殊發音規則'] },
         { name: '英文閱讀班', desc: '精選國外分級繪本與讀本，透過引導式閱讀討論培養理解力與語感，讓孩子養成主動閱讀英文書籍的良好習慣。', age: '小三 ~ 小五', time: '週二/五 晚上', objectives: '透過大量閱讀累積單字量，培養語感與閱讀理解策略，養成閱讀英文書籍的習慣。', target: '具備基礎拼讀能力，希望提升閱讀速度與廣度的學生。', features: ['精選國外分級讀本', '引導式閱讀討論', '閱讀理解策略教學', '讀後心得分享與寫作'], roadmap: ['繪本閱讀期', '橋樑書閱讀期', '章節小說閱讀期'] },
@@ -696,10 +725,12 @@ const CourseRoadmap: React.FC = () => {
                              <Users size={14} className="text-green-600" /> 
                              <span>{cls.age}</span>
                           </div>
-                          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
-                             <Clock size={14} className="text-green-600" /> 
-                             <span>{cls.time}</span>
-                          </div>
+                          {!cls.summerTime && !cls.semesterTime && (
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
+                               <Clock size={14} className="text-green-600" /> 
+                               <span>{cls.time}</span>
+                            </div>
+                          )}
                         </div>
                         {['math', 'chinese', 'gifted'].includes(COURSE_DATA[activeTab].id) && (
                           <button 
@@ -711,7 +742,34 @@ const CourseRoadmap: React.FC = () => {
                         )}
                       </div>
   
-                      <p className="text-slate-600 text-sm leading-relaxed mb-2">
+                      {/* Structured Time Info (Style like high school) */}
+                      {(cls.summerTime || cls.semesterTime) && (
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">
+                            <Clock size={12} /> 上課時間
+                          </div>
+                          <div className="grid grid-cols-1 gap-2">
+                            {cls.summerTime && (
+                              <div className="flex items-center justify-between bg-emerald-50/50 px-3 py-2 rounded-lg border border-emerald-100/50 group/time hover:bg-emerald-50 transition-colors">
+                                <span className="text-[10px] font-bold text-emerald-600 bg-white px-1.5 py-0.5 rounded border border-emerald-100">
+                                  {cls.summerLabel || '暑期'}
+                                </span>
+                                <span className="text-xs font-bold text-slate-700">{cls.summerTime}</span>
+                              </div>
+                            )}
+                            {cls.semesterTime && (
+                              <div className="flex items-center justify-between bg-green-50/50 px-3 py-2 rounded-lg border border-green-100/50 group/time hover:bg-green-50 transition-colors">
+                                <span className="text-[10px] font-bold text-green-600 bg-white px-1.5 py-0.5 rounded border border-green-100">
+                                  {cls.semesterLabel || '學期'}
+                                </span>
+                                <span className="text-xs font-bold text-slate-700">{cls.semesterTime}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      <p className="text-slate-600 text-sm leading-relaxed mb-2 whitespace-pre-wrap">
                         {cls.desc}
                       </p>
                     </div>
