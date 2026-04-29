@@ -8,10 +8,10 @@ const NAV_ITEMS: NavItem[] = [
     label: '國小築基', 
     page: 'elementary',
     dropdown: [
-      { label: '教學成果', id: 'outstanding-results' },
       { label: '課程班別', id: 'course-roadmap' },
       { label: '學員金榜', id: 'honor-roll' },
       { label: '環境介紹', id: 'environment' },
+      { label: '課程花絮', url: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
     ]
   },
   { 
@@ -52,7 +52,17 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
     ...NAV_ITEMS.filter(item => item.page !== 'bulletin')
   ];
 
-  const handleNavClick = (page: PageType, sectionId?: string) => {
+  const handleNavClick = (page: PageType, sectionId?: string, url?: string, external?: boolean) => {
+    if (url) {
+      if (external) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = url;
+      }
+      setIsMenuOpen(false);
+      return;
+    }
+
     const isPageChange = currentPage !== page;
     onNavigate(page);
     setIsMenuOpen(false);
@@ -171,10 +181,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
                     <div className="absolute top-full left-0 w-48 bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                       {item.dropdown.map((subItem) => (
                         <button
-                          key={subItem.id}
+                          key={subItem.label}
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleNavClick(item.page, subItem.id);
+                            handleNavClick(item.page, subItem.id, subItem.url, subItem.external);
                           }}
                           className="block w-full text-left px-5 py-3 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 border-b border-gray-50 last:border-0 transition-colors"
                         >
@@ -240,8 +250,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
                  <div className="grid grid-cols-2 gap-2 mt-2 mb-4">
                     {item.dropdown.map(subItem => (
                          <button
-                            key={subItem.id}
-                            onClick={() => handleNavClick(item.page, subItem.id)}
+                            key={subItem.label}
+                            onClick={() => handleNavClick(item.page, subItem.id, subItem.url, subItem.external)}
                             className="text-left py-2 px-3 text-slate-500 text-sm bg-slate-50 rounded-lg active:bg-primary-50 active:text-primary-600 transition-colors"
                          >
                             {subItem.label}

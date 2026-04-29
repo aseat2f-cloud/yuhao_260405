@@ -7,6 +7,7 @@ import { NewsItem, PageType } from '../types';
 interface QuickLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 interface HeroProps {
@@ -182,7 +183,12 @@ const Hero: React.FC<HeroProps> = ({
                       <a 
                         key={index}
                         href={link.href}
-                        onClick={(e) => handleScrollTo(e, link.href)}
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noopener noreferrer" : undefined}
+                        onClick={(e) => {
+                          if (link.external) return;
+                          handleScrollTo(e, link.href);
+                        }}
                         className="group w-20 h-20 bg-yellow-400 rounded-full flex flex-col items-center justify-center text-[15px] font-bold text-slate-900 hover:bg-yellow-300 hover:scale-110 transition-all cursor-pointer shadow-sm"
                       >
                          <span className="leading-tight text-center">

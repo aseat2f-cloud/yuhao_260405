@@ -6,7 +6,7 @@ export type PageType = 'home' | 'elementary' | 'junior' | 'senior' | 'bulletin';
 export interface NavItem {
   label: string;
   page: PageType;
-  dropdown?: { label: string; id: string }[];
+  dropdown?: { label: string; id?: string; url?: string; external?: boolean }[];
 }
 
 export interface FeatureItem {

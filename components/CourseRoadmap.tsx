@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Users, BookOpen, Calendar, Map, Target, CheckCircle2, Rocket, ArrowRight, Clock, FileText, Lightbulb, Waypoints, Calculator, Languages, FlaskConical, ChevronUp, ChevronsDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users, BookOpen, Calendar, Target, CheckCircle2, Rocket, ArrowRight, Clock, FileText, Lightbulb, Waypoints, Calculator, Languages, FlaskConical, MessageCircle } from 'lucide-react';
 import BrochureViewer from './BrochureViewer';
 import Modal from './Modal';
 
@@ -45,7 +45,6 @@ interface CourseCategory {
 const CourseRoadmap: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isBrochureOpen, setIsBrochureOpen] = useState(false);
-  const [isPlanOpen, setIsPlanOpen] = useState(false);
   
   // NEW STATE
   const [selectedClass, setSelectedClass] = useState<ClassInfo | null>(null);
@@ -53,7 +52,6 @@ const CourseRoadmap: React.FC = () => {
   const [selectedGrade, setSelectedGrade] = useState<string>('三年級');
   const [activeDetailTab, setActiveDetailTab] = useState<'main' | 'highlights' | 'features' | 'roadmap'>('main');
 
-  const timelineRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   // NEW: Updated Course Data with Detail Fields
@@ -68,23 +66,33 @@ const CourseRoadmap: React.FC = () => {
       classes: [
         { 
           name: '劍橋英檢國際證照班', 
-          desc: '私中書審必備： 直接對應南山、東山等名校入學門檻，是書審脫穎而出的關鍵加分亮點。\n\n全方位實力培養： 嚴格遵循國際標準，同步鍛鍊聽、說、讀、寫四項能力，且為全球最具公信力的語言指標。', 
+          desc: '**私中書審必備：** 直接對應南山、東山等名校入學門檻，是書審脫穎而出的關鍵加分亮點。\n**全方位實力培養：** 嚴格遵循國際標準，同步鍛鍊聽、說、讀、寫四項能力，且為全球最具公信力的語言指標。', 
           age: '小二 ~ 小六', 
           time: '暑假 / 週六', 
-          summerTime: '暑假',
-          summerLabel: 'Starters/Movers/Flyers',
-          semesterTime: '週六',
-          semesterLabel: 'KET/PET',
+          summerTime: 'Starters/Movers/Flyers｜暑假',
+          summerLabel: '暑期',
+          semesterTime: 'KET/PET｜週六',
+          semesterLabel: '學期',
           objectives: '熟悉劍橋英檢 KET 考試題型，強化聽說讀寫綜合能力，順利取得國際認證。', 
           target: '計畫報考 KET 英檢 or 希望檢視英語學習成效的學生。', 
-          features: ['仿真模考實戰演練', '口試技巧個別指導', '聽力解題策略分析', '閱讀寫作重點強化'], 
+          features: ['仿真模考實戰演練', '口試技巧個別指導', '進力解題策略分析', '閱讀寫作重點強化'], 
           roadmap: ['檢定觀念建立', '分項能力強化', '模考衝刺與檢討'] 
         },
-        { name: '美語程度分班', desc: '依據入學測驗程度能力分班，提供最適合孩子的學習難度，循序漸進提升聽說讀寫實力，達成適性教學的最佳成效。', age: '小一 ~ 小六', time: '平日/週六 晚上', objectives: '適性分級教學，讓每個孩子在最適合的難度下學習，循序漸進提升聽說讀寫能力。', target: '所有國小學齡兒童，需透過測驗分班。', features: ['全美語沉浸式教學環境', '主題式情境教學，學以致用', '定期成果發表，展現自信', '結合線上學習資源，延伸學習'], roadmap: ['L1-L2: 啟蒙與發音', 'L3-L4: 生活會話與閱讀', 'L5-L6: 寫作與進階表達'] },
-        { name: '外師發音班', desc: '由專業外師親自引導純正口音，掌握自然發音 (Phonics) 技巧，讓孩子看到單字能讀、聽到單字能拼，奠定語感。', age: '小一 ~ 小三', time: '週一/四 晚上', objectives: '建立正確發音嘴型與聽音辨位能力，看到單字能讀，聽到單字能拼。', target: '初學美語 or 希望矯正發音的孩子。', features: ['專業外師親自授課', '趣味發音遊戲與歌謠', '矯正台式發音習慣', '建立拼讀自信心'], roadmap: ['Level A: 字母與短母音', 'Level B: 長母音與混合音', 'Level C: 特殊發音規則'] },
-        { name: '英文閱讀班', desc: '精選國外分級繪本與讀本，透過引導式閱讀討論培養理解力與語感，讓孩子養成主動閱讀英文書籍的良好習慣。', age: '小三 ~ 小五', time: '週二/五 晚上', objectives: '透過大量閱讀累積單字量，培養語感與閱讀理解策略，養成閱讀英文書籍的習慣。', target: '具備基礎拼讀能力，希望提升閱讀速度與廣度的學生。', features: ['精選國外分級讀本', '引導式閱讀討論', '閱讀理解策略教學', '讀後心得分享與寫作'], roadmap: ['繪本閱讀期', '橋樑書閱讀期', '章節小說閱讀期'] },
-        { name: '口說美語班', desc: '打造全美語情境對話練習環境，透過角色扮演與互動遊戲，鼓勵孩子大膽開口說英語，提升口語表達的流利度。', age: '小一 ~ 小六', time: '週三/六 晚上', objectives: '打破不敢開口的心理障礙，在模擬情境中自然運用英語溝通，提升口語流利度。', target: '害羞不敢開口或希望增加口語練習機會的學生。', features: ['角色扮演與情境模擬', '小組討論與發表', '生活實用對話練習', '即席演講訓練'], roadmap: ['日常問候與自我介紹', '生活情境應對', '議題討論與表達'] },
-        { name: '外師寫作班', desc: '由外師引導創意寫作，從句子到段落循序漸進，建立嚴謹的邏輯思維與正確文法架構，培養孩子優雅的文字表達力。', age: '小四 ~ 小六', time: '週六 上午', objectives: '從句子到段落，從段落到文章，循序漸進培養英文寫作能力與邏輯架構。', target: '已有一定單字量與文法基礎，希望提升寫作能力的學生。', features: ['心智圖構思與大綱擬定', '各種文體寫作指導', '個別化作文批改', '優美句型與修辭運用'], roadmap: ['句型練習期', '段落寫作期', '短文創作期'] },
+        { 
+          name: '生活會話班', 
+          desc: '本課程以生活會話為主軸，讓孩子在自然情境中學習英文，並在對話過程中同步帶入文法與閱讀理解，全面培養聽說讀寫能力。課程設計著重實際運用，而非傳統填鴨式學習。特別適合不喜歡長時間英文課、希望在輕鬆氛圍將英文應用於日常生活的孩子。', 
+          age: '小三開始', 
+          time: '週三和週五晚上', 
+          objectives: '以生活會話為主軸，同步帶入文法與閱讀理解，全面培養聽說讀寫能力。', 
+          target: '不喜歡傳統填鴨式學習，希望在輕鬆氛圍應用英文的孩子。', 
+          features: ['生活化情境教學', '即時對話練習', '文法概念自然融入', '趣味閱讀輔助'], 
+          roadmap: ['日常口語建立', '情境應對強化', '綜合實力提升'] 
+        },
+        { name: '美語程度分班', desc: '依據入學測驗程度能力分班，提供最適合孩子的學習難度，循序漸進提升聽說讀寫實力，達成適性教學的最佳成效。', age: '小一 ~ 小六', time: '平日 下午或晚上', objectives: '適性分級教學，讓每個孩子在最適合的難度下學習，循序漸進提升聽說讀寫能力。', target: '所有國小學齡兒童，需透過測驗分班。', features: ['全美語沉浸式教學環境', '主題式情境教學，學以致用', '定期成果發表，展現自信', '結合線上學習資源，延伸學習'], roadmap: ['L1-L2: 啟蒙與發音', 'L3-L4: 生活會話與閱讀', 'L5-L6: 寫作與進階表達'] },
+        { name: '外師發音班', desc: '由專業外師親自引導純正口音，掌握自然發音 (Phonics) 技巧，讓孩子看到單字能讀、聽到單字能拼，奠定語感。', age: '小一 ~ 小三', time: '週二或週四 晚上', objectives: '建立正確發音嘴型與聽音辨位能力，看到單字能讀，聽到單字能拼。', target: '初學美語 or 希望矯正發音的孩子。', features: ['專業外師親自授課', '趣味發音遊戲與歌謠', '矯正台式發音習慣', '建立拼讀自信心'], roadmap: ['Level A: 字母與短母音', 'Level B: 長母音與混合音', 'Level C: 特殊發音規則'] },
+        { name: '英文閱讀班', desc: '精選國外分級繪本與讀本，透過引導式閱讀討論培養理解力與語感，讓孩子養成主動閱讀英文書籍的良好習慣。', age: '小三 ~ 小五', time: '週三 晚上', objectives: '透過大量閱讀累積單字量，培養語感與閱讀理解策略，養成閱讀英文書籍的習慣。', target: '具備基礎拼讀能力，希望提升閱讀速度與廣度的學生。', features: ['精選國外分級讀本', '引導式閱讀討論', '閱讀理解策略教學', '讀後心得分享與寫作'], roadmap: ['繪本閱讀期', '橋樑書閱讀期', '章節小說閱讀期'] },
+        { name: '口說美語班(K班)', desc: '打造全美語情境對話練習環境，透過角色扮演與互動遊戲，鼓勵孩子大膽開口說英語，提升口語表達的流利度。', age: '中班 ~ 小二', time: '週一到週五(可選天)', objectives: '打破不敢開口的心理障礙，在模擬情境中自然運用英語溝通，提升口語流利度。', target: '害羞不敢開口或希望增加口語練習機會的學生。', features: ['角色扮演與情境模擬', '小組討論與發表', '生活實用對話練習', '即席演講訓練'], roadmap: ['日常問候與自我介紹', '生活情境應對', '議題討論與表達'] },
+        { name: '外師寫作班', desc: '由外師引導創意寫作，從句子到段落循序漸進，建立嚴謹的邏輯思維與正確文法架構，培養孩子優雅的文字表達力。', age: '小五 ~ 小六', time: '當年度安排', objectives: '從句子到段落，從段落到文章，循序漸進培養英文寫作能力與邏輯架構。', target: '已有一定單字量與文法基礎，希望提升寫作能力的學生。', features: ['心智圖構思與大綱擬定', '各種文體寫作指導', '個別化作文批改', '優美句型與修辭運用'], roadmap: ['句型練習期', '段落寫作期', '短文創作期'] },
       ]
     },
     {
@@ -98,7 +106,7 @@ const CourseRoadmap: React.FC = () => {
         { 
           name: '進度數學班', 
           desc: '緊密配合學校教學進度，透過系統化教學穩紮穩打建立數學核心觀念與運算基礎，培養孩子解決問題的邏輯能力與自信心。', 
-          age: '小一 ~ 小六', 
+          age: '小三 ~ 小六', 
           time: '週二五/三/六',
           objectives: '鞏固學校課堂所學，強化運算準確度，並建立正確的數學解題觀念，培養自信心。',
           target: '希望跟上學校進度、加強計算能力與基礎概念的學生。',
@@ -152,9 +160,9 @@ const CourseRoadmap: React.FC = () => {
       classes: [
         { 
           name: '閱讀素養班', 
-          desc: '針對長文閱讀進行深度理解訓練，教導擷取資訊與統整分析的技巧，培養孩子獨立思考與批判性分析的關鍵素養能力。', 
+          desc: '【ㄧ～二年級】語感啟蒙：從「讀懂」到「會寫」\n透過敘述理解，精確拆解句構邏輯，解決孩子「字都認識卻讀不懂」的恐懼，讓孩子能將生活觀察轉化為生動、通順的長句。', 
           age: '小一~小二', 
-          time: '週六 下午', 
+          time: '週二或週四 下午', 
           objectives: '提升長篇文章閱讀速度與理解力，培養擷取資訊、統統分析與批判思考的能力。', 
           target: '閱讀速度慢、抓不到重點 or 希望能深入解讀文本的學生。', 
           features: ['多元文本閱讀材料', '閱讀理解策略教學', 'PISA 題型實戰演練', '議題探討與思辨'], 
@@ -193,8 +201,8 @@ const CourseRoadmap: React.FC = () => {
         },
         { 
           name: '閱讀寫作班', 
-          desc: '結合經典文學賞析與創意寫作引導，透過感官摹寫與修辭練習提升文字表現力，讓孩子能自信流暢地表達個人想法與文采。', 
-          age: '小四~小六', 
+          desc: '【三～四年級】思維佈局：打破框架的「邏輯重組」\n捨棄死板公式（如起承轉合），改以因果、對比等邏輯方塊建構文章。練習從閱讀中提取精準摘要，訓練孩子先「想清楚」文章骨架，再下筆創作。', 
+          age: '小三 ~ 小四', 
           time: '週六 上午', 
           objectives: '培養閱讀興趣，激發寫作靈感，能流暢表達個人想法與情感。', 
           target: '對寫作感到困難 or 希望提升文采的學生。', 
@@ -202,29 +210,51 @@ const CourseRoadmap: React.FC = () => {
           roadmap: ['基礎語句練習', '段落結構鋪陳', '完整篇章創作'],
           gradeDescs: {
             '中年級': '以生活經驗為核心，結合創意想像引導孩子寫出情感真摯的文章。強化感官摹寫訓練，教導孩子運用多元角度觀察世界，讓文字更具感染力。透過經典文學導讀與創意故事接龍，激發創作靈感，讓寫作不再枯燥，而是一場充滿成就感的自我表達旅程，提升文字駕馭力。',
-            '高年級': '針對升學需求，結合國學常識與進階修辭技巧，訓練批判性思考與邏輯論證能力。精選多元文本深度分析，掌握不同文體寫作策略，為國中會考與私中考試做好全方位準備。這不僅是技巧磨練，更是思維層次的提升，讓孩子面對複雜考題時能冷靜分析、精準表達。'
           },
           gradeObjectives: {
             '中年級': '培養觀察力與感受力，學習運用豐富的感官摹寫，將生活經驗轉化為動人的篇章。',
-            '高年級': '深化文本分析能力，掌握多元寫作技巧，並建立紮實的國學常識基礎，應對進階考試需求。'
           },
           gradeTargets: {
             '中年級': '希望提升文章豐富度，學習如何將生活觀察融入寫作的小三、小四學生。',
-            '高年級': '目標鎖定私中入學、資優鑑定或希望為國中會考打下深厚語文根基的小五、小六學生。'
           },
           gradeFeatures: {
             '中年級': ['生活觀察筆記', '感官摹寫訓練', '創意故事接龍', '情感書寫引導'],
-            '高年級': ['修辭技巧進階', '國學常識專題', '思辨性議題寫作', '私中/會考題型解析']
           },
           gradeRoadmaps: {
             '中年級': ['觀察感受期', '段落鋪陳期', '情感抒發期'],
-            '高年級': ['技巧深化期', '思辨表達期', '應試實戰期']
           },
           gradeHighlights: {
             '中年級': [
               '由生活經驗出發，寫出一篇段落分明、言辭恰當的文章。',
               '創造力與想像力'
             ],
+          }
+        },
+        { 
+          name: '國學閱寫班', 
+          desc: '【五～六年級】升學銜接：國學素養與長篇思辨\n對接私中入學考與未來國中需求，系統化奠定國學常識基礎。採用「引導式思辨寫作」，先從長文理解核心爭點、進行議題討論，再培養出具備廣度與深度的長篇論述力。', 
+          age: '小五 ~ 小六', 
+          time: '週六 上午', 
+          objectives: '深化文本分析能力，掌握多元寫作技巧，並建立紮實的國學常識基礎，應對進階考試需求。', 
+          target: '目標鎖定私中入學、資優鑑定或希望為國中會考打下深厚語文根基的小五、小六學生。', 
+          features: ['修辭技巧進階', '國學常識專題', '思辨性議題寫作', '私中/會考題型解析'], 
+          roadmap: ['技巧深化期', '思辨表達期', '應試實戰期'],
+          gradeDescs: {
+            '高年級': '針對升學需求，結合國學常識與進階修辭技巧，訓練批判性思考與邏輯論證能力。精選多元文本深度分析，掌握不同文體寫作策略，為國中會考與私中考試做好全方位準備。這不僅是技巧磨練，更是思維層次的提升，讓孩子面對複雜考題時能冷靜分析、精準表達。'
+          },
+          gradeObjectives: {
+            '高年級': '深化文本分析能力，掌握多元寫作技巧，並建立紮實的國學常識基礎，應對進階考試需求。'
+          },
+          gradeTargets: {
+            '高年級': '目標鎖定私中入學、資優鑑定或希望為國中會考打下深厚語文根基的小五、小六學生。'
+          },
+          gradeFeatures: {
+            '高年級': ['修辭技巧進階', '國學常識專題', '思辨性議題寫作', '私中/會考題型解析']
+          },
+          gradeRoadmaps: {
+            '高年級': ['技巧深化期', '思辨表達期', '應試實戰期']
+          },
+          gradeHighlights: {
             '高年級': [
               '藉由多元的寫作技巧，以及想法的練灶，為國中會考立下堅實的基礎。',
               '思辨力與表達力',
@@ -242,8 +272,16 @@ const CourseRoadmap: React.FC = () => {
       icon: <FlaskConical size={20} />,
       color: 'text-blue-500',
       classes: [
-        { name: '小小科學家', desc: '透過趣味的生活科學實驗激發孩子的好奇心，在動手做的過程中學習觀察與假設，培養實事求是的科學探究精神。', age: '小一 ~ 小三', time: '週六 下午', objectives: '透過趣味實驗引發科學興趣，培養觀察力與動手操作的能力。', target: '充滿好奇心，喜歡動手做的低年級學生。', features: ['安全有趣的科學實驗', '生活化科學原理介紹', '觀察記錄與分享', '培養科學探究精神'], roadmap: ['物理現象探索', '化學變化觀察', '生物與環境認識'] },
-        { name: '科展培訓班', desc: '引導學生進行專題研究與實驗設計，從選題到數據分析完整體驗科學方法，培養嚴謹的邏輯思維與解決問題的實戰能力。', age: '小四 ~ 小六', time: '週日 下午', objectives: '學習完整的科學研究方法，從選題、實驗設計到數據分析，完成專題研究。', target: '對科學研究有濃厚興趣，有意參加科展的高年級學生。', features: ['專題研究方法指導', '實驗設計與變因控制', '數據分析與圖表製作', '報告撰寫與口頭發表'], roadmap: ['研究主題確立', '實驗執行與記錄', '成果發表與競賽'] },
+        { 
+          name: '自然實驗班', 
+          desc: '專為具備高度邏輯潛力的學生設計，我們將複雜的理論拆解為「操作、觀察、理解」三部曲。資優班複試的勝負關鍵在於「實作測驗」，本課程不僅銜接國中物化、生科、地科知識，更透過實驗室級的培訓，培養孩子在未知情境下解決問題的能力，讓科學直覺成為孩子最強的直升競爭力。', 
+          age: '小五 ~ 小六', 
+          time: '隔週六 10:00~11:30', 
+          objectives: '銜接國中物化、生科、地科知識，透過實驗室級培訓，培養解決問題的能力與科學直覺。', 
+          target: '目標報考自然資優班 or 對科學實作有高度興趣、具邏輯潛力的學生。', 
+          features: ['操作、觀察、理解三部曲', '國中理化知識銜接', '資優班複試實作演練', '科學探究能力養成'], 
+          roadmap: ['理論拆解期', '實驗操作期', '實作應戰期'] 
+        },
       ]
     },
     {
@@ -254,10 +292,10 @@ const CourseRoadmap: React.FC = () => {
       icon: <Rocket size={20} />,
       color: 'text-purple-500',
       classes: [
-        { name: '超前數學班', desc: '精準鎖定資優鑑定需求，深化數學邏輯思維與難題解析技巧，透過歷屆試題實戰演練，協助孩子在升學挑戰中脫穎而出。', age: '小四 ~ 小六', time: '週三/五 晚上', objectives: '針對資優鑑定數學題型進行深度解析，強化邏輯推理與解題技巧。', target: '目標報考數理資優班 or 私中入學考的學生。', features: ['歷屆資優試題全解析', '邏輯推理與空間觀念', '難題破解策略教學', '模擬測驗實戰演練'], roadmap: ['基礎資優觀念', '進階題型挑戰', '考前密集衝刺'] },
-        { name: '自然實驗班', desc: '強調科學實作與探究實力，透過配合鑑定主題的實驗操作強化自然科核心觀念，讓孩子具備應對術科實作評量的堅實能力。', age: '小三 ~ 小六', time: '週六 上午', objectives: '透過實驗操作加深自然科觀念，培養科學實作能力與應試實力。', target: '目標報考自然資優班 or 對科學實驗有興趣的學生。', features: ['配合資優鑑定實驗主題', '強調實驗操作與原理', '科學探究能力訓練', '自然科筆試重點複習'], roadmap: ['基礎實驗操作', '進階探究實驗', '術科實作模擬'] },
-        { name: '公校黑馬營', desc: '專為公立數理資優班鑑定設計的全方位衝刺培訓，涵蓋性向測驗與數理實作強化，在關鍵時刻助孩子一臂之力，成就黑馬之姿。', age: '小六', time: '寒暑假/考前 上午', objectives: '針對公立資優班鑑定考試進行密集訓練，全面提升數理能力。', target: '目標考取公立國中數理資優班的小六學生。', features: ['性向測驗模擬練習', '數理實作能力強化', '口試面試技巧指導', '考前重點總整理'], roadmap: ['初試性向測驗準備', '複試實作評量準備', '全真模擬演練'] },
-        { name: '私中黑馬營', desc: '針對明星私中入學考進行高強度全科衝刺，結合命題趨勢分析與全真模擬演練，精準提升應試技巧，確保孩子順利金榜題名。', age: '小六', time: '週六/日 上午', objectives: '針對私中入學考試科目進行全方位複習與衝刺，確保金榜題名。', target: '目標考取延平、薇閣、東山等明星私中的小六學生. ', features: ['國英數三科重點複習', '私中命題趨勢分析', '高強度模擬考演練', '落點分析與志願選填'], roadmap: ['單元複習期', '綜合演練期', '考前衝刺期'] },
+        { name: '超前數學班', desc: '精準鎖定資優鑑定需求，深化數學邏輯思維與難題解析技巧，透過歷屆試題實戰演練，協助孩子在升學挑戰中脫穎而出。', age: '小五 ~ 小六', time: '週六 13:30~16:30', objectives: '針對資優鑑定數學題型進行深度解析，強化邏輯推理與解題技巧。', target: '目標報考數理資優班 or 私中入學考的學生。', features: ['歷屆資優試題全解析', '邏輯推理與空間觀念', '難題破解策略教學', '模擬測驗實戰演練'], roadmap: ['基礎資優觀念', '進階題型挑戰', '考前密集衝刺'] },
+        { name: '自然實驗班', desc: '強調科學實作與探究實力，透過配合鑑定主題的實驗操作強化自然科核心觀念，讓孩子具備應對術科實作評量的堅實能力。', age: '小五 ~ 小六', time: '隔週六 10:00~11:30', objectives: '透過實驗操作加深自然科觀念，培養科學實作能力與應試實力。', target: '目標報考自然資優班 or 對科學實驗有興趣的學生。', features: ['配合資優鑑定實驗主題', '強調實驗操作與原理', '科學探究能力訓練', '自然科筆試重點複習'], roadmap: ['基礎實驗操作', '進階探究實驗', '術科實作模擬'] },
+        { name: '公校黑馬營', desc: '專為公立數理資優班鑑定設計的全方位衝刺培訓，涵蓋性向測驗與數理實作強化，在關鍵時刻助孩子一臂之力，成就黑馬之姿。', age: '小六', time: '寒假 10 日', objectives: '針對公立資優班鑑定考試進行密集訓練，全面提升數理能力。', target: '目標考取公立國中數理資優班的小六學生。', features: ['性向測驗模擬練習', '數理實作能力強化', '口試面試技巧指導', '考前重點總整理'], roadmap: ['初試性向測驗準備', '複試實作評量準備', '全真模擬演練'] },
+        { name: '私中黑馬營', desc: '針對明星私中入學考進行高強度全科衝刺，結合命題趨勢分析與全真模擬演練，精準提升應試技巧，確保孩子順利金榜題名。', age: '小六', time: '寒假 10 日', objectives: '針對私中入學考試科目進行全方位複習與衝刺，確保金榜題名。', target: '目標考取延平、薇閣、東山等明星私中的小六學生. ', features: ['國英數三科重點複習', '私中命題趨勢分析', '高強度模擬考演練', '落點分析與志願選填'], roadmap: ['單元複習期', '綜合演練期', '考前衝刺期'] },
       ]
     },
     {
@@ -277,87 +315,12 @@ const CourseRoadmap: React.FC = () => {
     }
   ];
 
-  const TIMELINE_DATA = [
-    { 
-      grade: '低年級 (小一~小二)', 
-      subtitle: '興趣啟發期', 
-      goal: '建立學習習慣 × 激發好奇心', 
-      courses: [
-        '【數學】小育豪資優數學啟蒙', 
-        '【美語】ESL 生活會話 / 外師發音', 
-        '【科學】小小科學家動手做',
-        '【營隊】艾森樂主題探索營隊'
-      ] 
-    },
-    { 
-      grade: '中年級 (小三~小四)', 
-      subtitle: '能力養成期', 
-      goal: '奠定學科基礎 × 培養邏輯思考', 
-      courses: [
-        '【數學】資優數學邏輯養成', 
-        '【美語】英語閱讀與寫作起步', 
-        '【國語】閱讀素養與短文創作',
-        '【科學】科學原理探究 / 科展培訓'
-      ] 
-    },
-    { 
-      grade: '高年級 (小五)', 
-      subtitle: '升學準備期', 
-      goal: '深化學科實力 × 探索升學方向', 
-      courses: [
-        '【數學】高年級數學進階 / 資優特訓', 
-        '【美語】GEPT 英檢初級/中級培訓', 
-        '【國語】長篇閱讀理解 / 修辭寫作',
-        '【升學】私中入學 / 資優鑑定準備'
-      ] 
-    },
-    { 
-      grade: '升國中 (小六)', 
-      subtitle: '衝刺關鍵期', 
-      goal: '私中錄取 × 國中課程銜接', 
-      courses: [
-        '【升學】私中入學全科衝刺 (模考實戰)', 
-        '【升學】公校資優班鑑定專題輔導', 
-        '【銜接】國中數學 / 生物先修課程',
-        '【美語】國中英文文法銜接 / KET檢定'
-      ] 
-    },
-  ];
-
   const nextTab = () => {
     setActiveTab((prev) => (prev + 1) % COURSE_DATA.length);
   };
 
   const prevTab = () => {
     setActiveTab((prev) => (prev - 1 + COURSE_DATA.length) % COURSE_DATA.length);
-  };
-
-  const handleTogglePlan = () => {
-    if (!isPlanOpen) {
-      // Opening
-      setIsPlanOpen(true);
-      setTimeout(() => {
-        if (timelineRef.current) {
-          const y = timelineRef.current.getBoundingClientRect().top + window.scrollY - 100;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // Closing
-      handleCollapse();
-    }
-  };
-
-  const handleCollapse = () => {
-    // Scroll back to top of section first
-    if (sectionRef.current) {
-      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-    // Delay closing to allow scroll to complete visibly
-    setTimeout(() => {
-      setIsPlanOpen(false);
-    }, 500);
   };
 
   const openSchedule = (cls: any) => {
@@ -369,6 +332,8 @@ const CourseRoadmap: React.FC = () => {
       setSelectedGrade('一年級');
     } else if (cls.name === '閱讀寫作班') {
       setSelectedGrade('中年級');
+    } else if (cls.name === '國學閱寫班') {
+      setSelectedGrade('高年級');
     }
   };
 
@@ -468,7 +433,7 @@ const CourseRoadmap: React.FC = () => {
     }
 
     // Specific data for Reading and Writing
-    if (cls.name === '閱讀寫作班') {
+    if (cls.name === '閱讀寫作班' || cls.name === '國學閱寫班') {
       const writingData: Record<string, {topic: string, category: string}[]> = {
         '中年級': [
           { topic: '〈科學怪人——北極奇遇記〉', category: '閱讀理解＋詞彙' },
@@ -478,7 +443,7 @@ const CourseRoadmap: React.FC = () => {
           { topic: '作文：颱風過境', category: '長篇作文' },
           { topic: '〈科學怪人——你好！世界〉', category: '閱讀理解＋詞彙' },
           { topic: '情緒的書寫技巧（抒情）', category: '短文寫作' },
-          { topic: '〈科學怪人——可望而不可及的溫暖〉', category: '閱讀理解＋詞彙' },
+          { topic: '〈科學怪人——可望而不可及的溫涼〉', category: '閱讀理解＋詞彙' },
           { topic: '起承轉合的敘事結構', category: '寫作技巧' },
           { topic: '人性的反思', category: '閱讀思辨' },
           { topic: '作文：發考卷的時候', category: '長篇作文' },
@@ -503,7 +468,7 @@ const CourseRoadmap: React.FC = () => {
           { topic: '慎選朋友的勇氣', category: '讀報與思辨' },
         ]
       };
-      const units = writingData[selectedGrade] || [];
+      const units = writingData[selectedGrade] || (cls.name === '國學閱寫班' ? writingData['高年級'] : writingData['中年級']);
       return units.map((item, i) => ({
         unit: i + 1,
         courseName: item.topic,
@@ -566,25 +531,65 @@ const CourseRoadmap: React.FC = () => {
   const renderTimeWithCircles = (timeStr: string) => {
     if (!timeStr.includes('週')) return <span>{timeStr}</span>;
 
-    const parts = timeStr.split(' ');
-    const dayPart = parts[0];
-    const suffix = parts.slice(1).join(' ');
+    // Split by space to find multiple clauses like "週二/五 晚上" and "週六 上午"
+    const clauses = timeStr.split(' ');
+    
+    // Check if we have multiple "週" parts
+    const containsMultipleWeekly = clauses.filter(c => c.startsWith('週')).length > 1;
 
-    // Remove '週' and split by '/'
-    const days = dayPart.replace('週', '').split('/');
+    if (!containsMultipleWeekly) {
+       const parts = timeStr.split(' ');
+       const dayPart = parts[0];
+       const suffix = parts.slice(1).join(' ');
+       const days = dayPart.replace('週', '').split('/');
+       return (
+          <div className="flex items-center gap-2">
+            <span className="text-slate-500 font-bold text-sm">週</span>
+            <div className="flex gap-1.5 items-center">
+              {days.map((d, i) => (
+                <span key={i} className="min-w-[2.25rem] h-9 px-2 flex items-center justify-center rounded-full border-2 border-green-600 text-green-700 font-bold text-sm bg-green-50/50">
+                  {d}
+                </span>
+              ))}
+            </div>
+            {suffix && <span className="text-slate-900 font-medium ml-1">{suffix}</span>}
+          </div>
+       );
+    }
+
+    // New logic for complex strings like "週二/五 晚上 週六 上午"
+    const groups: {days: string[], suffix: string}[] = [];
+    let currentGroup: {days: string[], suffix: string} | null = null;
+    
+    clauses.forEach(token => {
+       if (token.startsWith('週')) {
+          if (currentGroup) groups.push(currentGroup);
+          currentGroup = {
+             days: token.replace('週', '').split('/'),
+             suffix: ''
+          };
+       } else if (currentGroup) {
+          currentGroup.suffix += (currentGroup.suffix ? ' ' : '') + token;
+       }
+    });
+    if (currentGroup) groups.push(currentGroup);
 
     return (
-      <div className="flex items-center gap-2">
-        <span className="text-slate-500 font-bold text-sm">週</span>
-        <div className="flex gap-1.5 items-center">
-          {days.map((d, i) => (
-            <span key={i} className="min-w-[2.25rem] h-9 px-2 flex items-center justify-center rounded-full border-2 border-green-600 text-green-700 font-bold text-sm bg-green-50/50">
-              {d}
-            </span>
+       <div className="flex flex-wrap items-center gap-y-2 gap-x-4">
+          {groups.map((group, gIdx) => (
+             <div key={gIdx} className="flex items-center gap-2">
+                <span className="text-slate-500 font-bold text-sm">週</span>
+                <div className="flex gap-1.5 items-center">
+                  {group.days.map((d, dIdx) => (
+                    <span key={dIdx} className="min-w-[2.25rem] h-9 px-2 flex items-center justify-center rounded-full border-2 border-green-600 text-green-700 font-bold text-sm bg-green-50/50">
+                      {d}
+                    </span>
+                  ))}
+                </div>
+                {group.suffix && <span className="text-slate-900 font-medium ml-1">{group.suffix}</span>}
+             </div>
           ))}
-        </div>
-        {suffix && <span className="text-slate-900 font-medium ml-1">{suffix}</span>}
-      </div>
+       </div>
     );
   };
 
@@ -661,26 +666,7 @@ const CourseRoadmap: React.FC = () => {
               </button>
             ))}
 
-            {/* Desktop Action Buttons */}
-            <button
-              onClick={() => setIsBrochureOpen(true)}
-              className="mt-4 flex items-center justify-center gap-2 px-6 py-4 rounded-xl transition-all bg-yellow-400 text-green-900 font-bold hover:bg-yellow-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >
-              <FileText size={20} />
-              <span className="text-lg">熱門課程</span>
-            </button>
-
-            <button
-              onClick={handleTogglePlan}
-              className={`mt-2 flex items-center justify-center gap-2 px-6 py-4 rounded-xl transition-all font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
-                isPlanOpen 
-                  ? 'bg-white text-green-800 ring-2 ring-white' 
-                  : 'bg-green-800 text-white hover:bg-green-700 border border-green-600'
-              }`}
-            >
-              <Map size={20} />
-              <span className="text-lg">完整規劃</span>
-            </button>
+            {/* Desktop Action Buttons removed */}
           </div>
 
           {/* Content Area */}
@@ -713,209 +699,86 @@ const CourseRoadmap: React.FC = () => {
                     key={idx} 
                     className="bg-white border border-green-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col h-full"
                   >
-                    <div className="flex-1">
+                    <div className="flex-1 flex flex-col">
                       <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-green-600 transition-colors">
                         {cls.name}
                       </h4>
   
-                      {/* Meta Tags: Age & Time & Schedule Button */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                        <div className="flex flex-wrap gap-2">
-                          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
-                             <Users size={14} className="text-green-600" /> 
-                             <span>{cls.age}</span>
-                          </div>
-                          {!cls.summerTime && !cls.semesterTime && (
-                            <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
-                               <Clock size={14} className="text-green-600" /> 
-                               <span>{cls.time}</span>
-                            </div>
-                          )}
+                      {/* Meta Tags: Age & Time */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
+                           <Users size={14} className="text-green-600" /> 
+                           <span>{cls.age}</span>
                         </div>
-                        {['math', 'chinese', 'gifted'].includes(COURSE_DATA[activeTab].id) && (
-                          <button 
-                            onClick={() => openSchedule(cls)}
-                            className="py-1.5 px-3 rounded-lg bg-green-50 text-green-700 text-xs font-bold hover:bg-green-100 transition-colors flex items-center gap-1.5 border border-green-200"
-                          >
-                             查看課表 <Calendar size={12} />
-                          </button>
+                        {!cls.summerTime && !cls.semesterTime && (
+                          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-green-50 px-2.5 py-1.5 rounded-md border border-green-100">
+                             <Clock size={14} className="text-green-600" /> 
+                             <span>{cls.time}</span>
+                          </div>
                         )}
                       </div>
   
-                      {/* Structured Time Info (Style like high school) */}
+                      {/* Structured Time Info - Elementary Style */}
                       {(cls.summerTime || cls.semesterTime) && (
-                        <div className="space-y-2 mb-4">
-                          <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">
-                            <Clock size={12} /> 上課時間
-                          </div>
-                          <div className="grid grid-cols-1 gap-2">
-                            {cls.summerTime && (
-                              <div className="flex items-center justify-between bg-emerald-50/50 px-3 py-2 rounded-lg border border-emerald-100/50 group/time hover:bg-emerald-50 transition-colors">
-                                <span className="text-[10px] font-bold text-emerald-600 bg-white px-1.5 py-0.5 rounded border border-emerald-100">
-                                  {cls.summerLabel || '暑期'}
-                                </span>
-                                <span className="text-xs font-bold text-slate-700">{cls.summerTime}</span>
-                              </div>
-                            )}
-                            {cls.semesterTime && (
-                              <div className="flex items-center justify-between bg-green-50/50 px-3 py-2 rounded-lg border border-green-100/50 group/time hover:bg-green-50 transition-colors">
-                                <span className="text-[10px] font-bold text-green-600 bg-white px-1.5 py-0.5 rounded border border-green-100">
-                                  {cls.semesterLabel || '學期'}
-                                </span>
-                                <span className="text-xs font-bold text-slate-700">{cls.semesterTime}</span>
-                              </div>
-                            )}
-                          </div>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {cls.summerTime && (
+                            <div className="inline-flex items-center bg-emerald-50 text-emerald-700 px-2.5 py-1.5 rounded-md border border-emerald-100 whitespace-nowrap text-xs font-bold shadow-sm">
+                               {cls.summerTime}
+                            </div>
+                          )}
+                          {cls.semesterTime && (
+                            <div className="inline-flex items-center bg-green-50 text-green-700 px-2.5 py-1.5 rounded-md border border-green-100 whitespace-nowrap text-xs font-bold shadow-sm">
+                               {cls.semesterTime}
+                            </div>
+                          )}
                         </div>
                       )}
 
-                      <p className="text-slate-600 text-sm leading-relaxed mb-2 whitespace-pre-wrap">
-                        {cls.desc}
-                      </p>
+                      <div className="text-slate-600 text-sm leading-relaxed mb-6 whitespace-pre-wrap">
+                        {cls.desc.split('\n').map((line, i) => {
+                          if (line.trim() === '') return null;
+                          if (line.startsWith('**') && line.includes('**')) {
+                            const parts = line.split('**');
+                            return (
+                              <div key={i} className="mb-1 last:mb-0">
+                                <span className="font-bold text-slate-800">{parts[1]}</span>
+                                <span>{parts[2]}</span>
+                              </div>
+                            );
+                          }
+                          return <div key={i} className="mb-1 last:mb-0">{line}</div>;
+                        }).filter(Boolean)}
+                      </div>
+
+                      <div className="mt-auto flex items-center gap-2">
+                        {['math', 'chinese', 'gifted'].includes(COURSE_DATA[activeTab].id) && !['公校黑馬營', '私中黑馬營'].includes(cls.name) && (
+                          <button 
+                            onClick={() => openSchedule(cls)}
+                            className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-green-50 text-green-700 rounded-lg text-sm font-bold hover:bg-green-100 transition-all border border-green-200 shadow-sm whitespace-nowrap"
+                          >
+                            <Calendar size={14} />
+                            查看課表
+                          </button>
+                        )}
+                        <a 
+                          href="https://line.me/R/ti/p/@420gcibw"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-green-600 text-white rounded-lg text-sm font-bold hover:bg-green-700 transition-all shadow-md hover:shadow-lg active:scale-[0.98] whitespace-nowrap"
+                        >
+                          <MessageCircle size={14} />
+                          了解課程
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ))
               )}
             </div>
 
-             {/* Mobile Action Buttons (Moved below cards) */}
-             <div className="grid grid-cols-2 gap-3 mt-6 md:hidden">
-               <button
-                onClick={() => setIsBrochureOpen(true)}
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all bg-yellow-400 text-green-900 font-bold hover:bg-yellow-300 shadow-sm"
-              >
-                <FileText size={18} />
-                <span>熱門課程</span>
-              </button>
-              <button
-                onClick={handleTogglePlan}
-                className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-all font-bold shadow-sm ${isPlanOpen ? 'bg-white text-green-700' : 'bg-green-700 text-white border border-green-500'}`}
-              >
-                <Map size={18} />
-                <span>完整規劃</span>
-              </button>
-             </div>
+             {/* Mobile Action Buttons removed */}
           </div>
         </div>
-
-        {/* Full Plan Timeline Section (Vertical Centered) */}
-        {isPlanOpen && (
-          <div ref={timelineRef} className="mt-16 py-12 px-4 md:px-12 bg-white rounded-3xl shadow-xl animate-in fade-in slide-in-from-top-4 duration-500">
-             <div className="flex flex-col items-center justify-center gap-2 mb-16 md:mb-20">
-               <div className="flex items-center gap-3">
-                 <Map className="text-green-600" size={32} />
-                 <h3 className="text-2xl md:text-3xl font-extrabold text-green-800 text-center">國小完整學習規劃路徑</h3>
-               </div>
-               <p className="text-slate-500 font-medium">六年初衷，快樂學習，自信成長</p>
-             </div>
-             
-             {/* Timeline Container: padding-bottom 12 (48px) to reserve space for rocket */}
-             <div className="relative max-w-5xl mx-auto pt-4 md:pt-10 pb-12">
-                {/* Central Line (Desktop) - Ends at 24px from bottom (bottom-6) which is center of rocket */}
-                <div className="absolute left-1/2 top-0 bottom-6 w-1 bg-green-100 -translate-x-1/2 rounded-full hidden md:block"></div>
-                
-                {/* Side Line (Mobile) - Ends at 24px from bottom (bottom-6) */}
-                <div className="absolute left-6 top-0 bottom-6 w-1 bg-green-100 -translate-x-1/2 rounded-full md:hidden"></div>
-
-                {/* NEW: Start Icon - Bouncing ChevronsDown */}
-                <div className="absolute top-0 left-6 md:left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                   <div className="bg-green-50 p-2 rounded-full border-2 border-green-100 animate-bounce shadow-sm">
-                      <ChevronsDown size={20} className="text-green-600" />
-                   </div>
-                </div>
-                
-                <div className="space-y-8 md:space-y-16 mb-8"> 
-                   {TIMELINE_DATA.map((step, idx) => (
-                      // Changed logic here: Start with Main Card on Left (idx % 2 !== 0 condition flipped)
-                      <div key={idx} className={`flex flex-col md:flex-row items-center md:justify-between relative ${idx % 2 !== 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                         
-                         {/* Side Content: Recommended Course Direction (Desktop Only) */}
-                         <div className={`hidden md:flex w-5/12 flex-col justify-center ${idx % 2 !== 0 ? 'items-end text-right' : 'items-start text-left'}`}>
-                            <div className={`flex items-center gap-2 text-amber-500 font-bold mb-2 ${idx % 2 !== 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                               {/* Icon order flips based on side */}
-                               <span className="font-bold text-lg">推薦選課方向</span>
-                               <CheckCircle2 size={20} />
-                            </div>
-                            <ul className="space-y-2">
-                                {step.courses.map(c => (
-                                    <li key={c} className={`text-slate-600 font-medium hover:text-green-600 transition-colors ${idx % 2 !== 0 ? 'mr-1' : 'ml-1'}`}>
-                                        {c}
-                                    </li>
-                                ))}
-                            </ul>
-                         </div>
-                         
-                         {/* Center Dot */}
-                         <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-yellow-400 border-4 border-green-50 z-10 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
-                             <div className="w-2 h-2 bg-green-800 rounded-full"></div>
-                         </div>
-
-                         {/* Main Content Card */}
-                         <div className={`w-[calc(100%-4rem)] ml-auto md:ml-0 md:w-5/12 group`}>
-                            <div className={`bg-green-50 rounded-2xl p-6 border border-green-100 hover:bg-green-100 transition-all hover:-translate-y-1 hover:shadow-lg relative flex flex-col ${idx % 2 !== 0 ? 'md:items-start md:text-left' : 'md:items-end md:text-right'}`}>
-                                
-                                {/* Step Label */}
-                                <span className="inline-block px-3 py-1 bg-white rounded-lg text-green-700 text-xs font-bold mb-3 border border-green-200">
-                                  Step {idx + 1}
-                                </span>
-                                
-                                <h4 className="text-xl md:text-2xl font-bold text-green-900 mb-1">{step.grade}</h4>
-                                <p className="text-green-700 font-bold text-sm md:text-base mb-4 tracking-wide">{step.subtitle}</p>
-                                
-                                <div className={`w-16 h-1.5 bg-yellow-400 rounded-full mb-5 opacity-90`}></div>
-                                
-                                <div className="w-full space-y-4">
-                                    {/* Goal Section */}
-                                    <div className={`text-sm md:text-base bg-white p-3 rounded-xl border border-green-200 ${idx % 2 !== 0 ? 'md:text-left' : 'md:text-right'}`}>
-                                        <div className={`flex items-center gap-2 text-amber-500 font-bold mb-1.5 ${idx % 2 !== 0 ? '' : 'md:flex-row-reverse'}`}>
-                                            <Target size={16} />
-                                            <span>學習目標</span>
-                                        </div>
-                                        <p className="text-slate-600 font-medium">{step.goal}</p>
-                                    </div>
-
-                                    {/* Mobile Only: Courses Section inside card */}
-                                    <div className="md:hidden pt-4 border-t border-green-200/50 mt-2">
-                                        <div className="flex items-center gap-2 text-amber-500 font-bold mb-2">
-                                            <CheckCircle2 size={16} />
-                                            <span>推薦選課方向</span>
-                                        </div>
-                                        <ul className="space-y-1.5">
-                                            {step.courses.map(c => (
-                                                <li key={c} className="flex items-center gap-2 text-slate-700 text-sm">
-                                                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full shrink-0"></span>
-                                                    {c}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                         </div>
-                      </div>
-                   ))}
-                </div>
-
-                {/* Bouncing Rocket Icon - Absolute position at bottom-0 */}
-                <div className="absolute bottom-0 left-6 md:left-1/2 -translate-x-1/2 z-10">
-                  <div className="w-12 h-12 bg-white border-4 border-green-100 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                      <Rocket className="text-green-600 w-6 h-6" />
-                  </div>
-                </div>
-             </div>
-
-             {/* Collapse Button - Moved OUTSIDE the timeline container */}
-             <div className="flex justify-center mt-4">
-                <button 
-                  onClick={handleCollapse}
-                  className="flex items-center gap-2 text-slate-500 hover:text-green-700 transition-colors py-3 px-6 rounded-full hover:bg-slate-100 text-sm font-medium"
-                >
-                  <ChevronUp size={16} />
-                  收起時間軸
-                </button>
-             </div>
-          </div>
-        )}
       </div>
       
       <BrochureViewer 
@@ -939,13 +802,15 @@ const CourseRoadmap: React.FC = () => {
         {selectedClass && modalMode === 'schedule' && (
           <div className="space-y-6">
              {/* Grade Selection */}
-             {(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+             {(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
                 <div className="flex flex-wrap gap-2 p-1 bg-slate-100 rounded-xl">
                    {(selectedClass.name === '進度數學班' 
                      ? ['三年級', '四年級', '五年級', '六年級'] 
                      : selectedClass.name === '閱讀素養班'
                      ? ['一年級', '二年級']
-                     : ['中年級', '高年級']
+                     : selectedClass.name === '閱讀寫作班'
+                     ? ['中年級']
+                     : ['高年級']
                    ).map((grade) => (
                       <button
                         key={grade}
@@ -965,20 +830,25 @@ const CourseRoadmap: React.FC = () => {
              {/* Info Header */}
              <div className="flex flex-wrap gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100 items-center">
                 <div className="flex items-center gap-2">
-                   {!(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+                   {!(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
                      <span className="text-slate-500 font-bold text-sm">上課對象：</span>
                    )}
-                   <span className={`text-slate-900 font-bold ${(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') ? 'text-xl' : 'text-medium'}`}>
+                   <span className={`text-slate-900 font-bold ${(selectedClass.name === '進度數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') ? 'text-xl' : 'text-medium'}`}>
                      {selectedClass.name === '進度數學班' ? `${selectedGrade}進度資優班` : 
                       selectedClass.name === '閱讀素養班' ? `${selectedGrade}閱讀素養班` : 
                       selectedClass.name === '閱讀寫作班' ? `${selectedGrade}閱讀寫作班` : 
+                      selectedClass.name === '國學閱寫班' ? `${selectedGrade}國學閱寫班` : 
                       selectedClass.age}
                    </span>
                 </div>
                 <div className="flex items-center gap-2">
                    <span className="text-slate-500 font-bold text-sm">上課時間：</span>
                    <div className="text-slate-900 font-medium">
-                     {renderTimeWithCircles(selectedClass.time)}
+                     {renderTimeWithCircles(
+                       selectedClass.name === '進度數學班' 
+                         ? (selectedGrade === '三年級' ? '週三 晚上' : (selectedGrade === '四年級' ? '週二五 晚上' : (selectedGrade === '六年級' ? '週二五 晚上 週六 上午' : selectedClass.time)))
+                         : selectedClass.time
+                     )}
                    </div>
                 </div>
              </div>
@@ -999,9 +869,9 @@ const CourseRoadmap: React.FC = () => {
                              <th className="px-4 py-3 whitespace-nowrap">單元</th>
                              <th className="px-4 py-3 whitespace-nowrap">
                                {(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班') ? '課程規劃' : 
-                                (selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') ? '主題' : '課程名稱'}
+                                (selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') ? '主題' : '課程名稱'}
                              </th>
-                             {(selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+                             {(selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
                                <th className="px-4 py-3 whitespace-nowrap">類別</th>
                              )}
                           </tr>
@@ -1009,7 +879,7 @@ const CourseRoadmap: React.FC = () => {
                        <tbody className="divide-y divide-slate-100">
                           {generateSchedule(selectedClass).map((row: any, idx) => (
                              <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                                {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+                                {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
                                   <>
                                     <td className="px-4 py-3 font-medium text-slate-900">{row.date}</td>
                                     <td className="px-4 py-3 text-slate-500">{row.day}</td>
@@ -1018,7 +888,7 @@ const CourseRoadmap: React.FC = () => {
                                 )}
                                 <td className="px-4 py-3 text-green-600 font-bold">{row.unit}</td>
                                 <td className="px-4 py-3 text-slate-700">{row.courseName}</td>
-                                {(selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+                                {(selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
                                   <td className="px-4 py-3 text-slate-500">{row.category}</td>
                                 )}
                              </tr>
@@ -1053,7 +923,9 @@ const CourseRoadmap: React.FC = () => {
                 <div className="flex flex-wrap gap-2 p-1 bg-slate-100 rounded-xl">
                    {(selectedClass.name === '閱讀素養班'
                      ? ['一年級', '二年級']
-                     : ['中年級', '高年級']
+                     : selectedClass.name === '閱讀寫作班'
+                     ? ['中年級']
+                     : ['高年級']
                    ).map((grade) => (
                       <button
                         key={grade}

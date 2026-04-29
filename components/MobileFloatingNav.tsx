@@ -14,6 +14,7 @@ interface MobileFloatingNavProps {
 interface QuickLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({ 
@@ -28,10 +29,10 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
     switch (currentPage) {
       case 'elementary':
         return [
-          { label: '教學成果', href: '#outstanding-results' },
           { label: '課程班別', href: '#course-roadmap' },
           { label: '學員金榜', href: '#honor-roll' },
           { label: '環境介紹', href: '#environment' },
+          { label: '課程花絮', href: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
         ];
       case 'junior':
         return [
@@ -103,7 +104,12 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
           <a
             key={index}
             href={link.href}
-            onClick={(e) => handleScrollTo(e, link.href)}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (link.external) return;
+              handleScrollTo(e, link.href);
+            }}
             className={`w-[54px] h-[54px] bg-white border rounded-2xl flex flex-col items-center justify-center text-center transition-transform active:scale-95 shadow-sm ${currentStyle}`}
           >
             <span className="text-[10px] font-bold leading-tight">
