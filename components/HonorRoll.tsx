@@ -141,7 +141,7 @@ const DATA = {
 const ELEMENTARY_IMAGE_DATA = {
   english: [
     "https://www.dropbox.com/scl/fi/cl3xljk255xq5z4l9kntm/02.jpg?rlkey=u4i7g1h49gbzwe2qq3pp7os5j&raw=1",
-    "https://www.dropbox.com/scl/fi/w64n2umjnaszggn1c6nbf/250625_02_114-_-_AH_-1500x1000-1.jpg?rlkey=3ketziobfbu2wapy6a3pcfanx&raw=1"
+    "https://www.dropbox.com/scl/fi/vxifjfuz8yr3n2axech5u/960238.jpg?rlkey=3osgkdxyz91o7futckl7nxbf2&raw=1"
   ],
   perfect: [
     "https://www.dropbox.com/scl/fi/02bku21xf9kcds9976086/250603_-PO-_-_AH_-A.jpg?rlkey=36lldwmj1t91wp5izhm806m96&raw=1",

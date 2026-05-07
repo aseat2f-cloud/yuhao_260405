@@ -139,7 +139,7 @@ const CourseRoadmap: React.FC = () => {
           age: '小六', 
           time: '週六',
           objectives: '針對高年級課程進行加深加廣，訓練複雜問題的分析能力，為國中數理資優班做準備。',
-          target: '校內成績優異，目標鎖定私中入學或資優鑑定的高年級學生。',
+          target: '校內成績優異，目標鎖定私中入學或資優鑑定的高年級學生. ',
           features: [
             '前進私中及公校資優班 1-2 個單元',
             '資優試題與奧數題型專題解析',
@@ -162,11 +162,11 @@ const CourseRoadmap: React.FC = () => {
           name: '閱讀素養班', 
           desc: '【ㄧ～二年級】語感啟蒙：從「讀懂」到「會寫」\n透過敘述理解，精確拆解句構邏輯，解決孩子「字都認識卻讀不懂」的恐懼，讓孩子能將生活觀察轉化為生動、通順的長句。', 
           age: '小一~小二', 
-          time: '週二或週四 下午', 
+          time: '週一或週四 下午', 
           objectives: '提升長篇文章閱讀速度與理解力，培養擷取資訊、統統分析與批判思考的能力。', 
           target: '閱讀速度慢、抓不到重點 or 希望能深入解讀文本的學生。', 
           features: ['多元文本閱讀材料', '閱讀理解策略教學', 'PISA 題型實戰演練', '議題探討與思辨'], 
-          roadmap: ['擷取訊息能力', '統整解釋能力', '省思評鑑能力'],
+          roadmap: ['擷取訊息能力', '統整解釋能力', '省思評議能力'],
           gradeDescs: {
             '一年級': '專為小一新生設計，從基礎詞彙補充引導孩子建立文字敏感度。透過趣味繪本與看圖說故事訓練，將圖像資訊轉化為文字表達，並在互動中培養口語自信。這是開啟閱讀興趣、建立良好習慣的關鍵啟蒙期，讓孩子在輕鬆氛圍中奠定紮實語文基礎。',
             '二年級': '引進心智圖法作為思考工具，幫助孩子學習邏輯分類與內容延伸。重點在於強化文章結構概念，引導學生掌握段落串聯技巧，將生活細節轉化為結構完整的短文。透過系統化引導與優美詞句積累，孩子將不再畏懼下筆，自信運用文字記錄生活，展現邏輯思維。'
@@ -256,9 +256,9 @@ const CourseRoadmap: React.FC = () => {
           },
           gradeHighlights: {
             '高年級': [
-              '藉由多元的寫作技巧，以及想法的練灶，為國中會考立下堅實的基礎。',
-              '思辨力與表達力',
-              '［私中預跑〕：私中考試一般來說會延伸至國中一年級的範圍，包括：基本修辭判讀、形音義（同音異字、一字多音、一字多義）、基本國學常識（天干地支、慣用語、季節風向、成語等）、閱讀素養（白話長文、唐詩、宋詞、元曲、世說新語、古文觀止等）。'
+              '升學銜接：國學素養與長篇思辨',
+              '對接私中入學考與未來國中需求',
+              '奠定國學常識基礎'
             ]
           }
         },
@@ -267,18 +267,18 @@ const CourseRoadmap: React.FC = () => {
     {
       id: 'science',
       label: '小小科學實驗家',
-      shortLabel: '科',
-      description: '科學不只是課本上的知識，更是探索世界的工具。小小科學實驗家課程強調「動手做 (Hands-on)」的科學精神，帶領孩子走出書本，親手操作有趣的科學實驗。在觀察、假設、實驗、驗證的過程中，培養實事求是的科學態度與邏輯思維。我們鼓勵孩子勇於提問、主動探究，發現日常生活中的科學奧秘，激發對大自然的好奇心與創造力。',
+      shortLabel: '自',
+      description: '好奇心是孩子探索世界的原動力。我們的自然實驗課從生活現象出發，引導孩子親手操作實驗、觀察現象並歸納實證。課程涵蓋物理、化學、生物與地球科學等跨領域主題，不只學習科學知識，更著重於科學探究能力（Inquiry）的培養，讓孩子學會發現問題、設計實驗並解決問題，在動手做的過程中，建立嚴謹的科學態度與邏輯思維。',
       icon: <FlaskConical size={20} />,
       color: 'text-blue-500',
       classes: [
         { 
-          name: '自然實驗班', 
-          desc: '專為具備高度邏輯潛力的學生設計，我們將複雜的理論拆解為「操作、觀察、理解」三部曲。資優班複試的勝負關鍵在於「實作測驗」，本課程不僅銜接國中物化、生科、地科知識，更透過實驗室級的培訓，培養孩子在未知情境下解決問題的能力，讓科學直覺成為孩子最強的直升競爭力。', 
-          age: '小五 ~ 小六', 
-          time: '隔週六 10:00~11:30', 
-          objectives: '銜接國中物化、生科、地科知識，透過實驗室級培訓，培養解決問題的能力與科學直覺。', 
-          target: '目標報考自然資優班 or 對科學實作有高度興趣、具邏輯潛力的學生。', 
+          name: '小小科學實驗家', 
+          desc: '透過有趣且具啟發性的實驗設計，引領孩子進入科學殿堂。從簡單的現象觀察到複雜的變因控制，讓孩子在實作中理解科學原理、掌握實驗技巧。不僅能應對學校自然科課程，更能在大賽與鑑定中展現對科學的深刻理解與熱情。', 
+          age: '小三 ~ 小六', 
+          time: '週六', 
+          objectives: '培養科學探究精神，學習嚴謹的實驗流程與觀察記錄，建立跨領域的自然科學觀念。', 
+          target: '對自然探究與實驗操作有高度興趣、具邏輯潛力的學生。', 
           features: ['操作、觀察、理解三部曲', '國中理化知識銜接', '資優班複試實作演練', '科學探究能力養成'], 
           roadmap: ['理論拆解期', '實驗操作期', '實作應戰期'] 
         },
@@ -307,7 +307,7 @@ const CourseRoadmap: React.FC = () => {
       color: 'text-pink-500',
       displayType: 'images',
       images: [
-        "https://www.dropbox.com/scl/fi/p44tfmhi1jlzh1boavv4t/1118_-PO-_R2_A.jpg?rlkey=n5cul8ota63vn05mpa9lhulcl&raw=1",
+        "https://www.dropbox.com/scl/fi/wfrcavl2leoijd7k4oitk/.png?rlkey=s07y1qn88ala6fpcmzda3rzz1&raw=1",
         "https://www.dropbox.com/scl/fi/pnm2c2o3cxd5c7q7i5rn5/1129_-PO-_A.jpg?rlkey=a8bt2jiqtuc59ncpu7eh8fgay&raw=1",
         "https://www.dropbox.com/scl/fi/1zrjbf0ifu841tp6fs91j/1109_-PO-_JZ_01-01.jpg?rlkey=3gpwtreuj30l49r3g8g3tqdug&raw=1"
       ],
@@ -476,6 +476,29 @@ const CourseRoadmap: React.FC = () => {
       }));
     }
 
+    // Specific data for Natural Science Experiment
+    if (cls.name === '自然實驗班') {
+      const themes = [
+        '實驗安全報你知(實驗課須知)',
+        '聲聲不息(波的觀察＋水杯樂器＋共振)',
+        '老鼠老虎傻傻分不清楚(生物分類)',
+        '省時省力好方便(簡單機械)',
+        '才不想跟你混一起(物質的分離)',
+        '我們的地球(地球科學)',
+        '集氣大師(氣體收集)',
+        '力拔山兮氣蓋世(摩擦力的檢測)',
+        '離子游啊游(電解質與酸鹼檢測)',
+        '太震了吧，好颱喔(台灣常見災害)',
+        '在小的東西都看的見！(顯微鏡操作＋觀察染色細胞)',
+        '元來素這樣',
+        '生物的奧秘'
+      ];
+      return themes.map((name, i) => ({
+        unit: `主題${['一','二','三','四','五','六','七','八','九','十','十一','十二','十三'][i]}`,
+        courseName: name
+      }));
+    }
+
     const daysMap: Record<string, string> = { '週一': 'Mon', '週二': 'Tue', '週三': 'Wed', '週四': 'Thu', '週五': 'Fri', '週六': 'Sat', '週日': 'Sun' };
     let primaryDay = '週六';
     
@@ -538,7 +561,9 @@ const CourseRoadmap: React.FC = () => {
     const containsMultipleWeekly = clauses.filter(c => c.startsWith('週')).length > 1;
 
     if (!containsMultipleWeekly) {
-       const parts = timeStr.split(' ');
+       // Support "週二五 和 六" or "週二五/六"
+       const normalizedStr = timeStr.replace(' 和 ', '/');
+       const parts = normalizedStr.split(' ');
        const dayPart = parts[0];
        const suffix = parts.slice(1).join(' ');
        const days = dayPart.replace('週', '').split('/');
@@ -547,9 +572,14 @@ const CourseRoadmap: React.FC = () => {
             <span className="text-slate-500 font-bold text-sm">週</span>
             <div className="flex gap-1.5 items-center">
               {days.map((d, i) => (
-                <span key={i} className="min-w-[2.25rem] h-9 px-2 flex items-center justify-center rounded-full border-2 border-green-600 text-green-700 font-bold text-sm bg-green-50/50">
-                  {d}
-                </span>
+                <React.Fragment key={i}>
+                  <span className="min-w-[2.25rem] h-9 px-2 flex items-center justify-center rounded-full border-2 border-green-600 text-green-700 font-bold text-sm bg-green-50/50">
+                    {d}
+                  </span>
+                  {i < days.length - 1 && timeStr.includes(' 和 ') && (
+                    <span className="text-slate-900 font-bold mx-0.5">和</span>
+                  )}
+                </React.Fragment>
               ))}
             </div>
             {suffix && <span className="text-slate-900 font-medium ml-1">{suffix}</span>}
@@ -846,7 +876,7 @@ const CourseRoadmap: React.FC = () => {
                    <div className="text-slate-900 font-medium">
                      {renderTimeWithCircles(
                        selectedClass.name === '進度數學班' 
-                         ? (selectedGrade === '三年級' ? '週三 晚上' : (selectedGrade === '四年級' ? '週二五 晚上' : (selectedGrade === '六年級' ? '週二五 晚上 週六 上午' : selectedClass.time)))
+                         ? (selectedGrade === '三年級' ? '週三 晚上' : (selectedGrade === '四年級' ? '週二五 晚上' : (selectedGrade === '五年級' || selectedGrade === '六年級' ? '週二五 和 六' : selectedClass.time)))
                          : selectedClass.time
                      )}
                    </div>
@@ -859,7 +889,7 @@ const CourseRoadmap: React.FC = () => {
                     <table className="w-full text-sm text-left min-w-[600px]">
                        <thead className="bg-[#4CAF50] text-white font-bold uppercase">
                           <tr>
-                             {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班') && (
+                             {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班' || selectedClass.name === '自然實驗班' || selectedClass.name === '小小科學實驗家') && (
                                <>
                                  <th className="px-4 py-3 whitespace-nowrap">日期</th>
                                  <th className="px-4 py-3 whitespace-nowrap">星期</th>
@@ -879,7 +909,7 @@ const CourseRoadmap: React.FC = () => {
                        <tbody className="divide-y divide-slate-100">
                           {generateSchedule(selectedClass).map((row: any, idx) => (
                              <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                                {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班') && (
+                                {!(selectedClass.name === '進度數學班' || selectedClass.name === '種子超前數學班' || selectedClass.name === '超前數學班' || selectedClass.name === '閱讀素養班' || selectedClass.name === '閱讀寫作班' || selectedClass.name === '國學閱寫班' || selectedClass.name === '自然實驗班' || selectedClass.name === '小小科學實驗家') && (
                                   <>
                                     <td className="px-4 py-3 font-medium text-slate-900">{row.date}</td>
                                     <td className="px-4 py-3 text-slate-500">{row.day}</td>
