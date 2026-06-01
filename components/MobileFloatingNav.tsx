@@ -29,24 +29,24 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
     switch (currentPage) {
       case 'elementary':
         return [
-          { label: '課程班別', href: '#course-roadmap' },
-          { label: '學員金榜', href: '#honor-roll' },
-          { label: '環境介紹', href: '#environment' },
+          { label: '課程班別', href: '#elementary-course-roadmap' },
+          { label: '學員金榜', href: '#elementary-honor-roll' },
+          { label: '環境介紹', href: '#elementary-environment' },
           { label: '課程花絮', href: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
         ];
       case 'junior':
         return [
-          { label: '學員心得', href: '#student-testimonials' },
-          { label: '家長見證', href: '#parent-testimonials' },
-          { label: '課程班別', href: '#course-roadmap' },
-          { label: '學員金榜', href: '#honor-roll' },
+          { label: '學員心得', href: '#junior-student-testimonials' },
+          { label: '家長見證', href: '#junior-parent-testimonials' },
+          { label: '課程班別', href: '#junior-course-roadmap' },
+          { label: '學員金榜', href: '#junior-honor-roll' },
         ];
       case 'senior':
         return [
-          { label: '課程班別', href: '#course-roadmap' },
-          { label: '學員金榜', href: '#honor-roll' },
-          { label: '環境介紹', href: '#environment' },
-          { label: '育豪優勢', href: '#advantages' },
+          { label: '課程班別', href: '#senior-course-roadmap' },
+          { label: '學員金榜', href: '#senior-honor-roll' },
+          { label: '環境介紹', href: '#senior-environment' },
+          { label: '育豪優勢', href: '#senior-advantages' },
         ];
       case 'bulletin':
         // No quick links for bulletin, only action buttons on the right
@@ -54,9 +54,9 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
       case 'home':
       default:
         return [
-          { label: '分齡學程', href: '#program-planning' },
-          { label: '學員金榜', href: '#honor-roll' },
-          { label: '家長見證', href: '#testimonials' },
+          { label: '分齡學程', href: '#home-program-planning' },
+          { label: '學員金榜', href: '#home-honor-roll' },
+          { label: '家長見證', href: '#home-testimonials' },
           { label: '學生專區', href: '#student-zone' },
         ];
     }
@@ -69,11 +69,15 @@ const MobileFloatingNav: React.FC<MobileFloatingNavProps> = ({
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      // Manual scroll offset calculation (100px for header)
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Check position a few times as images load and things shift
+      [300, 800, 1500].forEach(delay => {
+        setTimeout(() => {
+          const checkEl = document.getElementById(targetId);
+          if (checkEl) checkEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, delay);
+      });
     }
   };
 

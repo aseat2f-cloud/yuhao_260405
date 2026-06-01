@@ -16,19 +16,22 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news, onNavigate }) => {
 
   // Auto-play for the main carousel
   useEffect(() => {
+    // Reset timer whenever currentIndex changes or modal opens/closes
     const timer = setInterval(() => {
-      if (!isModalOpen) { // Pause auto-play when modal is open
+      if (!isModalOpen && news.length > 1) { 
         setCurrentIndex((prev) => (prev + 1) % news.length);
       }
     }, 5000);
     return () => clearInterval(timer);
-  }, [news.length, isModalOpen]);
+  }, [news.length, isModalOpen, currentIndex]);
 
   const nextSlide = () => {
+    if (news.length <= 1) return;
     setCurrentIndex((prev) => (prev + 1) % news.length);
   };
 
   const prevSlide = () => {
+    if (news.length <= 1) return;
     setCurrentIndex((prev) => (prev - 1 + news.length) % news.length);
   };
 
@@ -58,7 +61,6 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news, onNavigate }) => {
     }
   };
 
-  const currentItem = news[currentIndex];
   const modalItem = selectedNewsIndex !== null ? news[selectedNewsIndex] : null;
 
   return (
@@ -67,13 +69,20 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news, onNavigate }) => {
       <div className="relative w-full max-w-[950px] mx-auto lg:ml-auto lg:mr-0 rounded-3xl overflow-hidden shadow-lg bg-white group">
         
         {/* Main Image */}
-        <div className="aspect-[4/5] relative overflow-hidden bg-white">
-          <img 
-            src={currentItem.image} 
-            alt={currentItem.title} 
-            className="w-full h-auto absolute top-0 left-0 transition-transform duration-700 group-hover:scale-105"
-            referrerPolicy="no-referrer"
-          />
+        <div className="aspect-[4/5] relative bg-white bg-slate-100 flex items-center justify-center">
+          {news.map((item, idx) => (
+            <img 
+              key={item.id}
+              src={item.image} 
+              alt={item.title} 
+              className={`w-full h-auto absolute top-0 left-0 transition-opacity duration-300 ease-in ${
+                idx === currentIndex 
+                  ? 'opacity-100 z-10' 
+                  : 'opacity-0 z-0'
+              } group-hover:scale-105 pointer-events-none`}
+              referrerPolicy="no-referrer"
+            />
+          ))}
           
           {/* Controls - Bottom Right */}
           <div className="absolute bottom-6 right-6 z-20">
@@ -85,15 +94,31 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news, onNavigate }) => {
              </button>
           </div>
 
-          {/* Nav Arrows */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-            <button onClick={prevSlide} className="p-2 bg-black/20 text-white rounded-full pointer-events-auto hover:bg-black/40 backdrop-blur-sm">
-              <ChevronLeft size={20} />
-            </button>
-            <button onClick={nextSlide} className="p-2 bg-black/20 text-white rounded-full pointer-events-auto hover:bg-black/40 backdrop-blur-sm">
-              <ChevronRight size={20} />
-            </button>
-          </div>
+          {/* Nav Arrows - Positioned individually with higher z-index and explicit pointer events */}
+          <button 
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              prevSlide();
+            }} 
+            className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-[100] w-10 h-10 sm:w-12 sm:h-12 bg-slate-900/60 text-white rounded-full hover:bg-slate-900/90 backdrop-blur-md active:scale-90 transition-all shadow-xl flex items-center justify-center cursor-pointer pointer-events-auto"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button 
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              nextSlide();
+            }} 
+            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-[100] w-10 h-10 sm:w-12 sm:h-12 bg-slate-900/60 text-white rounded-full hover:bg-slate-900/90 backdrop-blur-md active:scale-90 transition-all shadow-xl flex items-center justify-center cursor-pointer pointer-events-auto"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
 

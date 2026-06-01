@@ -18,10 +18,10 @@ interface JuniorPageProps {
 const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
   
   const JUNIOR_QUICK_LINKS = [
-    { label: '課程規劃', href: '#course-roadmap' },
-    { label: '學員金榜', href: '#honor-roll' },
-    { label: '學員心得', href: '#student-testimonials' },
-    { label: '家長見證', href: '#parent-testimonials' },
+    { label: '課程規劃', href: '#junior-course-roadmap' },
+    { label: '學員金榜', href: '#junior-honor-roll' },
+    { label: '學員心得', href: '#junior-student-testimonials' },
+    { label: '家長見證', href: '#junior-parent-testimonials' },
   ];
 
   return (
@@ -88,27 +88,27 @@ const JuniorPage: React.FC<JuniorPageProps> = ({ heroNews, onNavigate }) => {
       <JuniorBanner />
 
       {/* 2. Teaching Results (教學成果) */}
-      <div id="outstanding-results" className="scroll-mt-32">
+      <div id="junior-outstanding-results" className="scroll-mt-32">
         <OutstandingResults theme="blue" limit={4} />
       </div>
 
       {/* 3. Course Roadmap (課程規劃) */}
-      <div id="course-roadmap" className="scroll-mt-32">
+      <div id="junior-course-roadmap" className="scroll-mt-32">
         <JuniorCourseRoadmap />
       </div>
 
       {/* 4. Honor Roll (學員金榜) */}
-      <div id="honor-roll" className="scroll-mt-32">
+      <div id="junior-honor-roll" className="scroll-mt-32">
         <HonorRoll variant="junior" theme="blue" />
       </div>
 
       {/* 5. Student Testimonials (學員心得) */}
-      <div id="student-testimonials" className="scroll-mt-32">
+      <div id="junior-student-testimonials" className="scroll-mt-32">
         <StudentTestimonials theme="blue" showClass={false} />
       </div>
 
       {/* 6. Parent Testimonials (家長見證) */}
-      <div id="parent-testimonials" className="scroll-mt-32">
+      <div id="junior-parent-testimonials" className="scroll-mt-32">
         <JuniorParentTestimonials theme="blue" />
       </div>
 

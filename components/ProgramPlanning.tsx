@@ -465,28 +465,26 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
     // Reset scroll to top instantly
     window.scrollTo(0, 0);
 
-    let attempts = 0;
-    const maxAttempts = 60; 
-    
-    const pollElement = () => {
+    const doScroll = () => {
       const element = document.getElementById(sectionId);
       if (element) {
-        // Use native scrollIntoView which respects scroll-margin-top
-        element.scrollIntoView({ behavior: 'smooth' });
-        
-        // Fallback: Page layout might shift as images load
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Check position a few times as images load and things shift
+        [300, 800, 1500].forEach(delay => {
+          setTimeout(() => {
+            const checkEl = document.getElementById(sectionId);
+            if (checkEl) checkEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, delay);
+        });
+      } else {
         setTimeout(() => {
-          const el = document.getElementById(sectionId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 800);
-      } else if (attempts < maxAttempts) {
-        attempts++;
-        setTimeout(pollElement, 50);
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
       }
     };
     
-    // Start polling after a short delay
-    setTimeout(pollElement, 100);
+    // Execute scroll with a short delay to ensure React has started rendering the new page
+    setTimeout(doScroll, 100);
   };
 
   const currentProgram = PROGRAMS_DATA[activeTab];

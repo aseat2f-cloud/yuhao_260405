@@ -17,9 +17,9 @@ interface ElementaryPageProps {
 const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate }) => {
   
   const ELEMENTARY_QUICK_LINKS = [
-    { label: '課程班別', href: '#course-roadmap' },
-    { label: '學員金榜', href: '#honor-roll' },
-    { label: '環境介紹', href: '#environment' },
+    { label: '課程班別', href: '#elementary-course-roadmap' },
+    { label: '學員金榜', href: '#elementary-honor-roll' },
+    { label: '環境介紹', href: '#elementary-environment' },
     { label: '課程花絮', href: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
   ];
 
@@ -86,31 +86,30 @@ const ElementaryPage: React.FC<ElementaryPageProps> = ({ heroNews, onNavigate })
       {/* New Banner Section */}
       <ElementaryBanner />
 
-      {/* 1. 亮眼成績 (ID: outstanding-results) */}
-      <div id="outstanding-results" className="scroll-mt-32">
+      {/* 1. 亮眼成績 (ID: elementary-outstanding-results) */}
+      <div id="elementary-outstanding-results" className="scroll-mt-32">
         <OutstandingResults theme="green" />
       </div>
 
-      {/* 3. 課程規劃 (ID: course-roadmap) - Has internal green theme */}
-      <div id="course-roadmap" className="scroll-mt-32">
+      {/* 3. 課程規劃 (ID: elementary-course-roadmap) - Has internal green theme */}
+      <div id="elementary-course-roadmap" className="scroll-mt-32">
         <CourseRoadmap />
       </div>
 
       {/* 4. 榮耀金榜 (Elementary Specific) */}
-      <div id="honor-roll" className="scroll-mt-32">
+      <div id="elementary-honor-roll" className="scroll-mt-32">
         <HonorRoll variant="elementary" theme="green" />
       </div>
 
-      {/* 5. 環境介紹 (ID: environment) */}
-      <div id="environment" className="scroll-mt-32">
+      {/* 5. 環境介紹 (ID: elementary-environment) */}
+      <div id="elementary-environment" className="scroll-mt-32">
         <EnvironmentIntro 
           theme="green" 
           images={[
-            "https://www.dropbox.com/scl/fi/j45gub1h2qkkn4aj59hya/70.jpg?rlkey=54pjut604aaqnfwsile0bxvm7&raw=1",
-            "https://www.dropbox.com/scl/fi/k2nq2hkjqx9hjfgxd7hhd/71.jpg?rlkey=hdwxq06xkgeise7ssvcbg4f5o&raw=1",
-            "https://www.dropbox.com/scl/fi/637sfvc6sb90n1w55clp9/72.jpg?rlkey=xh8fsrjehlxuuheknauzlku62&raw=1",
-            "https://www.dropbox.com/scl/fi/m105s5r7mae72g37s04t3/06.jpg?rlkey=ixphixrunndduwk248052w2f1&raw=1",
-            "https://www.dropbox.com/scl/fi/cupp9e6blxrl0eucclriy/04.jpg?rlkey=q8jt2hyizn99n8ps5g1crzmzt&raw=1"
+            "https://www.dropbox.com/scl/fi/07lz5m6yl5mdt50zz2px7/1_0.png?rlkey=mq5r9bx5a4mostdicxhcng9ll&raw=1",
+            "https://www.dropbox.com/scl/fi/16oj5ajwit6uo3aboqwk7/4_0.png?rlkey=mgiyaqkblc293351w3uh2wmsv&raw=1",
+            "https://www.dropbox.com/scl/fi/5ps1wfydvl1xj577z9q1r/2025-03-05-3_0.png?rlkey=xdmo5aalhkpl88b9210m3yc4k&raw=1",
+            "https://www.dropbox.com/scl/fi/8f1zmty0h8g9cfb1fkmnw/2_0.png?rlkey=l6pl127coi2bks3v7bbiit13b&raw=1"
           ]}
         />
       </div>

@@ -308,8 +308,7 @@ const CourseRoadmap: React.FC = () => {
       displayType: 'images',
       images: [
         "https://www.dropbox.com/scl/fi/wfrcavl2leoijd7k4oitk/.png?rlkey=s07y1qn88ala6fpcmzda3rzz1&raw=1",
-        "https://www.dropbox.com/scl/fi/pnm2c2o3cxd5c7q7i5rn5/1129_-PO-_A.jpg?rlkey=a8bt2jiqtuc59ncpu7eh8fgay&raw=1",
-        "https://www.dropbox.com/scl/fi/1zrjbf0ifu841tp6fs91j/1109_-PO-_JZ_01-01.jpg?rlkey=3gpwtreuj30l49r3g8g3tqdug&raw=1"
+        "https://www.dropbox.com/scl/fi/29g4l0xv3416h3v772lop/20260512_-_.jpg?rlkey=qsrinyo5nztsnh3j0b6megsue&raw=1"
       ],
       classes: []
     }

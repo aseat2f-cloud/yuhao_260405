@@ -46,9 +46,9 @@ const Hero: React.FC<HeroProps> = ({
   
   // Default Home Page Links
   const DEFAULT_LINKS: QuickLink[] = [
-    { label: '分齡學程', href: '#program-planning' },
-    { label: '學員金榜', href: '#honor-roll' },
-    { label: '家長見證', href: '#testimonials' },
+    { label: '分齡學程', href: '#home-program-planning' },
+    { label: '學員金榜', href: '#home-honor-roll' },
+    { label: '家長見證', href: '#home-testimonials' },
     { label: '學生專區', href: '#student-zone' },
   ];
 
@@ -59,7 +59,16 @@ const Hero: React.FC<HeroProps> = ({
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
+      // Use block: 'start' and rely on CSS scroll-margin-top
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Check position a few times as images load and things shift
+      [300, 800, 1500].forEach(delay => {
+        setTimeout(() => {
+          const checkEl = document.getElementById(targetId);
+          if (checkEl) checkEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, delay);
+      });
     }
   };
 
@@ -203,7 +212,7 @@ const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* Right Side: News Carousel */}
-          <div className="flex-1 w-full flex items-center justify-center lg:justify-end h-auto lg:h-full">
+          <div className="flex-1 w-full flex items-center justify-center lg:justify-end h-auto lg:h-full relative z-30">
             <NewsCarousel news={newsItems} onNavigate={onNavigate} />
           </div>
 

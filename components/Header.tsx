@@ -8,9 +8,9 @@ const NAV_ITEMS: NavItem[] = [
     label: '國小築基', 
     page: 'elementary',
     dropdown: [
-      { label: '課程班別', id: 'course-roadmap' },
-      { label: '學員金榜', id: 'honor-roll' },
-      { label: '環境介紹', id: 'environment' },
+      { label: '課程班別', id: 'elementary-course-roadmap' },
+      { label: '學員金榜', id: 'elementary-honor-roll' },
+      { label: '環境介紹', id: 'elementary-environment' },
       { label: '課程花絮', url: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
     ]
   },
@@ -18,20 +18,20 @@ const NAV_ITEMS: NavItem[] = [
     label: '國中突破', 
     page: 'junior',
     dropdown: [
-      { label: '課程規劃', id: 'course-roadmap' },
-      { label: '學員金榜', id: 'honor-roll' },
-      { label: '學員心得', id: 'student-testimonials' },
-      { label: '家長見證', id: 'parent-testimonials' },
+      { label: '課程規劃', id: 'junior-course-roadmap' },
+      { label: '學員金榜', id: 'junior-honor-roll' },
+      { label: '學員心得', id: 'junior-student-testimonials' },
+      { label: '家長見證', id: 'junior-parent-testimonials' },
     ]
   },
   { 
     label: '高中登峰', 
     page: 'senior',
     dropdown: [
-      { label: '課程班別', id: 'course-roadmap' },
-      { label: '學員金榜', id: 'honor-roll' },
-      { label: '環境介紹', id: 'environment' },
-      { label: '育豪優勢', id: 'advantages' },
+      { label: '課程班別', id: 'senior-course-roadmap' },
+      { label: '學員金榜', id: 'senior-honor-roll' },
+      { label: '環境介紹', id: 'senior-environment' },
+      { label: '育豪優勢', id: 'senior-advantages' },
     ]
   },
   { label: '育豪快訊', page: 'bulletin' },
@@ -73,32 +73,31 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
         window.scrollTo(0, 0);
       }
 
-      let attempts = 0;
-      const maxAttempts = 60; // 3 seconds max polling
-      
-      const pollElement = () => {
+      const doScroll = () => {
         const element = document.getElementById(sectionId);
         if (element) {
-          // Use native scrollIntoView which respects scroll-margin-top
-          element.scrollIntoView({ behavior: 'smooth' });
-          
-          // Fallback: If it's a page change, images might load and shift the layout.
-          // Do a second check after a short delay to ensure we're still at the right spot.
-          if (isPageChange) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Check position a few times as images load and things shift
+          [300, 800, 1500].forEach(delay => {
             setTimeout(() => {
-              const el = document.getElementById(sectionId);
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 600);
-          }
-        } else if (attempts < maxAttempts) {
-          attempts++;
-          setTimeout(pollElement, 20);
+              const checkEl = document.getElementById(sectionId);
+              if (checkEl) checkEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, delay);
+          });
+        } else {
+          // If element hasn't mounted yet, check again after a short delay
+          setTimeout(() => {
+            document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
         }
       };
 
-      // Start polling. If it's the same page, start immediately.
-      // If it's a new page, give it a tiny bit of time to start mounting.
-      setTimeout(pollElement, isPageChange ? 50 : 0);
+      // Execute scroll
+      if (isPageChange) {
+        setTimeout(doScroll, 100);
+      } else {
+        doScroll();
+      }
     } else {
        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -111,7 +110,11 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage, onOpenChat }) 
     const scrollToContact = () => {
       const element = document.getElementById('contact');
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const elementY = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementY - 80,
+          behavior: 'smooth'
+        });
       }
     };
 

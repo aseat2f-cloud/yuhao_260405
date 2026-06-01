@@ -18,10 +18,10 @@ interface SeniorPageProps {
 const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
   
   const SENIOR_QUICK_LINKS = [
-    { label: '課程班別', href: '#course-roadmap' },
-    { label: '學員金榜', href: '#honor-roll' },
-    { label: '環境介紹', href: '#environment' },
-    { label: '育豪優勢', href: '#advantages' },
+    { label: '課程班別', href: '#senior-course-roadmap' },
+    { label: '學員金榜', href: '#senior-honor-roll' },
+    { label: '環境介紹', href: '#senior-environment' },
+    { label: '育豪優勢', href: '#senior-advantages' },
   ];
 
   return (
@@ -90,22 +90,22 @@ const SeniorPage: React.FC<SeniorPageProps> = ({ heroNews, onNavigate }) => {
       <GSATCountdown />
 
       {/* 3. Course Roadmap (課程規劃) */}
-      <div id="course-roadmap" className="scroll-mt-32">
+      <div id="senior-course-roadmap" className="scroll-mt-32">
         <SeniorCourseRoadmap />
       </div>
 
       {/* 4. Honor Roll (榮耀金榜) */}
-      <div id="honor-roll" className="scroll-mt-32">
+      <div id="senior-honor-roll" className="scroll-mt-32">
         <HonorRoll variant="senior" theme="purple" />
       </div>
 
       {/* 5. Environment Introduction (環境介紹) */}
-      <div id="environment" className="scroll-mt-32">
+      <div id="senior-environment" className="scroll-mt-32">
         <EnvironmentIntro theme="purple" />
       </div>
 
       {/* 6. Senior Advantages (育豪優勢) */}
-      <div id="advantages" className="scroll-mt-32">
+      <div id="senior-advantages" className="scroll-mt-32">
         <SeniorAdvantages />
       </div>
 

@@ -1,6 +1,6 @@
 
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { ArrowUp, Loader2, HelpCircle, MessageCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowUp, HelpCircle, MessageCircle } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Features, { SUCCESS_VIDEOS } from './components/Features';
@@ -17,11 +17,10 @@ import Modal from './components/Modal';
 import { PageType, NewsItem } from './types';
 import { Play } from 'lucide-react';
 
-// Lazy load heavy page components
-const ElementaryPage = lazy(() => import('./components/ElementaryPage'));
-const JuniorPage = lazy(() => import('./components/JuniorPage'));
-const SeniorPage = lazy(() => import('./components/SeniorPage'));
-const BulletinPage = lazy(() => import('./components/BulletinPage'));
+import ElementaryPage from './components/ElementaryPage';
+import JuniorPage from './components/JuniorPage';
+import SeniorPage from './components/SeniorPage';
+import BulletinPage from './components/BulletinPage';
 
 // --- MOCK DATA HELPERS ---
 
@@ -162,18 +161,11 @@ function App() {
     setIsLineModalOpen(true);
   };
 
-  const LoadingScreen = () => (
-    <div className="flex items-center justify-center min-h-[50vh] w-full">
-      <div className="flex flex-col items-center gap-4">
-        <Loader2 className="w-10 h-10 text-primary-600 animate-spin" />
-        <p className="text-slate-500 font-medium animate-pulse">載入中...</p>
-      </div>
-    </div>
-  );
+
 
   const renderContent = () => {
     return (
-      <Suspense fallback={<LoadingScreen />}>
+      <>
         {currentPage === 'elementary' && (
           <ElementaryPage 
             heroNews={NEWS_HONORS.slice(0, 3)}
@@ -250,19 +242,19 @@ function App() {
               courseLabel="品德優先 • 成績第一"
               secondaryBtnLabel="為什麼選育豪"
               secondaryBtnIcon={<HelpCircle size={20} />}
-              secondaryBtnLink="#features"
+              secondaryBtnLink="#home-features"
             />
             <HomeBanner />
-            <div id="outstanding-results" className="scroll-mt-32">
+            <div id="home-outstanding-results" className="scroll-mt-32">
               <OutstandingResults />
             </div>
-            <div id="program-planning" className="scroll-mt-32">
+            <div id="home-program-planning" className="scroll-mt-32">
               <ProgramPlanning onNavigate={setCurrentPage} />
             </div>
-            <div id="honor-roll" className="scroll-mt-32">
+            <div id="home-honor-roll" className="scroll-mt-32">
               <HonorRoll />
             </div>
-            <div id="features" className="scroll-mt-32">
+            <div id="home-features" className="scroll-mt-32">
               <Features />
             </div>
             {/* Part 3: Video Gallery - 4 Columns, Square, Centered Title with Lines & Subtitle */}
@@ -305,12 +297,12 @@ function App() {
                 ))}
               </div>
             </div>
-            <div id="testimonials" className="scroll-mt-32">
+            <div id="home-testimonials" className="scroll-mt-32">
               <ParentTestimonials />
             </div>
           </>
         )}
-      </Suspense>
+      </>
     );
   };
 
