@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Phone, Facebook, Instagram, MessageCircle, Utensils, Video, Download } from 'lucide-react';
+import { Phone, Facebook, Instagram, Utensils, Video, Download, MapPin, MessageCircle } from 'lucide-react';
 
 interface LocationInfo {
   name: string;
@@ -12,28 +12,37 @@ interface LocationInfo {
 interface BranchGroup {
   title: string;
   locations: LocationInfo[];
+  socialLinks: {
+    fb: string;
+    line: string;
+    ig: string;
+  };
 }
 
 const BRANCHES: BranchGroup[] = [
   {
     title: '國小部',
+    socialLinks: {
+      fb: 'https://www.facebook.com/share/1GFkpGnU5Z/',
+      line: 'https://line.me/R/ti/p/@420gcibw',
+      ig: '#'
+    },
     locations: [
       {
         name: '艾森樂美語學院文理短期補習班',
         license: '社補教社字第110007號',
         address: '新北市板橋區漢生東路315、317號1、2樓',
         phone: '2954 9998',
-      },
-      {
-        name: '私立馬克堡美語學院文理短期補習班',
-        license: '社補教社字第114034號',
-        address: '新北市板橋區海山路25號2樓',
-        phone: '2954 9991',
       }
     ]
   },
   {
     title: '國中部',
+    socialLinks: {
+      fb: '#',
+      line: 'https://line.me/R/ti/p/@yuhaoschool',
+      ig: '#'
+    },
     locations: [
       {
         name: '育豪文理語文短期補習班',
@@ -51,6 +60,11 @@ const BRANCHES: BranchGroup[] = [
   },
   {
     title: '高中部',
+    socialLinks: {
+      fb: '#',
+      line: 'https://line.me/R/ti/p/@yhelite',
+      ig: '#'
+    },
     locations: [
       {
         name: '育豪菁英文理語文短期補習班',
@@ -79,9 +93,24 @@ const Footer: React.FC = () => {
           {/* Branch Contact Information (Columns 1-3) */}
           {BRANCHES.map((group, index) => (
             <div key={index} className="flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-6">
-                 <div className={`h-6 w-1 rounded-full ${index === 0 ? 'bg-teal-500' : index === 1 ? 'bg-blue-500' : 'bg-purple-500'}`}></div>
-                 <h4 className="text-white font-bold text-lg tracking-wide">{group.title}</h4>
+              <div className="flex items-center justify-between gap-2 mb-6">
+                 <div className="flex items-center gap-2">
+                   <div className={`h-6 w-1 rounded-full ${index === 0 ? 'bg-teal-500' : index === 1 ? 'bg-blue-500' : 'bg-purple-500'}`}></div>
+                   <h4 className="text-white font-bold text-lg tracking-wide">{group.title}</h4>
+                 </div>
+                 
+                 {/* Social Buttons */}
+                 <div className="flex items-center gap-2">
+                    <a href={group.socialLinks.fb} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1877F2] hover:text-white transition-all shadow-sm">
+                      <Facebook size={16} />
+                    </a>
+                    <a href={group.socialLinks.line} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#06C755] hover:text-white transition-all shadow-sm">
+                      <MessageCircle size={16} />
+                    </a>
+                    <a href={group.socialLinks.ig} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#fd5949] hover:to-[#d6249f] hover:text-white transition-all shadow-sm">
+                      <Instagram size={16} />
+                    </a>
+                 </div>
               </div>
               
               <div className="flex flex-col gap-8 h-full">
@@ -93,9 +122,18 @@ const Footer: React.FC = () => {
                         <p className="text-xs text-slate-500">{loc.license}</p>
                       )}
                       
-                      <ul className="space-y-2 text-slate-400 mt-1">
-                        <li className="text-sm leading-relaxed">
-                          {loc.address}
+                      <ul className="space-y-3 text-slate-400 mt-1">
+                        <li className="flex flex-col gap-1.5 items-start text-sm leading-relaxed">
+                          <span>{loc.address}</span>
+                          <a 
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.address)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 bg-slate-800/80 border border-slate-700/50 text-teal-400 hover:bg-slate-700 hover:border-slate-600 hover:text-teal-300 rounded text-xs transition-all tracking-wider"
+                          >
+                            <MapPin size={12} />
+                            教室位置
+                          </a>
                         </li>
                         <li className="flex items-center gap-3 text-sm">
                           <Phone className="shrink-0 text-slate-500" size={16} />
@@ -104,19 +142,6 @@ const Footer: React.FC = () => {
                       </ul>
                     </div>
                   ))}
-                </div>
-
-                {/* Social Buttons */}
-                <div className="flex items-center gap-3 mt-auto pt-6">
-                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1877F2] hover:text-white transition-all shadow-sm">
-                    <Facebook size={18} />
-                  </a>
-                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#06C755] hover:text-white transition-all shadow-sm">
-                    <MessageCircle size={18} />
-                  </a>
-                  <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#fd5949] hover:to-[#d6249f] hover:text-white transition-all shadow-sm">
-                    <Instagram size={18} />
-                  </a>
                 </div>
               </div>
             </div>

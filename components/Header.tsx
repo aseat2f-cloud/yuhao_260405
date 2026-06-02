@@ -12,6 +12,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: '學員金榜', id: 'elementary-honor-roll' },
       { label: '環境介紹', id: 'elementary-environment' },
       { label: '課程花絮', url: 'https://www.facebook.com/share/1GFkpGnU5Z/', external: true },
+      { label: '教室位置', url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('新北市板橋區漢生東路315、317號1、2樓')}`, external: true },
     ]
   },
   { 
@@ -22,6 +23,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: '學員金榜', id: 'junior-honor-roll' },
       { label: '學員心得', id: 'junior-student-testimonials' },
       { label: '家長見證', id: 'junior-parent-testimonials' },
+      { label: '教室位置', url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('新北市板橋區中山路一段206巷68號')}`, external: true },
     ]
   },
   { 
@@ -32,6 +34,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: '學員金榜', id: 'senior-honor-roll' },
       { label: '環境介紹', id: 'senior-environment' },
       { label: '育豪優勢', id: 'senior-advantages' },
+      { label: '教室位置', url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('新北市板橋區中山路一段293-2號4樓')}`, external: true },
     ]
   },
   { label: '育豪快訊', page: 'bulletin' },
