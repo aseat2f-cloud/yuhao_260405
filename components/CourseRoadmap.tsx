@@ -34,6 +34,7 @@ interface CourseCategory {
   id: string;
   label: string;
   shortLabel: string;
+  tags?: string[];
   description: string;
   icon: React.ReactNode;
   color: string;
@@ -302,6 +303,7 @@ const CourseRoadmap: React.FC = () => {
       id: 'essenjoy-player',
       label: '艾森樂小玩家',
       shortLabel: '玩',
+      tags: ['寒暑假營隊', '週末工作坊'],
       description: '艾森樂小玩家系列課程，結合寒暑假主題營隊與週末多元工作坊，旨在讓學習延伸至教室之外。透過科學實驗、藝術創作、戶外探索與體能活動，啟發孩子的多元興趣與潛能。我們相信「玩」是最好的學習，在遊戲與團隊合作中，培養解決問題的能力與人際互動技巧，讓孩子在歡笑中快樂成長，玩出屬於自己的競爭力。',
       icon: <Clock size={20} />,
       color: 'text-pink-500',
@@ -703,6 +705,15 @@ const CourseRoadmap: React.FC = () => {
             
             {/* Category Description */}
             <div className="mb-8 animate-in fade-in duration-300">
+               {COURSE_DATA[activeTab].tags && (
+                 <div className="mb-5 flex flex-wrap gap-3 mt-1">
+                   {COURSE_DATA[activeTab].tags.map(tag => (
+                     <span key={tag} className="px-5 py-2 bg-white/20 text-white rounded-full text-lg font-bold border border-white/30 backdrop-blur-sm shadow-sm tracking-wider">
+                       {tag}
+                     </span>
+                   ))}
+                 </div>
+               )}
                <p className="text-green-50 leading-relaxed md:leading-loose text-base md:text-lg font-medium text-justify">
                   {COURSE_DATA[activeTab].description}
                </p>
@@ -926,6 +937,14 @@ const CourseRoadmap: React.FC = () => {
                     </table>
                 </div>
              </div>
+
+             {/* Extra info for 自然實驗班 */}
+             {selectedClass.name === '自然實驗班' && (
+               <div className="bg-blue-50 rounded-xl p-4 border border-blue-100 flex items-center gap-3">
+                 <div className="w-1.5 h-6 bg-blue-500 rounded-full hidden sm:block"></div>
+                 <p className="text-blue-800 font-bold">一學年安排 13 組實驗，完整課程規劃為二年制。</p>
+               </div>
+             )}
 
              {/* Notes */}
              <div>
