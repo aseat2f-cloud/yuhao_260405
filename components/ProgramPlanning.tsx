@@ -538,17 +538,16 @@ const ProgramPlanning: React.FC<ProgramPlanningProps> = ({ onNavigate }) => {
              />
           ))}
 
-          {/* Bottom Buttons - Dependent on activeTab logic */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-2xl mx-auto px-4">
              <button 
-              onClick={() => handleNavAndScroll(currentProgram.page, 'course-roadmap')}
+              onClick={() => handleNavAndScroll(PROGRAMS_DATA[activeTab].page, `${PROGRAMS_DATA[activeTab].page}-course-roadmap`)}
               className="py-3.5 px-6 rounded-xl bg-white text-slate-700 font-bold hover:bg-slate-50 hover:text-slate-900 transition-colors flex items-center justify-center gap-2 shadow-sm"
             >
-              <BookOpen size={18} /> 班別列表
+              <BookOpen size={18} /> {activeTab === 'elementary' ? '國小班別' : activeTab === 'junior' ? '國中班別' : '高中班別'}
             </button>
 
             <button 
-              onClick={() => handleNavAndScroll(currentProgram.page, 'hero-labels')}
+              onClick={() => handleNavAndScroll(PROGRAMS_DATA[activeTab].page, 'hero-labels')}
               className="py-3.5 px-6 rounded-xl bg-yellow-400 text-slate-900 font-bold shadow-lg transition-all flex items-center justify-center gap-2 hover:bg-yellow-300 hover:shadow-xl hover:-translate-y-0.5"
             >
               <Search size={18} /> 了解更多
