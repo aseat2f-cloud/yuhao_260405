@@ -148,8 +148,8 @@ const ELEMENTARY_IMAGE_DATA = {
     "https://www.dropbox.com/scl/fi/d2xelxpkbrwxuz24hoebu/250603_-PO-_-_AH_-A.jpg?rlkey=jzz1uyi20nztjdz2jk0tgn15t&raw=1"
   ],
   gifted: [
-    "https://www.dropbox.com/scl/fi/pwq0toph6p3eprry9f5oi/02.jpg?rlkey=n6crh7q392qkb1azs30udsmzr&raw=1",
-    "https://www.dropbox.com/scl/fi/twpjtes678b8cxh5etx1a/03.jpg?rlkey=5jhiid4ltkh2aci9zcvosuubl&raw=1",
+    "https://www.dropbox.com/scl/fi/t6meobk6qv4ft0lizi970/.png?rlkey=y5bd3wusgo0gdlimi20m558ny&raw=1",
+    "https://www.dropbox.com/scl/fi/xqlj960ng4rc7fuzdyx67/985888.jpg?rlkey=jg1af4ajtdp79ezh1xwt1p4sv&raw=1",
     "https://www.dropbox.com/scl/fi/wri7f18zg1az948pypoul/.jpg?rlkey=tu6wfurczpesqk8apvsflgown&raw=1"
   ]
 };
